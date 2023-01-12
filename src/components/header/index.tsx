@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import MediaQuery from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import Button from '../button';
-import Navbar from '../navbar';
-import Logo from 'components/logo';
+import {Button} from "components";
+import { Navbar } from 'components';
+import { Logo } from 'components';
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,11 +21,11 @@ export const Header = () => {
             <>
               {isMenuOpen ? (
 			          <Button type="button" onClick={handleMenuOpen}>
-				          <FontAwesomeIcon icon={faTimes} size='1x' className="text-white"/>
+				          <FontAwesomeIcon icon={faTimes} className="text-white text-[25px]"/>
 				        </Button>
 				      ) : (
 				        <Button type="button" onClick={handleMenuOpen}>
-				          <FontAwesomeIcon icon={faBars}  className="text-red text-[25px]"/>
+				          <FontAwesomeIcon icon={faBars}  className="text-white text-[25px]"/>
 				        </Button>
 				      )
               }

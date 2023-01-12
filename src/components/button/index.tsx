@@ -6,7 +6,7 @@ type ButtonProps = {
   id?: string
 } & React.ComponentProps<'button'>
 
-const Button = ({
+export const Button = ({
   children, ...rest
 }: ButtonProps) => (
   <button {...rest}>
@@ -14,4 +14,3 @@ const Button = ({
   </button>
 );
 
-export default Button;

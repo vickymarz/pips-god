@@ -563,6 +563,10 @@ video {
   position: fixed;
 }
 
+.relative {
+  position: relative;
+}
+
 .top-0 {
   top: 0px;
 }
@@ -591,8 +595,17 @@ video {
   z-index: 10;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mt-16 {
   margin-top: 4rem;
+}
+
+.mb-\[10px\] {
+  margin-bottom: 10px;
 }
 
 .flex {
@@ -603,16 +616,28 @@ video {
   height: 5rem;
 }
 
+.h-\[23px\] {
+  height: 23px;
+}
+
 .h-full {
   height: 100%;
+}
+
+.h-\[739px\] {
+  height: 739px;
 }
 
 .w-full {
   width: 100%;
 }
 
-.w-\[63\.89px\] {
-  width: 63.89px;
+.w-\[27px\] {
+  width: 27px;
+}
+
+.w-\[90\%\] {
+  width: 90%;
 }
 
 .flex-col {
@@ -623,12 +648,21 @@ video {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-center {
   justify-content: center;
 }
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-x-\[10px\] {
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
 }
 
 .gap-y-24 {
@@ -639,8 +673,43 @@ video {
   row-gap: 2.25rem;
 }
 
+.gap-x-\[25px\] {
+  -webkit-column-gap: 25px;
+          column-gap: 25px;
+}
+
+.gap-y-\[15px\] {
+  row-gap: 15px;
+}
+
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-hero-pattern-mobile {
+  background-image: url('/src/assets/images/hero-pattern-mobile.png');
+}
+
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 
 .px-5 {
@@ -668,9 +737,92 @@ video {
   padding-bottom: 0.75rem;
 }
 
+.py-\[5px\] {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.px-\[15px\] {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.py-\[8px\] {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.px-\[10px\] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pt-\[4rem\] {
+  padding-top: 4rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-\[25px\] {
+  font-size: 25px;
+}
+
+.text-\[14px\] {
+  font-size: 14px;
+}
+
+.text-\[16px\] {
+  font-size: 16px;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-\[22px\] {
+  font-size: 22px;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
+}
+
+.text-\[11px\] {
+  font-size: 11px;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.leading-\[27px\] {
+  line-height: 27px;
+}
+
+.leading-\[14px\] {
+  line-height: 14px;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#0D142E\] {
+  --tw-text-opacity: 1;
+  color: rgb(13 20 46 / var(--tw-text-opacity));
+}
+
+.text-\[\#E8E8E8\] {
+  --tw-text-opacity: 1;
+  color: rgb(232 232 232 / var(--tw-text-opacity));
 }
 
 .transition-all {
@@ -722,6 +874,18 @@ li {
   list-style-type: none;
 }
 
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-image: url('./assets/images/planet.gif');
+  background-size: cover;
+  opacity: 0.1;
+}
+
 @media (min-width: 1024px) {
   .lg\:static {
     position: static;
@@ -735,9 +899,17 @@ li {
     height: 6rem;
   }
 
+  .lg\:h-\[50px\] {
+    height: 50px;
+  }
+
   .lg\:h-max {
     height: -webkit-max-content;
     height: max-content;
+  }
+
+  .lg\:w-\[64px\] {
+    width: 64px;
   }
 
   .lg\:w-max {
@@ -745,21 +917,29 @@ li {
     width: max-content;
   }
 
+  .lg\:w-\[75\%\] {
+    width: 75%;
+  }
+
+  .lg\:w-\[25\%\] {
+    width: 25%;
+  }
+
   .lg\:flex-row {
     flex-direction: row;
   }
 
-  .lg\:justify-center {
-    justify-content: center;
+  .lg\:justify-start {
+    justify-content: flex-start;
   }
 
   .lg\:justify-between {
     justify-content: space-between;
   }
 
-  .lg\:gap-x-44 {
-    -webkit-column-gap: 11rem;
-            column-gap: 11rem;
+  .lg\:gap-x-\[150px\] {
+    -webkit-column-gap: 150px;
+            column-gap: 150px;
   }
 
   .lg\:gap-y-0 {
@@ -771,14 +951,21 @@ li {
             column-gap: 3rem;
   }
 
+  .lg\:bg-hero-pattern {
+    background-image: url('/src/assets/images/hero-pattern.png');
+  }
+
   .lg\:px-20 {
     padding-left: 5rem;
     padding-right: 5rem;
   }
 
-  .lg\:text-xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+  .lg\:pt-\[11rem\] {
+    padding-top: 11rem;
+  }
+
+  .lg\:text-\[24px\] {
+    font-size: 24px;
   }
 
   .lg\:text-base {
@@ -786,8 +973,27 @@ li {
     line-height: 1.5rem;
   }
 
+  .lg\:text-\[65px\] {
+    font-size: 65px;
+  }
+
+  .lg\:text-\[25px\] {
+    font-size: 25px;
+  }
+
+  .lg\:text-\[20px\] {
+    font-size: 20px;
+  }
+
+  .lg\:leading-\[82px\] {
+    line-height: 82px;
+  }
+
+  .lg\:leading-\[40px\] {
+    line-height: 40px;
+  }
+
   .lg\:transition-none {
     transition-property: none;
   }
 }
-
