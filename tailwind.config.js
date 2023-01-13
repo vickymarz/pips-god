@@ -11,12 +11,16 @@ module.exports = {
         'flashes': "url('/src/assets/images/flashes.png')",
         'stars': "url('/src/assets/images/stars.png')",
         'mentors': "url('/src/assets/images/mentors.png')",
-        'cap': "url('/src/assets/images/cap.png')"
+        'cap': "url('/src/assets/images/cap.png')",
+        'arrow': "url('/src/assets/images/arrow.png')"
       },
       dropShadow: {
         'mentorShadow': '5.30801px 2.654px 1.76934px rgba(29, 30, 44, 0.25)',
+      },
+      boxShadow: {
+        'cardShadow': '2px 4px 4px rgba(0, 0, 0, 0.25)',
+        'cardShadowMobile': '0.984621px 1.96924px 1.96924px rgba(0, 0, 0, 0.25)',
       }
-
     },
   },
   plugins: [],
