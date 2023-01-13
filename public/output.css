@@ -624,10 +624,6 @@ video {
   height: 100%;
 }
 
-.h-\[739px\] {
-  height: 739px;
-}
-
 .w-full {
   width: 100%;
 }
@@ -678,8 +674,8 @@ video {
           column-gap: 25px;
 }
 
-.gap-y-\[15px\] {
-  row-gap: 15px;
+.gap-y-\[10px\] {
+  row-gap: 10px;
 }
 
 .rounded-lg {
@@ -702,6 +698,10 @@ video {
 
 .bg-hero-pattern-mobile {
   background-image: url('/src/assets/images/hero-pattern-mobile.png');
+}
+
+.bg-vector {
+  background-image: url('/src/assets/images/vector.png');
 }
 
 .bg-fixed {
@@ -883,7 +883,7 @@ li {
   left: 0px;
   background-image: url('./assets/images/planet.gif');
   background-size: cover;
-  opacity: 0.1;
+  opacity: 0.09;
 }
 
 @media (min-width: 1024px) {
@@ -949,6 +949,10 @@ li {
   .lg\:gap-x-12 {
     -webkit-column-gap: 3rem;
             column-gap: 3rem;
+  }
+
+  .lg\:gap-y-\[15px\] {
+    row-gap: 15px;
   }
 
   .lg\:bg-hero-pattern {
