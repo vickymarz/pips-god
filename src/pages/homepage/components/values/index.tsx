@@ -10,7 +10,7 @@ export const Values = () => {
               You'll learn how to analyze market trends, manage risks, and make informed trades.
             </p>
         </div>
-        <div className='basis-3/6 hidden lg:block'>
+        <div className='hidden lg:block'>
           <img src={forex} alt="forex trading" />
         </div>
       </div>

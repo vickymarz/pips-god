@@ -1,5 +1,5 @@
 import { Header } from "components"
-import { Intro, Values, Vision } from './components'
+import { Intro, Mentorship, Values, Vision } from './components'
 export const Homepage = () => {
   return (
     <>
@@ -9,6 +9,7 @@ export const Homepage = () => {
       </div>
       <Values />
       <Vision />
+      <Mentorship />
     </>
   )
 }
