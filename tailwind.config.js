@@ -12,7 +12,8 @@ module.exports = {
         'stars': "url('/src/assets/images/stars.png')",
         'mentors': "url('/src/assets/images/mentors.png')",
         'cap': "url('/src/assets/images/cap.png')",
-        'arrow': "url('/src/assets/images/arrow.png')"
+        'arrow': "url('/src/assets/images/arrow.png')",
+        'hill': "url('/src/assets/images/hill.png')"
       },
       dropShadow: {
         'mentorShadow': '5.30801px 2.654px 1.76934px rgba(29, 30, 44, 0.25)',

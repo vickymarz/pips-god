@@ -1,5 +1,5 @@
 import { Header } from "components"
-import { Intro, Mentorship, Packages, Values, Vision } from './components'
+import { Benefits, Intro, Mentorship, Packages, Values, Vision } from './components'
 export const Homepage = () => {
   return (
     <>
@@ -11,6 +11,7 @@ export const Homepage = () => {
       <Vision />
       <Mentorship />
       <Packages />
+      <Benefits />
     </>
   )
 }

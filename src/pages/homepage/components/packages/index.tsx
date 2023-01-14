@@ -28,7 +28,7 @@ export const Packages = () => {
         <span className='text-[#040F1A] text-[14px] lg:text-[28px] font-medium'>{title}</span>
       </li>
     ))
-console.log(userPackages)
+
   return (
     <section className='flex flex-col justify-start lg:justify-center items-start lg:items-center gap-y-[16px] lg:gap-y-[46px] px-[25px] lg:px-[80px] py-[16px] lg:py-[98px] bg-[#FFF5E3]'>
         <div className='flex flex-col justify-start lg:justify-center lg:items-center gap-y-[8px] lg:gap-y-[36px] lg:w-[50%] mx-auto'>
@@ -40,30 +40,6 @@ console.log(userPackages)
             </p>
         </div>
         <ul className='lg:grid grid-cols-2 grid-rows-2 gap-[80px]' >
-          {/* <li className='rounded-[10px] lg:rounded-[20px] bg-white shadow-cardShadowMobile lg:shadow-cardShadow gap-x-[4px] gap-x-[8px] p-[30px] p-[15px]'>
-            <div className='w-[23px] h-[23px] lg:w-[47px] lg:h-[47px]'>
-              <img src={arrow} alt="" />
-            </div>
-            <span className='text-[#040F1A] text-[13px] lg:text-[28px] font-medium'>Affordable VIP Signal group</span>
-          </li>
-          <li className='flex rounded-[10px] lg:rounded-[20px] bg-white shadow-cardShadowMobile lg:shadow-cardShadow gap-x-[4px] gap-x-[8px] p-[30px] p-[15px]'>
-            <div className='w-[23px] h-[23px] lg:w-[47px] lg:h-[47px]'>
-              <img src={arrow} alt="" />
-            </div>
-            <span className='text-[#040F1A] text-[14px] text-[28px] font-medium'>Free Educational tools</span>
-          </li>
-          <li className='flex rounded-[10px] lg:rounded-[20px] bg-white shadow-cardShadowMobile lg:shadow-cardShadow gap-x-[4px] gap-x-[8px] p-[30px] p-[15px]'>
-            <div className='w-[23px] h-[23px] lg:w-[47px] lg:h-[47px]'>
-              <img src={arrow} alt="" />
-            </div>
-            <span className='text-[#040F1A] text-[14px] text-[28px] font-medium'>Best Mentors at your disposal</span>
-          </li>
-          <li className='flex rounded-[10px] lg:rounded-[20px] bg-white shadow-cardShadowMobile lg:shadow-cardShadow gap-x-[4px] gap-x-[8px] p-[30px] p-[15px]'>
-            <div className='w-[23px] h-[23px] lg:w-[47px] lg:h-[47px]'>
-              <img src={arrow} alt="" />
-            </div>
-            <span className='text-[#040F1A] text-[14px] text-[28px] font-medium'>Access to free courses</span>
-          </li> */}
           {userPackages}
         </ul>
     </section>
