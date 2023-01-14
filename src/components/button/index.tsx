@@ -1,8 +1,8 @@
 type ButtonProps = {
   type: 'button' | 'submit',
   onClick?: () => void,
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode,
+  className?: string,
   id?: string
 } & React.ComponentProps<'button'>
 
