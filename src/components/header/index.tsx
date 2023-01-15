@@ -27,7 +27,7 @@ export const Header = () => {
           matches ? (
             <>
               {isMenuOpen ? (
-			          <Button type="button" onClick={handleMenuOpen}>
+			          <Button type="button" onClick={handleMenuOpen} className="z-10">
 				          <FontAwesomeIcon icon={faTimes} className="text-white text-[25px]"/>
 				        </Button>
 				      ) : (
@@ -45,13 +45,13 @@ export const Header = () => {
             <>
              <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen}/>
              <div className='flex justify-start items-center gap-x-[25px]'>
-          <Button type="button" className='font-productSans rounded-lg border border-white text-white py-[0.3rem] px-[0.9rem] text-[0.9rem]'>
-            Log in
-          </Button>
-          <Button type="button" className='font-productSans rounded-lg bg-white text-[#0D142E] py-[0.3rem] px-[0.9rem] text-[0.9rem] font-bold'>
-            Get Started
-          </Button>
-        </div>
+               <Button type="button" className='font-productSans rounded-lg border border-white text-white py-[0.3rem] px-[0.9rem] text-[0.9rem]'>
+                 Log in
+               </Button>
+               <Button type="button" className='font-productSans rounded-lg bg-white text-[#0D142E] py-[0.3rem] px-[0.9rem] text-[0.9rem] font-bold'>
+                 Get Started
+               </Button>
+             </div>
             </>
           )
         }
