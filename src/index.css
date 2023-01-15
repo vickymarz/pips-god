@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@400;500;600;700&display=swap');
+@font-face {
+  font-family: "SYNONYM_REGULAR";
+  src: url("./assets/fonts/synonym/Synonym-Regular.otf");
+}
 *,
 ::before,
 ::after {
@@ -12,7 +15,7 @@
 }
 
 html {
-  font-family: 'Red Rose', cursive;
+  font-family: SYNONYM_REGULAR;
   font-size: 16px;
   color: #000;
   font-weight: 400;

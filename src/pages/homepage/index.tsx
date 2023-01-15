@@ -1,4 +1,4 @@
-import { Header } from "components"
+import { Footer, Header } from "components"
 import { Benefits, Intro, Membership, Mentorship, Packages, Values, Vision } from './components'
 export const Homepage = () => {
   return (
@@ -13,6 +13,7 @@ export const Homepage = () => {
       <Packages />
       <Benefits />
       <Membership />
+      <Footer />
     </>
   )
 }

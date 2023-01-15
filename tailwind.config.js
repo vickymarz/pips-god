@@ -9,6 +9,7 @@ module.exports = {
         'overlayImg': "url('/src/assets/images/planet.gif')",
         'vector': "url('/src/assets/images/vector.png')",
         'flashes': "url('/src/assets/images/flashes.png')",
+        'flashesMobile': "url('/src/assets/images/flashes-mobile.png')",
         'stars': "url('/src/assets/images/stars.png')",
         'mentors': "url('/src/assets/images/mentors.png')",
         'cap': "url('/src/assets/images/cap.png')",
@@ -25,6 +26,9 @@ module.exports = {
         'textShadow': '0px 4px 4px rgba(0, 0, 0, 0.15);',
         'cardShadow': '2px 4px 4px rgba(0, 0, 0, 0.25)',
         'cardShadowMobile': '0.984621px 1.96924px 1.96924px rgba(0, 0, 0, 0.25)',
+      },
+      fontFamily: {
+        synonymRegular: ["SYNONYM_REGULAR", 'sans-serif']
       }
     },
   },
