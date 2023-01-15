@@ -37,7 +37,7 @@ export const Navbar = ({menuOpen, handleMenuOpen}: navbarProps) => {
       ];
 
       const navigation = nav.map(({ id, path, children }) => (
-        <li key={id} className="text-white text-[16px] font-medium">
+        <li key={id} className="text-center font-productSans text-white text-[0.9rem]">
           <Link
             to={`/${path}`}
             onClick={handleMenuOpen}
@@ -48,31 +48,31 @@ export const Navbar = ({menuOpen, handleMenuOpen}: navbarProps) => {
       ));
 
   return (
-    <nav className={`flex flex-col lg:flex-row justify-center lg:justify-start items-center lg:gap-x-[150px] gap-y-24 lg:gap-y-0 fixed lg:static w-full h-full lg:w-max lg:h-max top-16 ${menuOpen ? 'right-0' : '-right-full'} bottom-0 bg-pink lg:bg-light z-8 transition-all duration-1000 ease-in-out lg:transition-none`}>
-      <ul className='flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:gap-x-12 gap-y-9 lg:gap-y-0 mt-16 lg:mt-0'>
+    <nav className={`flex flex-col md:flex-row justify-center md:justify-between items-center gap-y-24 md:gap-y-0 fixed md:static w-full h-full md:w-max md:h-max top-16 ${menuOpen ? 'right-0' : '-right-full'} bottom-0 bg-pink md:bg-light z-8 transition-all duration-1000 ease-in-out md:transition-none`}>
+      <ul className='flex flex-col md:flex-row justify-center md:justify-between items-center gap-x-[2rem]  gap-y-9 md:gap-y-0 mt-16 md:mt-0'>
         {navigation}
       </ul>
-      <MediaQuery maxWidth={1024}>
+      <MediaQuery maxWidth={768}>
       { (matches: boolean) =>
-         matches ? (
+         matches && (
             <>
-          <Button type="button" onClick={handleMenuOpen} className='rounded-lg bg-light text-pink lg:text-light lg:bg-pink px-7 py-3.5 text-2xl lg:text-base'>
+          <Button type="button" onClick={handleMenuOpen} className='font-productSans rounded-lg bg-light text-pink md:text-light md:bg-pink px-[0.9rem] py-[0.3rem] text-2xl md:text-[1rem]'>
           Log in
         </Button>
-          <Button type="button" onClick={handleMenuOpen} className='rounded-lg bg-light text-pink lg:text-light lg:bg-pink px-7 py-3.5 text-2xl lg:text-base'>
+          <Button type="button" onClick={handleMenuOpen} className='font-productSans rounded-lg bg-light text-pink md:text-light md:bg-pink px-[0.9rem] py-[0.3rem] text-2xl md:text-[1rem]'>
           Get Started
         </Button>
         </>
-         ): (
-            <div className='flex justify-start items-center gap-x-[25px]'>
-          <Button type="button" className='rounded-lg border border-white text-white py-[5px] px-[15px] text-2xl lg:text-base font-medium'>
-            Log in
-          </Button>
-          <Button type="button" className='rounded-lg bg-white text-[#0D142E] py-[5px] px-[15px] text-2xl lg:text-base font-medium'>
-            Get Started
-          </Button>
-        </div>
-        )
+         )
+        //     <div className='flex justify-start items-center gap-x-[25px]'>
+        //   <Button type="button" className='font-productSans rounded-lg border border-white text-white py-[0.3rem] px-[0.9rem] text-[0.7rem]'>
+        //     Log in
+        //   </Button>
+        //   <Button type="button" className='font-productSans rounded-lg bg-white text-[#0D142E] py-[0.3rem] px-[0.9rem] text-[0.7rem] font-bold'>
+        //     Get Started
+        //   </Button>
+        // </div>
+        // )
       }
       </MediaQuery>
     </nav>

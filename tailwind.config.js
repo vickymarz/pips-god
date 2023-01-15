@@ -28,7 +28,8 @@ module.exports = {
         'cardShadowMobile': '0.984621px 1.96924px 1.96924px rgba(0, 0, 0, 0.25)',
       },
       fontFamily: {
-        synonymRegular: ["SYNONYM_REGULAR", 'sans-serif']
+        synonymRegular: ["SYNONYM_REGULAR", 'sans-serif'],
+        productSans: ["PRODUCT_SANS", 'sans-serif']
       }
     },
   },

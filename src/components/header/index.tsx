@@ -13,9 +13,9 @@ export const Header = () => {
 	};
 
   return (
-    <header className='w-full h-20 lg:h-24 fixed top-0 left-0 right-0 px-5 py-5 lg:px-20 flex justify-between items-center z-10'>
+    <header className='w-full h-20 md:h-24 fixed top-0 left-0 right-0 px-5 py-5 md:px-[5%] flex justify-between items-center z-10'>
       <Logo />
-      <MediaQuery maxWidth={1024}>
+      <MediaQuery maxWidth={768}>
         {matches =>
           matches ? (
             <>
@@ -37,6 +37,14 @@ export const Header = () => {
           (
             <>
              <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen}/>
+             <div className='flex justify-start items-center gap-x-[25px]'>
+          <Button type="button" className='font-productSans rounded-lg border border-white text-white py-[0.3rem] px-[0.9rem] text-[0.9rem]'>
+            Log in
+          </Button>
+          <Button type="button" className='font-productSans rounded-lg bg-white text-[#0D142E] py-[0.3rem] px-[0.9rem] text-[0.9rem] font-bold'>
+            Get Started
+          </Button>
+        </div>
             </>
           )
         }

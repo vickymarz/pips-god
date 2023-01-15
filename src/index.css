@@ -6,6 +6,12 @@
   font-family: "SYNONYM_REGULAR";
   src: url("./assets/fonts/synonym/Synonym-Regular.otf");
 }
+
+@font-face {
+  font-family: "PRODUCT_SANS";
+  src: url("./assets/fonts/product-sans/Product\ Sans\ Regular.ttf");
+}
+
 *,
 ::before,
 ::after {

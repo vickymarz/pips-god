@@ -32,7 +32,7 @@ export const Packages = () => {
   return (
     <section className='flex flex-col justify-start md:justify-center items-start md:items-center gap-y-[1rem] md:gap-y-[2.8rem] px-[1.6rem] md:px-[5rem] py-[1rem] md:py-[4rem] bg-[#FFF5E3]'>
         <div className='flex flex-col justify-start md:justify-center md:items-center gap-y-[8px] md:gap-y-[2rem] md:w-[70%] mx-auto'>
-            <h2 className="md:text-center font-bold text-[1.4rem] md:text-[3rem] leading-[1.7rem] md:leading-[3rem] text-[#0D142E]">
+            <h2 className="font-productSans md:text-center font-bold text-[1.4rem] md:text-[3rem] leading-[1.7rem] md:leading-[3rem] text-[#0D142E]">
               Gain Practical Investment Knowledge
             </h2>
             <p className="md:text-center font-medium text-[1rem] md:text-[1.7rem] text-[#19275E] leading-[1.4rem] md:leading-[2.5rem]">

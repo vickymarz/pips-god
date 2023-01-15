@@ -16,7 +16,7 @@ export const Benefits = () => {
   return (
     <section className='bg-[#F8FAFC] bg-no-repeat px-[1.6rem] md:px-[5rem] pt-[0.5rem] pb-[1.06rem] md:py-[3.12rem]'>
       <div className='md:bg-hill bg-no-repeat z-10'>
-          <h2 className="text-center font-bold text-[1.37rem] md:text-[3rem] leading-[1.68rem] md:leading-[3.25rem] text-[#0D142E] my-[1rem] md:my-[2.5rem]">
+          <h2 className="font-productSans text-center font-bold text-[1.37rem] md:text-[3rem] leading-[1.68rem] md:leading-[3.25rem] text-[#0D142E] my-[1rem] md:my-[2.5rem]">
           Our Packages
           </h2>
         <div className='flex flex-col md:flex-row items-start justify-start md:justify-between md:gap-x-[5.7rem]  gap-y-[9px]'>
@@ -29,7 +29,7 @@ export const Benefits = () => {
               {vipBenefits}
             </ul>
             <div className="flex justify-center items-center">
-            <Button type="button" className='rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
+            <Button type="button" className='font-productSans rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
               Subscribe
             </Button>
             </div>
@@ -43,7 +43,7 @@ export const Benefits = () => {
               {premiumBenefits}
             </ul>
             <div className="flex justify-center items-center">
-            <Button type="button" className='rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
+            <Button type="button" className='font-productSans rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
               Subscribe
             </Button>
             </div>

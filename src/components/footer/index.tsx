@@ -69,7 +69,7 @@ export const Footer = () => {
             />
             <div className='relative'>
               <img src={ellipse} alt="" className='block w-[10px] h-[10px] md:w-[26px] md:h-[26px] object-contain absolute top-[-5px] md:top-[-10px] right-0'/>
-              <Button type="button" className='rounded-tl-none rounded-br-[10px] bg-[#0D142E] text-[#fff] py-[1.12rem] px-[0.5rem] md:py-[1.45rem] md:px-[1.3rem] text-[0.62rem] md:text-[0.87rem] font-bold'>
+              <Button type="button" className='font-productSans rounded-tl-none rounded-br-[10px] bg-[#0D142E] text-[#fff] py-[1.12rem] px-[0.5rem] md:py-[1.45rem] md:px-[1.3rem] text-[0.62rem] md:text-[0.87rem] font-bold'>
                 Send
               </Button>
             </div>
