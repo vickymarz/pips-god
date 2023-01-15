@@ -1,0 +1,91 @@
+// {
+//   "presets": ["@babel/preset-typescript"],
+//     "plugins": [
+//       ["module-resolver", {
+//         "root": ["./src"],
+//         "alias": {
+//           '@assets': './src/assets',
+//             '@components': './src/components/index.ts',
+//             '@constants': './src/constants/index.ts',
+//             '@hooks': './src/hooks/index.ts',
+//             '@globalStyles': './src/assets/globalStyles.ts',
+//             '@screens': './src/screens/index.ts',
+//             '@utils': './src/utils/index.ts',
+//         }
+//       }]
+//     ]
+//   }
+
+
+// module.exports = function (api) {
+//   api.cache(true);
+//   return {
+//     presets: ["@babel/preset-typescript", "@babel/preset-env"],
+//     plugins: [
+//       [
+//         'module-resolver',
+//         {
+//           root: ['./'],
+//           extensions: [
+//             '.ts',
+//             '.tsx',
+//             '.jsx',
+//             '.js',
+//             '.json',
+//           ],
+//           alias: {
+//             '@assets': './src/assets',
+//             '@components': './src/components/index.ts',
+//             '@constants': './src/constants/index.ts',
+//             '@hooks': './src/hooks/index.ts',
+//             '@globalStyles': './src/assets/globalStyles.ts',
+//             '@routes': './src/routes/index.tsx',
+//             '@utils': './src/utils/index.ts',
+//           },
+//         },
+//       ],
+//     ],
+//   };
+// };
+
+// module.exports = {
+//     presets: [
+//       '@babel/preset-env',
+//       '@babel/preset-react',
+//       '@babel/preset-typescript',
+//     ],
+//     plugins: [
+//       [
+//         'module-resolver',
+//         {
+//           root: ['.'],
+//           extensions: [
+//                         '.ts',
+//                         '.tsx',
+//                         '.jsx',
+//                         '.js',
+//                         '.json',
+//                       ],
+//           alias: {
+//             '@routes': './src/routes',
+//           }
+//         },
+//       ],
+//     ]
+//   }
+
+{
+    "presets": ["@babel/preset-typescript", "@babel/preset-env"],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+            "root": ["./src"],
+            "alias": {
+            "@routes": "./src/routes",
+            "@pages": "./src/pages"
+          }
+        }
+      ]
+    ]
+  }
