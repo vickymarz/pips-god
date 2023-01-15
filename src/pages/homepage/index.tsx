@@ -6,7 +6,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div id="hero" className="bg-hero-pattern-mobile md:bg-hero-pattern bg-no-repeat">
+      <div className="bg-hero-pattern-mobile md:bg-hero-pattern bg-no-repeat">
       <div id="hero" className="bg-overlayImg bg-no-repeat">
         <Header />
         <Intro />
