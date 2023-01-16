@@ -9,7 +9,7 @@ export const Homepage = () => {
       <div className="bg-networkDark bg-no-repeat bg-cover">
         <Header />
         <Intro />
-        </div>
+      </div>
       <Values />
       <Vision />
       <Mentorship />
