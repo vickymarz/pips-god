@@ -6,7 +6,9 @@ module.exports = {
       backgroundImage: {
         'hero-pattern': "url('/src/assets/images/hero-pattern.png')",
         'hero-pattern-mobile': "url('/src/assets/images/hero-pattern-mobile.png')",
-        'overlayImg': "url('/src/assets/images/planet.gif')",
+        'networkDark': "url('/src/assets/images/network-dark.gif')",
+        'networkLight': "url('/src/assets/images/network-light.gif')",
+        'networkLightMobile': "url('/src/assets/images/network-light-mobile.gif')",
         'vector': "url('/src/assets/images/vector.png')",
         'flashes': "url('/src/assets/images/flashes.png')",
         'flashesMobile': "url('/src/assets/images/flashes-mobile.png')",
