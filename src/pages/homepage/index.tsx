@@ -6,7 +6,7 @@ export const Homepage = () => {
 
   return (
     <>
-      <div className="bg-networkDark bg-no-repeat bg-cover">
+      <div className="bg-networkDark lg:bg-hero-pattern bg-no-repeat bg-cover">
         <Header />
         <Intro />
       </div>
