@@ -4,10 +4,11 @@ import MediaQuery from 'react-responsive';
 
 type navbarProps = {
     menuOpen: boolean,
-    handleMenuOpen: () => void
+    handleMenuOpen: () => void,
+    view?: boolean
 }
 
-export const Navbar = ({menuOpen, handleMenuOpen}: navbarProps) => {
+export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
     const nav = [
         {
           id: 1,
@@ -37,7 +38,7 @@ export const Navbar = ({menuOpen, handleMenuOpen}: navbarProps) => {
       ];
 
       const navigation = nav.map(({ id, path, children }) => (
-        <li key={id} className="text-center font-productSans text-white text-[0.9rem]">
+        <li key={id} className={`text-center font-productSans text-[#fff] text-[0.9rem] ${view ? '' : 'text-[#232323]'}`}>
           <Link
             to={`/${path}`}
             onClick={handleMenuOpen}

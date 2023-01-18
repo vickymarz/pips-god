@@ -1,6 +1,6 @@
 import { Button } from 'components'
-import mentors from '../../../../assets/images/mentors.png'
-import cap from '../../../../assets/images/cap.png'
+import mentors from '../../../../../assets/images/mentors.png'
+import cap from '../../../../../assets/images/cap.png'
 
 export const Mentorship = () => {
   return (

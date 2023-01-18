@@ -16,7 +16,10 @@ module.exports = {
         'arrow': "url('/src/assets/images/arrow.png')",
         'hill': "url('/src/assets/images/hill.png')",
         'leftHill': "url('/src/assets/images/left-hill.png'), url('/src/assets/images/right-hill.png') bg-right",
+        'hillMobile': "url('/src/assets/images/left-hill.png'), url('/src/assets/images/hill-moblie.png')",
         'rightHill': "url('/src/assets/images/right-hill.png')",
+        'authImg': "url('/src/assets/images/auth-image.png')",
+        'authDesktop': "url('/src/assets/images/auth-desktop.png')",
       },
       dropShadow: {
         'mentorShadow': '5.30801px 2.654px 1.76934px rgba(29, 30, 44, 0.25)',
@@ -26,6 +29,7 @@ module.exports = {
         'textShadow': '0px 4px 4px rgba(0, 0, 0, 0.15);',
         'cardShadow': '2px 4px 4px rgba(0, 0, 0, 0.25)',
         'cardShadowMobile': '0.984621px 1.96924px 1.96924px rgba(0, 0, 0, 0.25)',
+        'headerShadow': '0px 4px 4px rgba(13, 20, 46, 0.25)'
       },
       fontFamily: {
         synonymRegular: ["SYNONYM_REGULAR", 'sans-serif'],
