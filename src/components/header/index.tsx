@@ -20,7 +20,7 @@ export const Header = () => {
 
   return (
     <>
-    <header className={`w-full h-20 md:h-24 fixed top-0 left-0 right-0 px-5 py-5 md:px-[5%] flex justify-between items-center z-10 ${inView ? '' : 'bg-[#0D142E]'}`}>
+    <header className={`w-full h-20 md:h-24 fixed top-0 left-0 right-0 px-5 py-5 md:px-[5%] flex justify-between items-center z-10 ${inView ? '' : 'bg-[#fff] shadow-headerShadow'}`}>
       <Logo />
       <MediaQuery maxWidth={768}>
         {matches =>
@@ -28,27 +28,27 @@ export const Header = () => {
             <>
               {isMenuOpen ? (
 			          <Button type="button" onClick={handleMenuOpen} className="z-10">
-				          <FontAwesomeIcon icon={faTimes} className="text-white text-[25px]"/>
+				          <FontAwesomeIcon icon={faTimes} className={`text-white text-[25px] ${inView ? '' : 'text-[#232323]'}`}/>
 				        </Button>
 				      ) : (
 				        <Button type="button" onClick={handleMenuOpen}>
-				          <FontAwesomeIcon icon={faBars}  className="text-white text-[25px]"/>
+				          <FontAwesomeIcon icon={faBars}  className={`text-white text-[25px] ${inView ? '' : 'text-[#232323]'}`}/>
 				        </Button>
 				      )
               }
 
-              <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen} />
+              <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen} view={inView} />
 
             </>
           ) :
           (
             <>
-             <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen}/>
+             <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen} view={inView}/>
              <div className='flex justify-start items-center gap-x-[25px]'>
-               <Button type="button" className='font-productSans rounded-lg border border-white text-white py-[0.3rem] px-[0.9rem] text-[0.9rem]'>
+               <Button type="button" className={`font-productSans rounded-lg border border-white text-white py-[0.3rem] px-[0.9rem] text-[0.9rem] ${inView ? '' : 'text-[#0D142E] border-[#0D142E]'}`}>
                  Log in
                </Button>
-               <Button type="button" className='font-productSans rounded-lg bg-white text-[#0D142E] py-[0.3rem] px-[0.9rem] text-[0.9rem] font-bold'>
+               <Button type="button" className={`font-productSans rounded-lg bg-white text-[#0D142E] py-[0.3rem] px-[0.9rem] text-[0.9rem] font-bold ${inView ? '' : 'text-[#fff] bg-[#0D142E]'}`}>
                  Get Started
                </Button>
              </div>

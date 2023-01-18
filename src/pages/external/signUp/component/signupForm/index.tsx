@@ -289,7 +289,7 @@ export const SignupForm = () => {
             </div>
             <div>
             <button
-                className='text-[1.06rem] font-bold mt-5 text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[3.8rem] tracking-[0.02em]'
+                className='font-productSans text-[1.06rem] font-bold mt-5 text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[3.8rem] tracking-[0.02em]'
                 type='submit'>
                 {isSubmit ? "Loading..." : "Create Account"}
             </button>
