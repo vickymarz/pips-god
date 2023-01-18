@@ -49,7 +49,7 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
       ));
 
   return (
-    <nav className={`flex flex-col md:flex-row justify-center md:justify-between items-center gap-y-24 md:gap-y-0 fixed md:static w-full h-full md:w-max md:h-max top-0 ${menuOpen ? 'right-0' : '-right-full'} bottom-0 bg-[#0D142E] md:bg-inherit z-8 transition-all duration-1000 ease-in-out md:transition-none`}>
+    <nav className={`flex flex-col md:flex-row justify-center md:justify-between items-center gap-y-24 md:gap-y-0 fixed md:static w-full h-full md:w-max md:h-max top-0 ${menuOpen ? 'right-0' : '-right-full'} bottom-0 ${view ? 'bg-[#0D142E]' : 'bg-[#fff] text-[#232323]'}  md:bg-inherit z-8 transition-all duration-1000 ease-in-out md:transition-none`}>
       <ul className='flex flex-col md:flex-row justify-center md:justify-between items-center gap-x-[2rem]  gap-y-9 md:gap-y-0 md:mt-0'>
         {navigation}
       </ul>
@@ -57,7 +57,7 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
       { (matches: boolean) =>
          matches && (
             <div className='flex justify-center items-center gap-x-[10px]'>
-          <Button type="button" onClick={handleMenuOpen} className='font-productSans rounded-lg bg-white text-[#0D142E] px-[0.9rem] py-[0.3rem] text-[1rem]'>
+          <Button type="button" onClick={handleMenuOpen} className={`font-productSans rounded-lg bg-white text-[#0D142E] px-[0.9rem] py-[0.3rem] text-[1rem] ${view ? 'bg-white text-[#0D142E]' : 'bg-[#0D142E] text-[#fff]'} `}>
           Get Started
         </Button>
         </div>
