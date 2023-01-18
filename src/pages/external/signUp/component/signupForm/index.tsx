@@ -78,20 +78,20 @@ export const SignupForm = () => {
   return (
     <>
         {errorMsg()}
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-start items-center w-full gap-y-[1rem]'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-start items-center w-full gap-y-[1rem] md:gap-y-[2.12rem]'>
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#666666] text-[1rem] font-medium' htmlFor='name'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='fullName'>
                     Full Name
                 </label>
                 <input
                     style={{
-                        border: errors.fullName ? "1px solid red" : "1px solid #D0D5DD",
+                        border: errors.fullName && "1px solid red",
                     }}
                     className={`focus:outline-none focus:${
                         !errors.fullName
                             ? "shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    }  text-[#666666] text-[0.75rem] w-full h-11 p-3.5 rounded-lg bg-transparent border border-[#666666]`}
+                    }  text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2 `}
                     type='text'
                     placeholder='Enter your name'
                     {...register("fullName", {
@@ -122,19 +122,19 @@ export const SignupForm = () => {
             </div>
 
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[8px]'>
-                <label className='pb-0 text-[#666666] text-[1rem] font-medium' htmlFor='email'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='email'>
                     Email
                 </label>
 
                 <input
                     style={{
-                        border: errors.email ? "1px solid red" : "1px solid #D0D5DD",
+                        border: errors.email && "1px solid red"
                     }}
                     className={`focus:outline-none focus:${
                         !errors.email
                             ? "shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    }  text-[#666666] text-[0.75rem] w-full h-11 p-3.5 rounded-lg bg-transparent border border-[#666666]`}
+                    }  text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type='email'
                     placeholder='Enter your email'
                     {...register("email", {
@@ -153,18 +153,18 @@ export const SignupForm = () => {
             </div>
 
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#666666] text-[1rem] font-medium' htmlFor='name'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='name'>
                     Phone Number
                 </label>
                 <input
                     style={{
-                        border: errors.mobile ? "1px solid red" : "1px solid #D0D5DD",
+                        border: errors.mobile && "1px solid red"
                     }}
                     className={`focus:outline-none focus:${
                         !errors.mobile
                             ? "shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    }  text-[#666666] text-[0.75rem] w-full h-11 p-3.5 rounded-lg bg-transparent border border-[#666666]`}
+                    }  text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type='text'
                     placeholder='Enter your phone number'
                     {...register("mobile", {
@@ -195,24 +195,24 @@ export const SignupForm = () => {
             </div>
 
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#666666] text-[1rem] font-medium' htmlFor='password'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='password'>
                    Create Password
                 </label>
 
                 <input
                     style={{
                         border: errors.password
-                            ? "1px solid red"
-                            : "1px solid #D0D5DD",
+                            && "1px solid red"
+                        ,
                     }}
                     className={`relative focus:outline-none ${
                         !errors.password
                             ? "focus:shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
                             : "focus:shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    } text-[#666666] text-[0.75rem] w-full h-11 p-3.5 rounded-lg bg-transparent border border-[#666666]`}
+                    } text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type={passwordShown ? "text" : "password"}
 
-                    placeholder='Please enter your unique password'
+                    placeholder='Create password'
                     {...register("password", {
                         required: "Password cannot be empty",
                         minLength: {
@@ -247,18 +247,18 @@ export const SignupForm = () => {
             </div>
 
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#666666] text-[1rem] font-medium' htmlFor='name'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='name'>
                     Address
                 </label>
                 <input
                     style={{
-                        border: errors.address ? "1px solid red" : "1px solid #D0D5DD",
+                        border: errors.address && "1px solid red"
                     }}
                     className={`focus:outline-none focus:${
                         !errors.address
                             ? "shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    }  text-[#666666] text-[0.75rem] w-full h-11 p-3.5 rounded-lg bg-transparent border border-[#666666]`}
+                    }  text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type='text'
                     placeholder='Enter your name'
                     {...register("address", {
