@@ -1,4 +1,4 @@
-import student from '../../../../assets/images/student.png'
+import student from '../../../../../assets/images/student.png'
 
 export const Vision = () => {
   return (

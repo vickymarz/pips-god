@@ -16,7 +16,9 @@ module.exports = {
         'arrow': "url('/src/assets/images/arrow.png')",
         'hill': "url('/src/assets/images/hill.png')",
         'leftHill': "url('/src/assets/images/left-hill.png'), url('/src/assets/images/right-hill.png') bg-right",
+        'hillMobile': "url('/src/assets/images/left-hill.png'), url('/src/assets/images/hill-moblie.png')",
         'rightHill': "url('/src/assets/images/right-hill.png')",
+        'authImg': "url('/src/assets/images/auth-image.png')",
       },
       dropShadow: {
         'mentorShadow': '5.30801px 2.654px 1.76934px rgba(29, 30, 44, 0.25)',

@@ -1,13 +1,14 @@
 import { Button, Input } from 'components'
-import ellipse from '../../../../assets/images/ellipse.png'
-import leftHill from '../../../../assets/images/left-hill.png'
-import rightHill from '../../../../assets/images/right-hill.png'
+import ellipse from '../../../../../assets/images/ellipse.png'
+import leftHill from '../../../../../assets/images/left-hill.png'
+import rightHill from '../../../../../assets/images/right-hill.png'
+import hill from '../../../../../assets/images/hill-mobile.png'
 
 export const Membership = () => {
   return (
     <section className='bg-[#FFF6E3] bg-no-repeat'>
       <div style={{
-              background: window.innerWidth >= 768 ? `url(${leftHill}) no-repeat, url(${rightHill}) no-repeat right` : ''
+              background: window.innerWidth >= 768 ? `url(${leftHill}) no-repeat, url(${rightHill}) no-repeat right` : `url(${hill}) no-repeat`
             }}
           className='px-[1.6rem] md:py-[4rem] py-[1.4rem] z-10 flex flex-col justify-center items-center gap-y-[16px] md:gap-y-[2.7rem]'>
           <h2 className="font-productSans text-center font-bold text-[1.4rem] md:text-[3rem] leading-[1.7rem] md:leading-[3rem] text-[#494949]">

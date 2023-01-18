@@ -1,4 +1,4 @@
-import arrow from '../../../../assets/images/arrow.png'
+import arrow from '../../../../../assets/images/arrow.png'
 
 export const Packages = () => {
     const packages = [

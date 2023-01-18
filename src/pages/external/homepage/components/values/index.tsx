@@ -1,4 +1,4 @@
-import forex from '../../../../assets/images/forex.png'
+import forex from '../../../../../assets/images/forex.png'
 
 export const Values = () => {
   return (
