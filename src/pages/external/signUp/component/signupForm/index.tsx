@@ -260,7 +260,7 @@ export const SignupForm = () => {
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
                     }  text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type='text'
-                    placeholder='Enter your name'
+                    placeholder='Enter your residential address'
                     {...register("address", {
                         required: "Name cannot be empty",
                         minLength: {
