@@ -1,22 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import {Footer} from "../../components";
-import ForgetPasswordImage from "../../assets/img/ForgetPasswordImage.png";
-import BackToSignIn from "../../assets/img/BackToSignIn.png";
+
 const ResetLink = () => {
   return (
     <>
-      <Navbar />
       <div className="container mx-auto px-10 mt-20">
         <div className="md:flex items-center justify-center gap-20">
           <div className="grid items-center justify-center">
-            <div className="md:hidden mb-5">
-              <Link to="/forgot_password">
-                <img src={BackToSignIn} alt="arrow" />
-              </Link>
-            </div>
-            <h1 className="text-3xl font-bold">Reset Link Sent</h1>
+            <h2 className="text-3xl font-bold">Reset Link Sent</h2>
             <p className="w-60 md:w-96 mt-3 text-base xl:text-lg">
               A password reset code has been sent to your Email
             </p>
@@ -40,12 +31,8 @@ const ResetLink = () => {
               </Link>
             </p>
           </div>
-          <div className="hidden lg:flex">
-            <img src={ForgetPasswordImage} alt="beautiful girl" />
-          </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
