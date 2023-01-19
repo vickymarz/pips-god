@@ -1,7 +1,7 @@
 import { AuthHeader } from "components";
 import { ForgotPasswordForm } from "./component";
 
-const ForgetPassword = () => {
+export const ForgetPassword = () => {
 
   return (
     <section className='w-full min-h-screen bg-authImg md:bg-none bg-cover bg-no-repeat'>
@@ -18,4 +18,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+

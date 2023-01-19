@@ -1,3 +1,6 @@
 export * from './homepage'
 export * from './signUp'
 export * from './signIn'
+export * from './ForgetPassword'
+export * from './linkReset'
+export * from './resetPassword'

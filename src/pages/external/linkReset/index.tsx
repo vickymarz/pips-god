@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ResetLink = () => {
+export const ResetLink = () => {
   return (
     <>
       <div className="container mx-auto px-10 mt-20">
@@ -37,4 +37,3 @@ const ResetLink = () => {
   );
 };
 
-export default ResetLink;
