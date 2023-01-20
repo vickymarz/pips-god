@@ -1,31 +1,28 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 export const ResetLink = () => {
   return (
     <>
-      <div className="container mx-auto px-10 mt-20">
-        <div className="md:flex items-center justify-center gap-20">
+      <div className="w-full min-h-screen bg-authImg bg-cover bg-no-repeat">
+        <div className="w-full min-h-screen flex items-center  justify-center bg-[#ffffffe6] px-[33px] md:px-[38px] pt-[45px]">
           <div className="grid items-center justify-center">
-            <h2 className="text-3xl font-bold">Reset Link Sent</h2>
-            <p className="w-60 md:w-96 mt-3 text-base xl:text-lg">
-              A password reset code has been sent to your Email
-            </p>
-
+          <h2 className='text-[#0D142E] font-bold text-[1.4rem] md:text-[1.87rem] font-productSans'>Reset Link sent</h2>
+          <p className='px-[40px] md:px-[0] text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
+          A password reset code has been sent to your Email
+          </p>
             <div className="mt-5">
               <button
                 type="submit"
-                className="w-60 md:w-96 text-white bg-[#0056D6] hover:bg-[#0056D6] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-[#0056D6] dark:hover:bg-[#0056D6] dark:focus:ring-blue-800"
+                className="my-[20px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]"
               >
                 <Link to="/reset_password">Click here to reset password</Link>
               </button>
             </div>
-
-            <p className="w-60 md:w-96 mt-5 text-sm xl:text-base">
+            <p className="mt-[5px] mt-[50px] font-medium text-[0.87rem] md:text-[1.31rem] text-center text-[#666666]">
               Didn't receive the email yet?{" "}
               <Link
                 to="/forgot_password"
-                className="text-[#0056D6] font-semi-bold"
+                className="text-[#0D142E] font-semi-bold"
               >
                 Click here to resend
               </Link>
