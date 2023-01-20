@@ -63,7 +63,7 @@ const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-start items-center w-full gap-y-[1rem] md:gap-y-[53px]'>
     <div className='relative flex flex-col justify-start items-start w-full gap-y-[8px] md:gap-y-[23px]'>
                 <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='email'>
-                    Your Email
+                    Email
                 </label>
 
                 <input
@@ -92,9 +92,9 @@ const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
                 )}
             </div>
             <button
-                className='mt-[150px] md:my-[85px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]'
+                className='mt-[80px] md:my-[150px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]'
                 type='submit'>
-                {isSubmit ? "Loading..." : "Sign In"}
+                {isSubmit ? "Loading..." : "Reset password"}
             </button>
         </form>
         </>
