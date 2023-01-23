@@ -1,4 +1,4 @@
-import { AuthHeader } from "components";
+import { AuthFooter, AuthHeader } from "components";
 import { ForgotPasswordForm } from "./component";
 
 export const ForgetPassword = () => {
@@ -12,6 +12,7 @@ export const ForgetPassword = () => {
              text="Let’s help you get back to your account."
           />
          <ForgotPasswordForm />
+         <AuthFooter />
       </div>
     </div>
     </section>

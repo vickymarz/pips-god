@@ -1,5 +1,5 @@
 import { ResetPasswordForm } from "./component";
-import { AuthHeader } from "components";
+import { AuthFooter, AuthHeader } from "components";
 
 export const ResetPassword = () => {
   return(
@@ -11,6 +11,7 @@ export const ResetPassword = () => {
             text="Let’s help you get back to your account."
           />
           <ResetPasswordForm />
+          <AuthFooter />
         </div>
       </div>
     </section>

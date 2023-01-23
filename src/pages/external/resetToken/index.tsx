@@ -1,4 +1,4 @@
-import { AuthHeader } from "components";
+import { AuthFooter, AuthHeader } from "components";
 import { ResetTokenForm } from "./component";
 
 export const ResetToken = () => {
@@ -12,6 +12,7 @@ export const ResetToken = () => {
             text="Enter 6 digit code sent to your email."
           />
          <ResetTokenForm />
+         <AuthFooter />
       </div>
     </div>
     </section>
