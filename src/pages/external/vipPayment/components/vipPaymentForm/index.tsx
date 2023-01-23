@@ -21,17 +21,13 @@ export const VipPaymentForm = ({id}:{id:string}) => {
     const navigate = useNavigate();
 
 	const [invalidCredentials, setInvalidCredentials] = useState(false);
-	const [isSubmit, setIsSubmit] = useState(false);
 	const [accountCreated, setAccountCreated] = useState(false);
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-		setIsSubmit(true);
-
 		const result = await userServices.login(data);
 
 		if (result.status === "fail") {
-			setIsSubmit(false);
 			setInvalidCredentials(true);
 		}
 
