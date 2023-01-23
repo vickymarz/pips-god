@@ -5,12 +5,11 @@ import userServices from "services/userServices";
 import card from '../../../../../assets/images/card.png'
 type FormValues = {
     fullName: string;
-    telegramUsername: string;
     email: string;
     amount: number;
   };
 
-export const VipPaymentForm = ({id}:{id:string}) => {
+export const MentorshipPaymentForm = ({id}:{id:string}) => {
     const {
 		register,
 		handleSubmit,
@@ -109,47 +108,6 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                         className='right-0 bottom-[-37px] italic text-sm mt-2'
                         style={{ color: "red" }}>
                         {errors.fullName?.message}
-                    </p>
-                )}
-            </div>
-            <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#19275E] md:text-[1.25rem] text-[1rem] ' htmlFor='fullName'>
-                    Telegram Username
-                </label>
-                <input
-                    style={{
-                        border: errors.telegramUsername && "1px solid red",
-                    }}
-                    className={`focus:outline-none focus:${
-                        !errors.telegramUsername
-                            ? "shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
-                            : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    }  w-full pr-[80px] text-[#666666] text-[0.75rem] md:text-[1rem] py-[12px] px-[10px] rounded-[10px] bg-transparent border border-[#000000]`}
-                    type='text'
-                    placeholder='Enter your telegram username'
-                    {...register("telegramUsername", {
-                        required: "Name cannot be empty",
-                        minLength: {
-                            value: 3,
-                            message: "Name must be at least 3 characters",
-                        },
-                        maxLength: {
-                            value: 30,
-                            message: "Name must not be more than 30 characters",
-                        },
-
-                        pattern: {
-                            value: thirdPattern,
-                            message:
-                                "Name must start with a letter and no special characters are allowed",
-                        },
-                    })}
-                />
-                {errors.telegramUsername && (
-                    <p
-                        className='right-0 bottom-[-37px] italic text-sm mt-2'
-                        style={{ color: "red" }}>
-                        {errors.telegramUsername?.message}
                     </p>
                 )}
             </div>

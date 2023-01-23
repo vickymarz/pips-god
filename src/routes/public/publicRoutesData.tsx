@@ -1,4 +1,4 @@
-import { ForgetPassword, Homepage, ResetLink, SignIn, Signup,  ResetPassword, ResetToken, VipPayment } from '../../pages'
+import { ForgetPassword, Homepage, ResetLink, SignIn, Signup,  ResetPassword, ResetToken, VipPayment, MentorshipPayment } from '../../pages'
 import type {RouteObject} from 'react-router-dom'
 
 const publicRoutesData: RouteObject[] = [
@@ -41,6 +41,11 @@ const publicRoutesData: RouteObject[] = [
       id: '9',
       path: "vip_payment",
       element: <VipPayment />,
+    },
+    {
+      id: '10',
+      path: "mentorship_payment",
+      element: <MentorshipPayment />,
     },
   ];
 
