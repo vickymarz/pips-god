@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import MediaQuery from 'react-responsive';
 import { useInView } from 'react-intersection-observer';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import {Button} from "components";
