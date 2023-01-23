@@ -5,11 +5,11 @@ export const ResetLink = () => {
     <>
       <div className="w-full min-h-screen bg-authImg bg-cover bg-no-repeat">
         <div className="w-full min-h-screen flex items-center  justify-center bg-[#ffffffe6] px-[33px] md:px-[38px] pt-[45px]">
-          <div className="grid items-center justify-center">
-          <h2 className='text-[#0D142E] font-bold text-[1.4rem] md:text-[1.87rem] font-productSans'>Reset Link sent</h2>
-          <p className='px-[40px] md:px-[0] text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
-          A password reset code has been sent to your Email
-          </p>
+          <div className="flex flex-col items-center justify-center items-center">
+            <h2 className='text-[#0D142E] font-bold text-[1.4rem] md:text-[1.87rem] font-productSans'>Reset Link sent</h2>
+            <p className='px-[40px] md:px-[0] text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
+              A password reset code has been sent to your Email
+            </p>
             <div className="mt-5">
               <button
                 type="submit"
