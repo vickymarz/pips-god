@@ -10,6 +10,8 @@ type FormValues = {
   };
 
 export const SigninForm = () => {
+    const [isChecked, setIsChecked] = useState(false);
+
     const {
 		register,
 		handleSubmit,
@@ -66,6 +68,11 @@ export const SigninForm = () => {
 		return element;
 	};
 
+
+    const handleCheckbox = () => {
+        setIsChecked(!isChecked);
+      };
+
 	const pattern =
 		// eslint-disable-next-line no-useless-escape
 		/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -74,21 +81,21 @@ export const SigninForm = () => {
   return (
     <>
         {errorMsg()}
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-start items-center w-full gap-y-[1rem]'>
-            <div className='relative flex flex-col justify-start items-start w-full gap-y-[8px]'>
-                <label className='pb-0 text-[#666666] text-[1rem] font-medium' htmlFor='email'>
-                    Email
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-start items-center w-full gap-y-[1rem] md:gap-y-[53px]'>
+        <div className='relative flex flex-col justify-start items-start w-full gap-y-[8px] md:gap-y-[23px]'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='email'>
+                    Your Email
                 </label>
 
                 <input
                     style={{
-                        border: errors.email ? "1px solid red" : "1px solid #D0D5DD",
+                        border: errors.email && "1px solid red"
                     }}
                     className={`focus:outline-none focus:${
                         !errors.email
                             ? "shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    }  text-[#666666] text-[0.75rem] w-full h-11 p-3.5 rounded-lg bg-transparent border border-[#666666]`}
+                    } text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type='email'
                     placeholder='Enter your email'
                     {...register("email", {
@@ -105,25 +112,25 @@ export const SigninForm = () => {
                     </p>
                 )}
             </div>
-            <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#666666] text-[1rem] font-medium' htmlFor='password'>
-                   Create Password
+            <div className='relative flex flex-col justify-start items-start gap-y-[8px] md:gap-y-[23px] w-full'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='password'>
+                   Enter Password
                 </label>
 
                 <input
                     style={{
                         border: errors.password
-                            ? "1px solid red"
-                            : "1px solid #D0D5DD",
+                            && "1px solid red"
+                        ,
                     }}
                     className={`relative focus:outline-none ${
                         !errors.password
                             ? "focus:shadow-[0px_0px_0px_4px_rgba(74,74,104,0.1)]"
                             : "focus:shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
-                    } text-[#666666] text-[0.75rem] w-full h-11 p-3.5 rounded-lg bg-transparent border border-[#666666]`}
+                    } text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type={passwordShown ? "text" : "password"}
 
-                    placeholder='Please enter your unique password'
+                    placeholder='Enter password'
                     {...register("password", {
                         required: "Password cannot be empty",
                         minLength: {
@@ -156,15 +163,19 @@ export const SigninForm = () => {
                     </p>
                 )}
             </div>
-            <div className="flex flex-col justify-center items-center mt-[20px]">
-            <p className="text-[#19275E] text-[1rem] font-medium">Forget password?</p>
+            <div className="flex justify-between mt-[0] md:mt-[20px]  w-full">
+                <div className='flex justify-start items-center gap-x-[9px]'>
+                   <input type="checkbox" className={`appearance-none w-[16px] md:w-[26px] h-[16px] md:h-[26px] relative outline-none bg-transparent border border-[#000] rounded-[3.7px] ${isChecked ? 'relative' : ''}`} checked={isChecked} onChange={handleCheckbox} id={`${isChecked ? 'checkbox' : ''}`} />
+                   <span className="text-[1rem] md:text-[16px] font-medium text-[#8B8B8B]">Remember me</span>
+                </div>
+                <p className="hidden md:block text-[#19275E] text-[1rem] md:text-[1.12rem] font-medium">Forget password?</p>
+            </div>
+            <p className="md:hidden mt-[15px] text-[#19275E] text-[1rem] md:text-[1.12rem] font-medium">Forget password?</p>
             <button
-                className='mt-[200px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]'
+                className='mt-[150px] md:my-[85px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]'
                 type='submit'>
                 {isSubmit ? "Loading..." : "Sign In"}
             </button>
-
-            </div>
         </form>
     </>
   )

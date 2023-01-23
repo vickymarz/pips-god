@@ -47,4 +47,13 @@ li {
   list-style-type: none;
 }
 
+#checkbox::before {
+  content: "\2714";
+  font-size: 1.3rem;
+  color: #0D142E;
+  position: absolute;
+  left: 3px;
+  top: -2px;
+}
+
 
