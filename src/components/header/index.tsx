@@ -44,10 +44,10 @@ export const Header = () => {
             <>
              <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen} view={inView}/>
              <div className='flex justify-start items-center gap-x-[25px]'>
-               <Button type="button" className={`font-productSans rounded-lg border border-white text-white py-[0.3rem] px-[0.9rem] text-[0.9rem] ${inView ? '' : 'text-[#0D142E] border-[#0D142E]'}`}>
+               <Button type="button" className={`font-productSans rounded-lg py-[0.5rem] px-[0.9rem] text-[0.9rem] ${inView ? 'text-white border border-white' : 'text-[#0D142E] border border-[#0D142E]'}`}>
                  Log in
                </Button>
-               <Button type="button" className={`font-productSans rounded-lg bg-white text-[#0D142E] py-[0.3rem] px-[0.9rem] text-[0.9rem] font-bold ${inView ? '' : 'text-[#fff] bg-[#0D142E]'}`}>
+               <Button type="button" className={`font-productSans rounded-lg bg-white text-[#0D142E] py-[0.5rem] px-[0.9rem] text-[0.9rem] font-bold ${inView ? '' : 'text-[#fff] bg-[#0D142E]'}`}>
                  Get Started
                </Button>
              </div>
