@@ -4,7 +4,7 @@ export const Overview = () => {
   return (
     <div>
         <Analytics />
-        <Database />
+        {/* <Database /> */}
     </div>
   )
 }
