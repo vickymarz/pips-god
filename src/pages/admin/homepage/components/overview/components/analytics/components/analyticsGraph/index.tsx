@@ -41,8 +41,8 @@ const data = [
 
 export const AnalyticsGraph = () => {
   return (
-    <div className="flex justify-between">
-        <div style={{ width: "100%", height: '200px', borderRadius: '10px', boxShadow: '0px 10.7px 16.0499px rgba(220, 224, 249, 0.5)', border: ' 1.07px solid #ECEEF7', background: '#fff' }}>
+    <div className="flex justify-between w-full">
+      <div style={{ width: "100%", height: '200px', borderRadius: '10px', boxShadow: '0px 10.7px 16.0499px rgba(220, 224, 249, 0.5)', border: ' 1.07px solid #ECEEF7', background: '#fff' }}>
         <div className="font-medium text-[0.73rem] text-[#0D142E] flex flex-col gap-y-[8px] justify-start items-start">
           <p className="tracking-[0.01rem]">Total learners</p>
           <p className="font-semibold">3000</p>
