@@ -12,6 +12,33 @@
   src: url("./assets/fonts/product-sans/Product\ Sans\ Regular.ttf");
 }
 
+@layer utilities {
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #F8FAFC;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #d9d9d9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #F8FAFC;
+    border-radius: 100vh;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #F8FAFC;
+  }
+}
+
 *,
 ::before,
 ::after {
