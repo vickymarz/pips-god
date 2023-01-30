@@ -5,7 +5,7 @@ import {Button} from 'components'
 
 export const DatePicker = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
     const [value, onChange] = useState([new Date(), new Date()]);
-    console.log(value)
+    
     return (
     <div className={`${modal ?'fixed top-0 right-0 left-0 bottom-0 w-screen z-20 bg-[#69686844]': 'hidden'}`}>
       <div className='w-[26%] ml-auto mr-auto relative mt-44 flex flex-col justify-center items-center bg-white py-6 rounded-2xl h-min-[400px]'>

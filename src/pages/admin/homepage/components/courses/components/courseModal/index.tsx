@@ -5,7 +5,24 @@ import { Button } from 'components';
 
 export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
   const [image, setImage] = useState<string | Blob>('')
+  const [selectedFile, setSelectedFile] =  useState<File | Blob>()
+	const [isFilePicked, setIsFilePicked] = useState(false);
+  const [selectedVideo, setSelectedVideo] =  useState<File | Blob>()
+	const [isVideoPicked, setIsVideoPicked] = useState(false);
 
+  const onFileChange = (event: React.ChangeEvent) => {
+    const target= event.target as HTMLInputElement;
+    const file = (target.files as FileList)[0];
+		setSelectedFile(file);
+		setIsFilePicked(true);
+	};
+
+  const onVideoChange = (event: React.ChangeEvent) => {
+    const target= event.target as HTMLInputElement;
+    const file = (target.files as FileList)[0];
+		setSelectedVideo(file);
+		setIsVideoPicked(true);
+	};
 
   const onImageChange = (event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
@@ -72,18 +89,30 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
                 />
             </div>
             <div className='flex flex-col justify-start items-start gap-y-[19px]'>
-              <Button type='button' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[11px]'>
+              <input type="file" id="videopicker" accept="video/*" onChange={onVideoChange} className='hidden'/>
+              <label htmlFor='videopicker' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[11px]'>
                 <span className='text-[#0D142E] font-medium text-[1.25rem]'>Attach videos</span>
                 <div className='w-[11px] h-[22px]'>
                   <img src={pin} alt="attach video" />
                 </div>
-              </Button>
-              <Button type='button' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[11px]'>
+              </label>
+              {isVideoPicked && (
+				        <span>
+					        <p>{selectedVideo?.name}</p>
+				        </span>
+			        )}
+              <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
+              <label htmlFor='docpicker' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[11px]'>
                 <span className='text-[#0D142E] font-medium text-[1.25rem]'>Attach file</span>
                 <div className='w-[11px] h-[22px]'>
                   <img src={pin} alt="attach file" />
                 </div>
-              </Button>
+              </label>
+              {isFilePicked && (
+				        <span>
+					        <p>{selectedFile?.name}</p>
+				        </span>
+			        )}
             </div>
             <div className='mt-[59px] w-full flex justify-end items-start text-[1.12rem] font-bold font-productSans gap-x-[32px]'>
               <Button type='button' onClick={() => setModal(false)}  className="text-[#B0B0B0] bg-[#fff] rounded-[8px] py-[17px] px-[34px] border border-[#B0B0B0]">
