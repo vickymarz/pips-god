@@ -4,7 +4,7 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import {Button} from 'components'
 
 export const DatePicker = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
-    const [value, onChange] = useState<string | Date[] | any>([new Date(), new Date()]);
+    const [value, onChange] = useState<string | Date[]>([new Date(), new Date()]);
 
     return (
     <div className={`${modal ?'fixed top-0 right-0 left-0 bottom-0 w-screen z-20 bg-[#69686844]': 'hidden'}`}>

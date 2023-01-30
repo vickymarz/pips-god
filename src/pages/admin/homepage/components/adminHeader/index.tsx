@@ -5,7 +5,7 @@ import moment from 'moment'
 import { CourseModal } from '../courses/components'
 
 export const AdminHeader = () => {
-  const [modal, setModal] = useState(true)
+  const [modal, setModal] = useState(false)
 
   const handleModal = () => {
     setModal(!modal)
