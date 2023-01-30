@@ -5,9 +5,9 @@ import file from '../../../../../../../assets/images/file.png'
 
 export const Readings = () => {
   return (
-    <div className='flex flex-col gap-y-[16px] px-[32px] bg-[#F8FAFC] rounded-[8px]'>
-      <div className='rounded-[8px] bg-white py-[13px] py-[24px]'>
-        <div className='flex justify-start items-start gap-x-[35xp]'>
+    <div className='flex flex-col gap-y-[16px] p-[32px] bg-[#F8FAFC] rounded-[8px] w-full'>
+      <div className='rounded-[8px] bg-white py-[13px] py-[24px] flex justify-between items-center px-[24px] py-[13px]'>
+        <div className='flex justify-start items-start gap-x-[36px]'>
             <Button type='button'>
               <img src={file} alt="file player" />
             </Button>
