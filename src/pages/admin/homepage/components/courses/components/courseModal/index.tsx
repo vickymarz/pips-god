@@ -3,7 +3,7 @@ import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
 
-export const CourseModal = ({setModal, modal}:{setModal: () => void, modal: boolean}) => {
+export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
   const [image, setImage] = useState<string | Blob>('')
 
 
@@ -14,21 +14,27 @@ export const CourseModal = ({setModal, modal}:{setModal: () => void, modal: bool
 };
 
     return (
-      <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 w-screen w-screen z-20 bg-[#69686844]' : 'hidden'}`}>
-        <div className='w-[80%] ml-auto mr-auto relative mt-44 rounded-[27px] flex justify-between items-start'>
-          <div className="profileContainer">
-            <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8]'>(required)</span></h2>
-	          <div className="flex flex-col justify-center items-center gap-x-[32px]">
+      <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
+        <div className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white'>
+          <div className="p-[32px]">
+            <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
+	          <div className="flex flex-col justify-center items-center gap-y-[32px]">
 		          <div className="bg-[#E8E8E8] rounded-[8px] flex justify-center items-center w-[339px] h-[259px]">
-			          <img src={`${upload || image}`} alt="uploaded thumbnail" />
+                  {image ? ( <img src={`${image}`} alt="uploaded thumbnail" />)
+                  :
+                  (
+                  <div className='flex justify-center items-center w-[50px] h-[33.3px]'>
+                    <img src={`${upload}`} alt="uploaded thumbnail" />
+                  </div>
+                  )}
 		          </div>
               <input type="file" name="file" id="input" multiple accept="image/*" onChange={onImageChange} className='hidden'/>
-              <label htmlFor="input" className="text-[#2A72FF] font-medium text-[1.37rem]">
+              <label htmlFor="input" className="text-[#2A72FF] font-medium text-[1.37rem] cursor-pointer">
                 Upload thumbnail
               </label>
             </div>
           </div>
-          <form className='w-full flex flex-col justify-start items-start gap-y-[32px]'>
+          <form className='w-full flex flex-col justify-start items-start gap-y-[32px] py-[40px] px-[32px] border-l-[1px] border-[#B0B0B0]'>
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='title'>
                 Course title <span className='text-[#B0B0B0]'>(required)</span>
@@ -66,22 +72,26 @@ export const CourseModal = ({setModal, modal}:{setModal: () => void, modal: bool
                 />
             </div>
             <div className='flex flex-col justify-start items-start gap-y-[19px]'>
-              <Button type='button' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[4px]'>
+              <Button type='button' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[11px]'>
                 <span className='text-[#0D142E] font-medium text-[1.25rem]'>Attach videos</span>
-                <img src={pin} alt="attach video" />
+                <div className='w-[11px] h-[22px]'>
+                  <img src={pin} alt="attach video" />
+                </div>
               </Button>
-              <Button type='button' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[4px]'>
+              <Button type='button' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[11px]'>
                 <span className='text-[#0D142E] font-medium text-[1.25rem]'>Attach file</span>
-                <img src={pin} alt="attach file" />
+                <div className='w-[11px] h-[22px]'>
+                  <img src={pin} alt="attach file" />
+                </div>
               </Button>
             </div>
-            <div className='mt-[59px] flex justify-end items-start text-[1.12rem] font-bold font-productSans'>
-              <button className="text-[#B0B0B0] bg-[#fff] rounded-[8px] py-[17px] px-[34px] border border-[#B0B0B0]" type="button">
+            <div className='mt-[59px] w-full flex justify-end items-start text-[1.12rem] font-bold font-productSans gap-x-[32px]'>
+              <Button type='button' onClick={() => setModal(false)}  className="text-[#B0B0B0] bg-[#fff] rounded-[8px] py-[17px] px-[34px] border border-[#B0B0B0]">
                 Cancel
-              </button>
-              <button className="text-white bg-[#0D142E] rounded-[8px] py-[17px] px-[34px]" type="submit">
+              </Button>
+              <Button type='submit' className="text-white bg-[#0D142E] rounded-[8px] py-[17px] px-[34px]">
                 Create
-              </button>
+              </Button>
             </div>
           </form>
         </div>

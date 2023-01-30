@@ -1,9 +1,18 @@
+import {useState} from 'react'
 import { Button } from 'components'
 import admin from '../../../../../assets/images/admin.png'
 import moment from 'moment'
+import { CourseModal } from '../courses/components'
 
 export const AdminHeader = () => {
+  const [modal, setModal] = useState(true)
+
+  const handleModal = () => {
+    setModal(!modal)
+  }
+
   return (
+    <>
     <div className="flex justify-between w-full items-center gap-x-[8px] pt-[42px] border-b-[1px] border-[#D3D3D3] pb-[22px]">
       <div className="flex justify-start items-center gap-x-[8px] pt-[42px]">
         <div className='flex justify-center items-center'>
@@ -18,11 +27,13 @@ export const AdminHeader = () => {
           </p>
         </div>
      </div>
-     <Button type='button' className='flex justify-center items-center gap-x-[6px] text-productSans text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[8.25px] py-[15px] px-[34px] tracking-[0.02em]'>
+     <Button type='button' onClick={handleModal} className='flex justify-center items-center gap-x-[6px] text-productSans text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[8.25px] py-[15px] px-[34px] tracking-[0.02em]'>
        <span className='text-[30px] font-normal'>+</span>
        <span>Create</span>
      </Button>
     </div>
+    {modal && <CourseModal setModal={setModal} modal={modal}/>}
+    </>
   )
 }
 
