@@ -2,6 +2,8 @@ import fetchApi from "./fetchApi";
 
 import {
   BASE_URL,
+  CLOUDINARY_BASE_URL,
+  UPLOAD_THUMBNAIL,
   SIGNUP_URL,
   LOGIN_URL,
   CREATE_EVENT,
@@ -17,6 +19,16 @@ import {
   DELETE_EVENT,
   EVENT_BY_TOKEN,
 } from "./rootEndPoints.js";
+
+
+const uploadThumbnail = async (params) => {
+  try {
+    const result = await fetchApi.post(`${CLOUDINARY_BASE_URL}/${UPLOAD_THUMBNAIL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
 
 const register = async (params) => {
   try {
@@ -152,7 +164,7 @@ const deleteEvent = async (id) => {
 const getUser = async () => {
   try {
     const dataObj = await fetchApi.get(`${BASE_URL}/${GET_USER}`);
-    
+
     const datas = await dataObj.data;
     return datas;
   } catch (err) {
@@ -179,6 +191,7 @@ const deleteParticipants = async (id) => {
 }
 
 const userServices = {
+  uploadThumbnail,
   register,
   login,
   createEvents,
