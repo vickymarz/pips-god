@@ -1,4 +1,6 @@
 export const BASE_URL = process.env.REACT_APP_BASE_URL
+export const CLOUDINARY_BASE_URL = process.env.CLOUDINARY_BASE_URL
+export const UPLOAD_THUMBNAIL = 'image/upload'
 export const SIGNUP_URL = 'auth/signup'
 export const LOGIN_URL ='auth/signin'
 export const PASSWORD_RECOVERY_URL ='auth/recover/generate'
