@@ -1,9 +1,13 @@
-import {useQuery} from 'react-query'
+import {useMutation} from 'react-query'
 
-export const useFiles = ({queryKey, queryFn}) => {
-  useQuery(queryKey, queryFn)
-  return (
-    <div>index</div>
-  )
+export const useFiles = (
+  queryFn: (params?: any) => Promise<any>,
+  onSuccess:(data:string) => void
+  ) => {
+ const mutation =  useMutation(queryFn, {
+   onSuccess: onSuccess
+ })
+
+ return mutation
 }
 

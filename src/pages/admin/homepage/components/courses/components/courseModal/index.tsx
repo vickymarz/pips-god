@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
+import userServices from 'services/userServices';
+import { UploadImages } from 'helpers/uploadImages';
 
 export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
   const [image, setImage] = useState<string | Blob>('')
@@ -25,9 +27,10 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
 	};
 
   const onImageChange = (event: React.ChangeEvent) => {
-    const target= event.target as HTMLInputElement;
-    const file = (target.files as FileList)[0];;
-    setImage(URL.createObjectURL(file))
+
+   const thumbnail = UploadImages(event)
+    // setImage(URL.createObjectURL(file))
+    setImage(thumbnail)
 };
 
     return (
