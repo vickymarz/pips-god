@@ -1,4 +1,4 @@
-import useResendOTP from "../../../../../hooks/useResendOTP";
+import {useResendOTP} from "../../../../../hooks";
 
 type ButtonProps = {
   disabled: boolean
