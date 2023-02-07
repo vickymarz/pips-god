@@ -10,7 +10,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
 	const [isFilePicked, setIsFilePicked] = useState(false);
   const [selectedVideo, setSelectedVideo] =  useState<string | React.ReactNode>('')
 	const [isVideoPicked, setIsVideoPicked] = useState(false);
-
+  const [tags, setTags] = useState<Array<string>>([])
 
   const onFileChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
@@ -35,6 +35,15 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
     setImage(thumbnail)
 };
 
+const handleKeyDown = (event: React.KeyboardEvent) => {
+  if(event.key !== 'Enter') return
+  const target = event.target as HTMLInputElement
+  const values = target.value
+  if(!values.trim()) return
+  setTags([...tags, values])
+  target.value = ''
+}
+
     return (
       <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
         <div className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white'>
@@ -42,7 +51,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
             <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
 	          <div className="flex flex-col justify-center items-center gap-y-[32px]">
 		          <div className="bg-[#E8E8E8] rounded-[8px] flex justify-center items-center w-[339px] h-[259px]">
-                  {image ? ( <img src={`${image}`} alt="uploaded thumbnail" />)
+                  {image ? ( <img src={`${image}`} alt="uploaded thumbnail" className='object-cover'/>)
                   :
                   (
                   <div className='flex justify-center items-center w-[50px] h-[33.3px]'>
@@ -85,13 +94,22 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='keywords'>
                 Include Keywords
               </label>
-              <input
-                className={`outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full py-[17px] px-[20px] rounded-[8px] bg-[#fff] border border-[#B0B0B0]`}
-                type='text'
-                required
-                id='keywords'
-                placeholder='Provide your video keywords'
+              <div className="border-[2px] border-[#000] p-[0.5em] rounded-[3px] mt-[1em] flex items-center wrap gap-[0.5em]">
+               { tags.map((tag, index) => (
+                  <div key={index} className='bg-[rgb(218, 216, 216)] inline-block px-[0.75em] py-[0.5em] rounded-[20px]'>
+                    <span>{tag}</span>
+                    <span className='h-[20px] w-[20px] bg-[rgb(48, 48. 48)] text-[#fff] rounded-[50%] inline-flex justify-center items-center text-[18px] cursor-pointer'>&times;</span>
+                  </div>
+               ))}
+                <input
+                  className={`border-0 outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full py-[17px] px-[20px] rounded-[8px] bg-[#fff] border border-[#B0B0B0]`}
+                  type='text'
+                  required
+                  id='keywords'
+                  onKeyDown={handleKeyDown}
+                  placeholder='Provide your video keywords'
                 />
+              </div>
             </div>
             <div className='flex flex-col justify-start items-start gap-y-[19px]'>
               <input type="file" id="videopicker" accept="video/*" onChange={onVideoChange} className='hidden'/>
