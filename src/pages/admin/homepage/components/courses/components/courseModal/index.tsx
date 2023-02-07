@@ -3,6 +3,9 @@ import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
 import userServices from 'services/userServices';
+import useFiles from 'hooks/useFiles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
   const [image, setImage] = useState<string | Blob>('')
@@ -11,6 +14,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
   const [selectedVideo, setSelectedVideo] =  useState<string | React.ReactNode>('')
 	const [isVideoPicked, setIsVideoPicked] = useState(false);
   const [tags, setTags] = useState<Array<string>>([])
+  const [title, setTitle] = useState('')
 
   const onFileChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
@@ -44,9 +48,32 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
   target.value = ''
 }
 
+const removeTag = (index:number) => {
+  setTags(tags.filter((el:any, i:number) => i !== index))
+}
+
+const onSuccess = (data:any) => {
+  console.log(data)
+}
+
+const {mutate} = useFiles(userServices.createCourses, onSuccess)
+
+const onSubmit = (e:React.FormEvent) => {
+  e.preventDefault()
+  const parameters = {
+    title,
+    image,
+    selectedFile,
+    selectedVideo,
+    tags
+  }
+  console.log(parameters)
+  mutate(parameters)
+}
+
     return (
       <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
-        <div className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white'>
+        <form className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
           <div className="p-[32px]">
             <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
 	          <div className="flex flex-col justify-center items-center gap-y-[32px]">
@@ -65,7 +92,7 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
               </label>
             </div>
           </div>
-          <form className='w-full flex flex-col justify-start items-start gap-y-[32px] py-[40px] px-[32px] border-l-[1px] border-[#B0B0B0]'>
+          <div className='w-full flex flex-col justify-start items-start gap-y-[32px] py-[40px] px-[32px] border-l-[1px] border-[#B0B0B0]'>
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='title'>
                 Course title <span className='text-[#B0B0B0]'>(required)</span>
@@ -75,10 +102,11 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
                 type='text'
                 required
                 id='title'
+                onChange={(e) => setTitle(e.target.value)}
                 placeholder='Provide your course title'
                 />
             </div>
-            <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
+            {/* <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='transcript'>
                 Include transcript
               </label>
@@ -89,22 +117,25 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
                 id='transcript'
                 placeholder='Provide your video transcript'
                 />
-            </div>
+            </div> */}
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='keywords'>
                 Include Keywords
               </label>
-              <div className="border-[2px] border-[#000] p-[0.5em] rounded-[3px] mt-[1em] flex items-center wrap gap-[0.5em]">
+              <div className="w-full p-[0.6em] rounded-[8px] flex flex-col justify-start items-start wrap gap-[0.5em] border border-[#B0B0B0]">
+               <div className='flex justify-start items-center wrap gp-x-[10px]'>
                { tags.map((tag, index) => (
-                  <div key={index} className='bg-[rgb(218, 216, 216)] inline-block px-[0.75em] py-[0.5em] rounded-[20px]'>
+                  <div key={index} className='bg-[#EBEBEB] flex justify-start items-center gap-x-[20px] px-[0.75em] py-[0.5em] rounded-[20px]'>
                     <span>{tag}</span>
-                    <span className='h-[20px] w-[20px] bg-[rgb(48, 48. 48)] text-[#fff] rounded-[50%] inline-flex justify-center items-center text-[18px] cursor-pointer'>&times;</span>
+                    <Button type='button' onClick={() => removeTag(index)}>
+                      <FontAwesomeIcon icon={faTimes} className={`text-white text-[20px]`}/>
+                    </Button>
                   </div>
                ))}
+               </div>
                 <input
-                  className={`border-0 outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full py-[17px] px-[20px] rounded-[8px] bg-[#fff] border border-[#B0B0B0]`}
+                  className={`border-0 outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full rounded-[8px] bg-[#fff] border border-[#B0B0B0] p-[7px]`}
                   type='text'
-                  required
                   id='keywords'
                   onKeyDown={handleKeyDown}
                   placeholder='Provide your video keywords'
@@ -145,8 +176,8 @@ const handleKeyDown = (event: React.KeyboardEvent) => {
                 Create
               </Button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
   )
 }

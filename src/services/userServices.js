@@ -6,6 +6,7 @@ import {
   UPLOAD_THUMBNAIL,
   UPLOAD_VIDEO,
   UPLOAD_RAW_FILE,
+  COURSES_URL,
   SIGNUP_URL,
   LOGIN_URL,
   CREATE_EVENT,
@@ -64,6 +65,15 @@ const uploadFile = async (file) => {
   const result = await res.json()
   console.log(result.secure_url)
   return result.secure_url
+};
+
+const createCourses = async (params) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${COURSES_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
 };
 
 const register = async (params) => {
@@ -230,6 +240,7 @@ const userServices = {
   uploadThumbnail,
   uploadVideo,
   uploadFile,
+  createCourses,
   register,
   login,
   createEvents,
