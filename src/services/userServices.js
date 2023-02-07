@@ -8,6 +8,7 @@ import {
   UPLOAD_RAW_FILE,
   COURSES_URL,
   ANALYTICS_URL,
+  MENTORSHIP_URL,
   SIGNUP_URL,
   LOGIN_URL,
   CREATE_EVENT,
@@ -80,6 +81,15 @@ const createCourses = async (params) => {
 const getAnalyticsData = async () => {
   try {
     const result = await fetchApi.get(`${BASE_URL}/${ANALYTICS_URL}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const getMentorshipData = async () => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${MENTORSHIP_URL}`);
     return result;
   } catch (err) {
     return err;
@@ -252,6 +262,7 @@ const userServices = {
   uploadFile,
   createCourses,
   getAnalyticsData,
+  getMentorshipData,
   register,
   login,
   createEvents,
