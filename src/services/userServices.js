@@ -4,6 +4,8 @@ import {
   BASE_URL,
   CLOUDINARY_BASE_URL,
   UPLOAD_THUMBNAIL,
+  UPLOAD_VIDEO,
+  UPLOAD_RAW_FILE,
   SIGNUP_URL,
   LOGIN_URL,
   CREATE_EVENT,
@@ -21,13 +23,47 @@ import {
 } from "./rootEndPoints.js";
 
 
-const uploadThumbnail = async (params) => {
-  try {
-    const result = await fetchApi.post(`${CLOUDINARY_BASE_URL}/${UPLOAD_THUMBNAIL}`, params);
-    return result;
-  } catch (err) {
-    return err;
-  }
+const uploadThumbnail = async (file) => {
+
+  const formData = new FormData()
+   formData.append('file', file)
+   formData.append('upload_preset', `${process.env.REACT_APP_CLOUDINARY_KEY}`)
+   formData.append("cloud_name", `${process.env.REACT_APP_CLOUD_NAME}`)
+   const res = await fetch(`${CLOUDINARY_BASE_URL}/${UPLOAD_THUMBNAIL}`, {
+    method: 'POST',
+    body: formData,
+  })
+  const result = await res.json()
+ return result.secure_url
+};
+
+const uploadVideo = async (file) => {
+
+  const formData = new FormData()
+   formData.append('file', file)
+   formData.append('upload_preset', `${process.env.REACT_APP_CLOUDINARY_KEY}`)
+   formData.append("cloud_name", `${process.env.REACT_APP_CLOUD_NAME}`)
+   const res = await fetch(`${CLOUDINARY_BASE_URL}/${UPLOAD_VIDEO}`, {
+    method: 'POST',
+    body: formData,
+  })
+  const result = await res.json()
+  console.log(result.secure_url)
+  return result.secure_url
+};
+
+const uploadFile = async (file) => {
+  const formData = new FormData()
+   formData.append('file', file)
+   formData.append('upload_preset', `${process.env.REACT_APP_CLOUDINARY_KEY}`)
+   formData.append("cloud_name", `${process.env.REACT_APP_CLOUD_NAME}`)
+   const res = await fetch(`${CLOUDINARY_BASE_URL}/${UPLOAD_RAW_FILE}`, {
+    method: 'POST',
+    body: formData,
+  })
+  const result = await res.json()
+  console.log(result.secure_url)
+  return result.secure_url
 };
 
 const register = async (params) => {
@@ -192,6 +228,8 @@ const deleteParticipants = async (id) => {
 
 const userServices = {
   uploadThumbnail,
+  uploadVideo,
+  uploadFile,
   register,
   login,
   createEvents,

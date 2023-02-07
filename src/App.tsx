@@ -1,9 +1,9 @@
-import { PortalRoutes } from './routes';
+import { AdminRoutes } from './routes';
 
 function App() {
   return (
     <div className="App">
-      <PortalRoutes />
+      <AdminRoutes />
     </div>
   );
 }

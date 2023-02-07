@@ -3,33 +3,35 @@ import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
 import userServices from 'services/userServices';
-import { UploadImages } from 'helpers/uploadImages';
 
 export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
   const [image, setImage] = useState<string | Blob>('')
   const [selectedFile, setSelectedFile] =  useState<File | Blob>()
 	const [isFilePicked, setIsFilePicked] = useState(false);
-  const [selectedVideo, setSelectedVideo] =  useState<File | Blob>()
+  const [selectedVideo, setSelectedVideo] =  useState<string | React.ReactNode>('')
 	const [isVideoPicked, setIsVideoPicked] = useState(false);
 
-  const onFileChange = (event: React.ChangeEvent) => {
+
+  const onFileChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
-		setSelectedFile(file);
+    const raw = await userServices.uploadFile(file)
+		setSelectedFile(raw);
 		setIsFilePicked(true);
 	};
 
-  const onVideoChange = (event: React.ChangeEvent) => {
+  const onVideoChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
-		setSelectedVideo(file);
+    const video = await userServices.uploadVideo(file)
+		setSelectedVideo(video);
 		setIsVideoPicked(true);
 	};
 
-  const onImageChange = (event: React.ChangeEvent) => {
-
-   const thumbnail = UploadImages(event)
-    // setImage(URL.createObjectURL(file))
+  const onImageChange = async(event: React.ChangeEvent) => {
+    const target= event.target as HTMLInputElement;
+    const file = (target.files as FileList)[0];
+    const thumbnail = await userServices.uploadThumbnail(file)
     setImage(thumbnail)
 };
 
@@ -101,7 +103,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
               </label>
               {isVideoPicked && (
 				        <span>
-					        <p>{selectedVideo?.name}</p>
+					        <p>{selectedVideo}</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -113,7 +115,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
               </label>
               {isFilePicked && (
 				        <span>
-					        <p>{selectedFile?.name}</p>
+					        <p>{selectedFile}</p>
 				        </span>
 			        )}
             </div>
