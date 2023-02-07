@@ -7,6 +7,7 @@ import {
   UPLOAD_VIDEO,
   UPLOAD_RAW_FILE,
   COURSES_URL,
+  ANALYTICS_URL,
   SIGNUP_URL,
   LOGIN_URL,
   CREATE_EVENT,
@@ -70,6 +71,15 @@ const uploadFile = async (file) => {
 const createCourses = async (params) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${COURSES_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const getAnalyticsData = async () => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${ANALYTICS_URL}`);
     return result;
   } catch (err) {
     return err;
@@ -241,6 +251,7 @@ const userServices = {
   uploadVideo,
   uploadFile,
   createCourses,
+  getAnalyticsData,
   register,
   login,
   createEvents,
