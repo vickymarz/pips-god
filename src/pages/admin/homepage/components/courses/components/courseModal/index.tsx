@@ -6,7 +6,7 @@ import userServices from 'services/userServices';
 
 export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
   const [image, setImage] = useState<string | Blob>('')
-  const [selectedFile, setSelectedFile] =  useState<File | Blob>()
+  const [selectedFile, setSelectedFile] =  useState<string | React.ReactNode>('')
 	const [isFilePicked, setIsFilePicked] = useState(false);
   const [selectedVideo, setSelectedVideo] =  useState<string | React.ReactNode>('')
 	const [isVideoPicked, setIsVideoPicked] = useState(false);
