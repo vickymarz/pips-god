@@ -11,8 +11,8 @@ export const Table = () => {
     number: string
   }
    const {data} = useMentorshipData()
-   const mentorshipList = data?.mentorshipData.map(({name, email, date, number, amount}: mentorshipDataType) => (
-    <tr className='border-b-[10px] border-[#F8FAFC] bg-[#fff] text-[#040F1A] font-medium text-[0.87rem] mb-[12px]'>
+   const mentorshipList = data?.mentorshipData?.map(({name, email, date, number, amount}: mentorshipDataType) => (
+     <tr className='border-b-[10px] border-[#F8FAFC] bg-[#fff] text-[#040F1A] font-medium text-[0.87rem] mb-[12px]'>
     <td className='px-[9px] py-[16px] flex justify-start items-center gap-x-[25px]'>
       <div className="bg-[#0F375A] rounded-full h-[49px] w-[49px] flex justify-center items-center text-[21px] text-white font-bold">
         {name.slice(0, 2)}
@@ -33,7 +33,13 @@ export const Table = () => {
    ))
 
   return (
-      data ? (
+    <>
+      {
+      data?.data === undefined  ?
+        <div className='flex justify-center items-center'>
+          <p className='text-[30px]'>Your data will appear here</p>
+        </div>
+      :
         <table className="table-auto w-full border-0 outline-0 max-h-[30rem] overflow-y-scroll">
         <thead>
           <tr className='text-justify pb-[22px] text-start text-[#777777] font-medium text-[0.87rem]'>
@@ -46,13 +52,10 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-           {mentorshipList}
+          {mentorshipList}
         </tbody>
       </table>
-      ) : (
-        <div className='flex justify-center items-center'>
-           <p className='text-[30px]'>Your data will appear here</p>
-        </div>
-      )
+      }
+      </>
   )
 }
