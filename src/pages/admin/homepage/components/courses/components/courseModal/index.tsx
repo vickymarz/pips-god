@@ -6,8 +6,10 @@ import userServices from 'services/userServices';
 import {useFiles} from 'hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import {CreateCourseContextUse} from 'context'
 
-export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
+export const CourseModal = () => {
+  const {modal, setModal, course, setCourse}  = CreateCourseContextUse()
   const [image, setImage] = useState<string | Blob>('')
   const [selectedFile, setSelectedFile] =  useState<string | React.ReactNode>('')
 	const [isFilePicked, setIsFilePicked] = useState(false);
@@ -69,6 +71,7 @@ const onSubmit = (e:React.FormEvent) => {
   }
   console.log(parameters)
   mutate(parameters)
+  setCourse(parameters)
 }
 
     return (
@@ -82,7 +85,7 @@ const onSubmit = (e:React.FormEvent) => {
                   :
                   (
                   <div className='flex justify-center items-center w-[50px] h-[33.3px]'>
-                    <img src={`${upload}`} alt="uploaded thumbnail" />
+                    <img src={`${upload || course?.image}`} alt="uploaded thumbnail" />
                   </div>
                   )}
 		          </div>
@@ -102,6 +105,7 @@ const onSubmit = (e:React.FormEvent) => {
                 type='text'
                 required
                 id='title'
+                value={course?.title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder='Provide your course title'
                 />
@@ -124,7 +128,7 @@ const onSubmit = (e:React.FormEvent) => {
               </label>
               <div className="w-full p-[0.6em] rounded-[8px] flex flex-col justify-start items-start wrap gap-[0.5em] border border-[#B0B0B0]">
                <div className='flex justify-start items-center wrap gp-x-[10px]'>
-               { tags.map((tag, index) => (
+               { course?.tags || tags.map((tag, index) => (
                   <div key={index} className='bg-[#EBEBEB] flex justify-start items-center gap-x-[20px] px-[0.75em] py-[0.5em] rounded-[20px]'>
                     <span>{tag}</span>
                     <Button type='button' onClick={() => removeTag(index)}>
@@ -152,7 +156,7 @@ const onSubmit = (e:React.FormEvent) => {
               </label>
               {isVideoPicked && (
 				        <span>
-					        <p>{selectedVideo}</p>
+					        <p>{selectedVideo || course?.video}</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -164,7 +168,7 @@ const onSubmit = (e:React.FormEvent) => {
               </label>
               {isFilePicked && (
 				        <span>
-					        <p>{selectedFile}</p>
+					        <p>{selectedFile ||  course?.file}</p>
 				        </span>
 			        )}
             </div>

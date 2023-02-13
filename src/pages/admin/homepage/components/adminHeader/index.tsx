@@ -1,14 +1,16 @@
-import {useState} from 'react'
+// import {useState} from 'react'
 import { Button } from 'components'
 import admin from '../../../../../assets/images/admin.png'
 import moment from 'moment'
-import { CourseModal } from '../courses/components'
+// import { CourseModal } from '../courses/components'
+import {CreateCourseContextUse} from 'context'
 
 export const AdminHeader = () => {
-  const [modal, setModal] = useState(false)
+  const {setModal}  = CreateCourseContextUse()
+  // const [modal, setModal] = useState(false)
 
   const handleModal = () => {
-    setModal(!modal)
+    setModal(true)
   }
 
   return (
@@ -32,7 +34,6 @@ export const AdminHeader = () => {
        <span>Create</span>
      </Button>
     </div>
-    {modal && <CourseModal setModal={setModal} modal={modal}/>}
     </>
   )
 }

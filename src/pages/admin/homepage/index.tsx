@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { AdminHeader, Courses, Overview } from "./components"
 import { Button, Logo } from "components"
+import { CourseModal } from "./components/courses/components";
+import {CreateCourseContextUse} from 'context'
 
 export const Admin = () => {
   const [status, setStatus] = useState("overview");
+  // const [modal, setModal] = useState(false)
+  const {modal }  = CreateCourseContextUse()
 
   return (
+    <>
     <div className='px-6 py-[24px] md:px-[80px]'>
       <Logo />
       <AdminHeader />
@@ -45,6 +50,9 @@ export const Admin = () => {
           )}
         </div>
     </div>
+    {modal && <CourseModal />}
+
+    </>
   )
 }
 
