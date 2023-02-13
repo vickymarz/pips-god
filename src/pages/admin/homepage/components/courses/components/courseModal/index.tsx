@@ -2,46 +2,90 @@ import React, { useState } from 'react'
 import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
+import userServices from 'services/userServices';
+import {useFiles} from 'hooks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import {CreateCourseContextUse} from 'context'
 
-export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.SetStateAction<boolean>>, modal: boolean}) => {
+export const CourseModal = () => {
+  const {modal, setModal, course, setCourse}  = CreateCourseContextUse()
   const [image, setImage] = useState<string | Blob>('')
-  const [selectedFile, setSelectedFile] =  useState<File | Blob>()
+  const [selectedFile, setSelectedFile] =  useState<string | React.ReactNode>('')
 	const [isFilePicked, setIsFilePicked] = useState(false);
-  const [selectedVideo, setSelectedVideo] =  useState<File | Blob>()
+  const [selectedVideo, setSelectedVideo] =  useState<string | React.ReactNode>('')
 	const [isVideoPicked, setIsVideoPicked] = useState(false);
+  const [tags, setTags] = useState<Array<string>>([])
+  const [title, setTitle] = useState('')
 
-  const onFileChange = (event: React.ChangeEvent) => {
+  const onFileChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
-		setSelectedFile(file);
+    const raw = await userServices.uploadFile(file)
+		setSelectedFile(raw);
 		setIsFilePicked(true);
 	};
 
-  const onVideoChange = (event: React.ChangeEvent) => {
+  const onVideoChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
-		setSelectedVideo(file);
+    const video = await userServices.uploadVideo(file)
+		setSelectedVideo(video);
 		setIsVideoPicked(true);
 	};
 
-  const onImageChange = (event: React.ChangeEvent) => {
+  const onImageChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
-    const file = (target.files as FileList)[0];;
-    setImage(URL.createObjectURL(file))
+    const file = (target.files as FileList)[0];
+    const thumbnail = await userServices.uploadThumbnail(file)
+    setImage(thumbnail)
 };
+
+const handleKeyDown = (event: React.KeyboardEvent) => {
+  if(event.key !== 'Enter') return
+  const target = event.target as HTMLInputElement
+  const values = target.value
+  if(!values.trim()) return
+  setTags([...tags, values])
+  target.value = ''
+}
+
+const removeTag = (index:number) => {
+  setTags(tags.filter((el:any, i:number) => i !== index))
+}
+
+const onSuccess = (data:any) => {
+  console.log(data)
+}
+
+const {mutate} = useFiles(userServices.createCourses, onSuccess)
+
+const onSubmit = (e:React.FormEvent) => {
+  e.preventDefault()
+  const parameters = {
+    title,
+    image,
+    selectedFile,
+    selectedVideo,
+    tags
+  }
+  console.log(parameters)
+  mutate(parameters)
+  setCourse(parameters)
+}
 
     return (
       <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
-        <div className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white'>
+        <form className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
           <div className="p-[32px]">
             <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
 	          <div className="flex flex-col justify-center items-center gap-y-[32px]">
 		          <div className="bg-[#E8E8E8] rounded-[8px] flex justify-center items-center w-[339px] h-[259px]">
-                  {image ? ( <img src={`${image}`} alt="uploaded thumbnail" />)
+                  {image ? ( <img src={`${image}`} alt="uploaded thumbnail" className='object-cover'/>)
                   :
                   (
                   <div className='flex justify-center items-center w-[50px] h-[33.3px]'>
-                    <img src={`${upload}`} alt="uploaded thumbnail" />
+                    <img src={`${upload || course?.image}`} alt="uploaded thumbnail" />
                   </div>
                   )}
 		          </div>
@@ -51,7 +95,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
               </label>
             </div>
           </div>
-          <form className='w-full flex flex-col justify-start items-start gap-y-[32px] py-[40px] px-[32px] border-l-[1px] border-[#B0B0B0]'>
+          <div className='w-full flex flex-col justify-start items-start gap-y-[32px] py-[40px] px-[32px] border-l-[1px] border-[#B0B0B0]'>
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='title'>
                 Course title <span className='text-[#B0B0B0]'>(required)</span>
@@ -61,10 +105,12 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
                 type='text'
                 required
                 id='title'
+                value={course?.title}
+                onChange={(e) => setTitle(e.target.value)}
                 placeholder='Provide your course title'
                 />
             </div>
-            <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
+            {/* <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='transcript'>
                 Include transcript
               </label>
@@ -75,18 +121,30 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
                 id='transcript'
                 placeholder='Provide your video transcript'
                 />
-            </div>
+            </div> */}
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[11px]'>
               <label className='text-[#0D142E] text-[1.37rem] font-semibold' htmlFor='keywords'>
                 Include Keywords
               </label>
-              <input
-                className={`outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full py-[17px] px-[20px] rounded-[8px] bg-[#fff] border border-[#B0B0B0]`}
-                type='text'
-                required
-                id='keywords'
-                placeholder='Provide your video keywords'
+              <div className="w-full p-[0.6em] rounded-[8px] flex flex-col justify-start items-start wrap gap-[0.5em] border border-[#B0B0B0]">
+               <div className='flex justify-start items-center wrap gp-x-[10px]'>
+               { course?.tags || tags.map((tag, index) => (
+                  <div key={index} className='bg-[#EBEBEB] flex justify-start items-center gap-x-[20px] px-[0.75em] py-[0.5em] rounded-[20px]'>
+                    <span>{tag}</span>
+                    <Button type='button' onClick={() => removeTag(index)}>
+                      <FontAwesomeIcon icon={faTimes} className={`text-white text-[20px]`}/>
+                    </Button>
+                  </div>
+               ))}
+               </div>
+                <input
+                  className={`border-0 outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full rounded-[8px] bg-[#fff] border border-[#B0B0B0] p-[7px]`}
+                  type='text'
+                  id='keywords'
+                  onKeyDown={handleKeyDown}
+                  placeholder='Provide your video keywords'
                 />
+              </div>
             </div>
             <div className='flex flex-col justify-start items-start gap-y-[19px]'>
               <input type="file" id="videopicker" accept="video/*" onChange={onVideoChange} className='hidden'/>
@@ -98,7 +156,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
               </label>
               {isVideoPicked && (
 				        <span>
-					        <p>{selectedVideo?.name}</p>
+					        <p>{selectedVideo || course?.video}</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -110,7 +168,7 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
               </label>
               {isFilePicked && (
 				        <span>
-					        <p>{selectedFile?.name}</p>
+					        <p>{selectedFile ||  course?.file}</p>
 				        </span>
 			        )}
             </div>
@@ -122,8 +180,8 @@ export const CourseModal = ({setModal, modal}:{setModal: React.Dispatch<React.Se
                 Create
               </Button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
   )
 }

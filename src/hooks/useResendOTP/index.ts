@@ -5,7 +5,7 @@ type useResendOtpProps = {
   onResendClick?: (remainingTime:boolean) => void
 }
 
-const useResendOTP = ({
+export const useResendOTP = ({
   onTimerComplete,
   onResendClick
 }: useResendOtpProps) => {
@@ -40,5 +40,3 @@ const useResendOTP = ({
     remainingTime
   };
 };
-
-export default useResendOTP;

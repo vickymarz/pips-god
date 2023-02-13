@@ -4,7 +4,7 @@ import type {RouteObject} from 'react-router-dom'
 export const adminRoutesData: RouteObject[] = [
     {
       id: '1',
-      path: "/admin/homepage",
+      path: "/admin",
       element: <Admin />
     },
   ];

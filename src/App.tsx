@@ -1,9 +1,13 @@
-import { PortalRoutes } from './routes';
+import { AdminRoutes } from './routes';
+import { CreateCourseContextProvider } from 'context'
 
 function App() {
+
   return (
     <div className="App">
-      <PortalRoutes />
+      <CreateCourseContextProvider>
+        <AdminRoutes />
+      </CreateCourseContextProvider>
     </div>
   );
 }
