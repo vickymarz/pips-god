@@ -1,5 +1,5 @@
-import { Button } from "components"
 import { vipData, premiumData } from "./benefitData"
+import { Link } from "react-router-dom"
 
 export const Benefits = () => {
     const vipBenefits = vipData.map(({title, id}) => (
@@ -29,9 +29,9 @@ export const Benefits = () => {
               {vipBenefits}
             </ul>
             <div className="flex justify-center items-center">
-            <Button type="button" className='font-productSans rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
+            <Link to={'/vip_payment'} className='font-productSans rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
               Subscribe
-            </Button>
+            </Link>
             </div>
           </div>
           <div className="rounded-[10px] md:rounded-[20px] pt-[1rem] pb-[0.81rem] px-[0.75rem] md:pt-[2.12rem] md:pb-[1.63rem] md:px-[1.37rem] bg-white">
@@ -43,9 +43,9 @@ export const Benefits = () => {
               {premiumBenefits}
             </ul>
             <div className="flex justify-center items-center">
-            <Button type="button" className='font-productSans rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
-              Subscribe
-            </Button>
+              <Link to={'/mentorship_payment'} className='font-productSans rounded-[4px] md:rounded-[10px] bg-[#0D142E] text-[#fff] py-[0.5rem] px-[0.62rem] md:py-[1.25rem] md:px-[2.5rem] text-[0.62rem] md:text-[1.25rem] font-bold mt-[1.56rem]'>
+                Subscribe
+              </Link>
             </div>
           </div>
           <div>

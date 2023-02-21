@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
 import userServices from "services/userServices";
 import card from '../../../../../assets/images/card.png'
+
 type FormValues = {
     fullName: string;
     telegramUsername: string;
@@ -20,42 +21,36 @@ export const VipPaymentForm = ({id}:{id:string}) => {
 
     const navigate = useNavigate();
 
-	const [invalidCredentials, setInvalidCredentials] = useState(false);
-	const [accountCreated, setAccountCreated] = useState(false);
-
-	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
-		reset();
-		const result = await userServices.login(data);
-
-		if (result.status === "fail") {
-			setInvalidCredentials(true);
-		}
-
-		if (result.status === "success") {
-			setAccountCreated(true);
-			localStorage.setItem("jwt-token", result.accessToken);
+    const {mutate, isSuccess, isError} = useMutation(userServices.vipPayment, {
+        onSuccess: (data) => {
+            localStorage.setItem("jwt-token", data.accessToken);
 			setTimeout(() => {
 				navigate("/dashboard");
 			}, 1000);
-		}
-	};
+        },
+    })
 
 	const errorMsg = () => {
 		let element;
-		if (accountCreated) {
+		if (isSuccess) {
 			element = (
 				<p className='mt-4 text-xl text-green-600 text-center'>
-					Login Successful!
+					Payment Initialized!
 				</p>
 			);
-		} else if (invalidCredentials) {
+		} else if (isError) {
 			element = (
 				<p className='mt-4 text-xl text-red-600 text-center'>
-					Incorrect Email or Password
+					Kindly try again
 				</p>
 			);
 		}
 		return element;
+	};
+
+    const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
+		reset();
+		mutate(data)
 	};
 
 	const pattern =
@@ -81,7 +76,8 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
                     }  w-full pr-[80px] text-[#666666] text-[0.75rem] md:text-[1rem] py-[12px] px-[10px] rounded-[10px] bg-transparent border border-[#000000]`}
                     type='text'
-                    placeholder='Enter your name'
+                    id='fullName'
+                    placeholder='Enter your full name'
                     {...register("fullName", {
                         required: "Name cannot be empty",
                         minLength: {
@@ -109,7 +105,7 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                 )}
             </div>
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#19275E] md:text-[1.25rem] text-[1rem] ' htmlFor='fullName'>
+                <label className='pb-0 text-[#19275E] md:text-[1.25rem] text-[1rem] ' htmlFor='telegram'>
                     Telegram Username
                 </label>
                 <input
@@ -122,22 +118,17 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
                     }  w-full pr-[80px] text-[#666666] text-[0.75rem] md:text-[1rem] py-[12px] px-[10px] rounded-[10px] bg-transparent border border-[#000000]`}
                     type='text'
+                    id="telegram"
                     placeholder='Enter your telegram username'
                     {...register("telegramUsername", {
-                        required: "Name cannot be empty",
+                        required: "Telegram username cannot be empty",
                         minLength: {
                             value: 3,
-                            message: "Name must be at least 3 characters",
+                            message: "Telegram username must be at least 3 characters",
                         },
                         maxLength: {
-                            value: 30,
-                            message: "Name must not be more than 30 characters",
-                        },
-
-                        pattern: {
-                            value: thirdPattern,
-                            message:
-                                "Name must start with a letter and no special characters are allowed",
+                            value: 10,
+                            message: "Telegram username must not be more than 10 characters",
                         },
                     })}
                 />
@@ -165,6 +156,7 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                             : "shadow-[0px_0px_0px_4px_rgba(249,50,50,0.1)]"
                     }  text-[#666666] w-full text-[0.75rem] md:text-[1rem] pr-[80px] py-[12px] px-[10px] rounded-[10px] bg-transparent border border-[#000000]`}
                     type='email'
+                    id="email"
                     placeholder='Enter your email'
                     {...register("email", {
                         required: "Email cannot be empty",
@@ -182,7 +174,7 @@ export const VipPaymentForm = ({id}:{id:string}) => {
             </div>
 
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 text-[#19275E] md:text-[1.25rem] text-[1rem] ' htmlFor='name'>
+                <label className='pb-0 text-[#19275E] md:text-[1.25rem] text-[1rem] ' htmlFor='amount'>
                     Amount
                 </label>
                 <input
@@ -196,22 +188,17 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                     }  text-[#666666] w-full text-[0.75rem] md:text-[1rem] pr-[80px] py-[12px] px-[10px] rounded-[10px] bg-transparent border border-[#000000]`}
                     type='number'
                     placeholder='Enter amount'
+                    id="amount"
                     {...register("amount", {
-                        required: "Name cannot be empty",
+                        required: "Amount cannot be empty",
                         minLength: {
                             value: 3,
-                            message: "Name must be at least 3 characters",
+                            message: "Amount must be least 3 numbers",
                         },
                         maxLength: {
-                            value: 30,
-                            message: "Name must not be more than 30 characters",
-                        },
-
-                        pattern: {
-                            value: thirdPattern,
-                            message:
-                                "Name must start with a letter and no special characters are allowed",
-                        },
+                            value: 3,
+                            message: "Amount must be least 3 numbers",
+                        }
                     })}
                 />
                 {errors.amount && (

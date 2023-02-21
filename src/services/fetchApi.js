@@ -64,7 +64,7 @@ const get = async (url) => {
       },
       body: JSON.stringify(data),
     };
-  
+
     try {
       const response = await fetch(url, config);
       const datas = await response.json();

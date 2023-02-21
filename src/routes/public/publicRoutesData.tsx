@@ -9,7 +9,7 @@ const publicRoutesData: RouteObject[] = [
     },
     {
       id: '2',
-      path: "create_account",
+      path: "register",
       element: <Signup />,
     },
     {

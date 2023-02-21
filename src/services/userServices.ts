@@ -1,7 +1,21 @@
-import fetchApi from "./fetchApi";
+import fetchApi from "./fetchApi.js";
+import {
+  mentorshipPaymentTypes,
+  vipPaymentTypes
+ } from "./dataTypes";
 
 import {
   BASE_URL,
+  INITIALIZE_MENTORSHIP_PAYMENT,
+  INITIALIZE_VIP_PAYMENT,
+  SIGNUP_URL,
+  LOGIN_URL,
+  PASSWORD_RECOVERY_URL,
+  RESET_TOKEN,
+  RESET_PASSWORD_URL,
+  GET_COURSES,
+  GET_COURSE,
+  DELETE_COURSE,
   CLOUDINARY_BASE_URL,
   UPLOAD_THUMBNAIL,
   UPLOAD_VIDEO,
@@ -12,13 +26,80 @@ import {
   GET_DOCUMENT,
   ANALYTICS_URL,
   MENTORSHIP_URL,
-  SIGNUP_URL,
-  LOGIN_URL,
-  DELETE_COURSE,
-  PASSWORD_RECOVERY_URL,
-  RESET_PASSWORD_URL,
-} from "./rootEndPoints.js";
+} from "./rootEndPoints";
 
+
+const mentorshipPayment = async (params:mentorshipPaymentTypes) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_MENTORSHIP_PAYMENT}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const vipPayment = async (params:vipPaymentTypes) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_VIP_PAYMENT}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const register = async (params: any) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${SIGNUP_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const login = async (params: any) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${LOGIN_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const recoverPassword = async (params: any) => {
+  try {
+    const result = await fetchApi.post(
+      `${BASE_URL}/${PASSWORD_RECOVERY_URL}`,
+      params
+    );
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const resetToken = async (params: string) => {
+  try {
+    const result = await fetchApi.post(
+      `${BASE_URL}/${RESET_TOKEN}`,
+      params
+    );
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const resetPassword = async (params: any) => {
+  try {
+    const result = await fetchApi.post(
+      `${BASE_URL}/${RESET_PASSWORD_URL}`,
+      params
+    );
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
 
 const uploadThumbnail = async (file: File) => {
 
@@ -117,6 +198,16 @@ const getDocument = async (id:number) => {
   }
 };
 
+const getAllCourses = async () => {
+  try {
+    const dataObj = await fetchApi.get(`${BASE_URL}/${GET_COURSES}`);
+    const datas = await dataObj.data;
+    return datas;
+  } catch (err) {
+    return err;
+  }
+};
+
 const deleteCourse = async (id: number) => {
   try {
     const result = await fetchApi.deleteE(`${BASE_URL}/${DELETE_COURSE}/${id}`);
@@ -126,76 +217,16 @@ const deleteCourse = async (id: number) => {
   }
 }
 
-const register = async (params: any) => {
+const getCourse = async (id: number) => {
   try {
-    const result = await fetchApi.post(`${BASE_URL}/${SIGNUP_URL}`, params);
+    const result = await fetchApi.get(`${BASE_URL}/${GET_COURSE}/${id}`);
     return result;
   } catch (err) {
     return err;
   }
 };
 
-const login = async (params: any) => {
-  try {
-    const result = await fetchApi.post(`${BASE_URL}/${LOGIN_URL}`, params);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
 
-const recoverPassword = async (params: any) => {
-  try {
-    const result = await fetchApi.post(
-      `${BASE_URL}/${PASSWORD_RECOVERY_URL}`,
-      params
-    );
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const resetPassword = async (params: any) => {
-  try {
-    const result = await fetchApi.post(
-      `${BASE_URL}/${RESET_PASSWORD_URL}`,
-      params
-    );
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-// const createEvents = async (params) => {
-//   try {
-//     const result = await fetchApi.post(`${BASE_URL}/${CREATE_EVENT}`, params);
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// };
-
-// const getAllEvents = async () => {
-//   try {
-//     const dataObj = await fetchApi.get(`${BASE_URL}/${GET_EVENTS}`);
-//     const datas = await dataObj.data;
-//     return datas;
-//   } catch (err) {
-//     return err;
-//   }
-// };
-
-// const getEventsById = async (id) => {
-//   try {
-//     const dataObj = await fetchApi.get(`${BASE_URL}/${GET_EVENTS}/${id}`);
-//     const datas = await dataObj.data;
-//     return datas;
-//   } catch (err) {
-//     return err;
-//   }
-// };
 
 // const getEventsByToken = async (id) => {
 //   try {
@@ -277,16 +308,15 @@ const resetPassword = async (params: any) => {
 //   }
 // };
 
-// const deleteParticipants = async (id) => {
-//   try {
-//     const result = await fetchApi.deleteE(`${BASE_URL}/${DELETE_PARTICIPANTS}/${id}`);
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// }
 
 const userServices = {
+  mentorshipPayment,
+  vipPayment,
+  register,
+  login,
+  recoverPassword,
+  resetToken,
+  resetPassword,
   uploadThumbnail,
   uploadVideo,
   uploadFile,
@@ -296,15 +326,13 @@ const userServices = {
   getVideos,
   getDocuments,
   getDocument,
+  getAllCourses,
+  getCourse,
   deleteCourse,
-  register,
-  login,
   // createEvents,
   // getAllEvents,
   // getEventsById,
   // getParticipants,
-  recoverPassword,
-  resetPassword,
   // addToGoogleCalender,
   // addParticipants,
   // deleteParticipants,

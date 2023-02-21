@@ -2,11 +2,16 @@ import {useQuery} from 'react-query'
 import userServices from 'services/userServices'
 
 export const useAnalyticsData = () => {
- return useQuery('users-data', userServices.getAnalyticsData)
+ return useQuery('users-data', userServices.getAnalyticsData, {
+    staleTime: 60000
+ })
 }
 
 export const useMentorshipData = () => {
- return useQuery('mentorship-data', userServices.getMentorshipData)
+ return useQuery('mentorship-data', userServices.getMentorshipData,
+ {
+    staleTime: 60000
+ })
 }
 
 export const useVideosData = () => {
@@ -20,4 +25,18 @@ export const useDocumentData = () => {
 export const useDocument = (id:number) => {
  return useQuery(['document-data', id], () => userServices.getDocument(id))
 }
+
+export const useGetCourses = () => {
+ return useQuery('get-all-courses', userServices.getAllCourses,
+ {
+   staleTime: 60000
+ })
+}
+
+export const useGetCourse = (id:number) => {
+   return useQuery(['course', id], () => userServices.getCourse(id), {
+      enabled: false,
+   })
+}
+
 
