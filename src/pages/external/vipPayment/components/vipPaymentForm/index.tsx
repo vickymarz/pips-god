@@ -15,7 +15,7 @@ export const VipPaymentForm = ({id}:{id:string}) => {
 		formState: { errors },
 	} = useForm<FormValues>();
 
-    const {mutate, isError, data} = useMutation(userServices.vipPayment, {
+    const {mutate, isError, isLoading, data} = useMutation(userServices.initializeTransaction, {
         onSuccess: (data) => {
             if (data?.code !== 400) {
 			setTimeout(() => {
@@ -23,8 +23,7 @@ export const VipPaymentForm = ({id}:{id:string}) => {
 			}, 1000);
         }
       }
-    }
-    )
+    })
 
 	const errorMsg = () => {
 		let element;
@@ -33,6 +32,16 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                 <div className="w-full justify-center items-center">
                     <p className='mt-4 text-red-600 text-center'>
                         Kindly try again, Thank!
+                    </p>
+                </div>
+			);
+		}
+
+		 if (isLoading) {
+			element = (
+                <div className="w-full justify-center items-center">
+                    <p className='mt-4 text-green-600 text-center'>
+                       Transaction initialization in progress...
                     </p>
                 </div>
 			);

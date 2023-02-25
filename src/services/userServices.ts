@@ -1,7 +1,6 @@
 import fetchApi from "./fetchApi.js";
 import {
-  mentorshipPaymentTypes,
-  vipPaymentTypes
+  paymentTypes
  } from "./dataTypes";
 
 import {
@@ -28,16 +27,7 @@ import {
 } from "./rootEndPoints";
 
 
-const mentorshipPayment = async (params:mentorshipPaymentTypes) => {
-  try {
-    const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_TRANSACTION}`, params);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const vipPayment = async (params:vipPaymentTypes) => {
+const initializeTransaction = async (params:paymentTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_TRANSACTION}`, params);
     console.log(result)
@@ -310,8 +300,7 @@ const getCourse = async (id: number) => {
 
 
 const userServices = {
-  mentorshipPayment,
-  vipPayment,
+  initializeTransaction,
   register,
   login,
   recoverPassword,
