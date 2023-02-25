@@ -6,8 +6,7 @@ import {
 
 import {
   BASE_URL,
-  INITIALIZE_MENTORSHIP_PAYMENT,
-  INITIALIZE_VIP_PAYMENT,
+  INITIALIZE_TRANSACTION,
   SIGNUP_URL,
   LOGIN_URL,
   PASSWORD_RECOVERY_URL,
@@ -31,7 +30,7 @@ import {
 
 const mentorshipPayment = async (params:mentorshipPaymentTypes) => {
   try {
-    const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_MENTORSHIP_PAYMENT}`, params);
+    const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_TRANSACTION}`, params);
     return result;
   } catch (err) {
     return err;
@@ -40,7 +39,8 @@ const mentorshipPayment = async (params:mentorshipPaymentTypes) => {
 
 const vipPayment = async (params:vipPaymentTypes) => {
   try {
-    const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_VIP_PAYMENT}`, params);
+    const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_TRANSACTION}`, params);
+    console.log(result)
     return result;
   } catch (err) {
     return err;

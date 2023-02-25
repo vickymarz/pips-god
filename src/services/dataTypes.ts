@@ -5,10 +5,8 @@ export type mentorshipPaymentTypes = {
 }
 
 export type vipPaymentTypes = {
-    fullName: string
-    telegramUsername: string;
     email: string
-    amount: number
+    subscriptionPlanName: string
 }
 
 

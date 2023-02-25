@@ -1,6 +1,5 @@
 export const BASE_URL = process.env.REACT_APP_BASE_URL
-export const INITIALIZE_MENTORSHIP_PAYMENT = 'mentorship/initialize'
-export const INITIALIZE_VIP_PAYMENT = 'vip/initialize'
+export const INITIALIZE_TRANSACTION = 'transactions'
 export const SIGNUP_URL = 'auth/signup'
 export const LOGIN_URL ='auth/signin'
 export const PASSWORD_RECOVERY_URL ='auth/recover/generate'
