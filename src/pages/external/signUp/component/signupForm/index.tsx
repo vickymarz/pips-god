@@ -1,19 +1,35 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
+import { useTransactions } from 'hooks'
+import { VerifyPopup } from "../verifyPopUp";
 
 type FormValues = {
-    fullName: string;
+    name: string;
     email: string;
     password: string;
     mobile: string;
     address: string;
-  };
+};
 
 export const SignupForm = () => {
+    const [verify, setVerify] = useState(false)
+    const { reference } = useParams()
+    const navigate = useNavigate();
+
+      const onSuccess = (data:any) => {
+        if (data.code === 404 || isError) {
+          setVerify(true)
+          setTimeout(() => {
+             navigate('/')
+          }, 3000);
+        }
+    }
+    const { isError } = useTransactions(reference, onSuccess)
+
     const {
 		register,
 		handleSubmit,
@@ -21,15 +37,14 @@ export const SignupForm = () => {
 		formState: { errors },
 	} = useForm<FormValues>();
 
-    const navigate = useNavigate();
-
 	const [passwordShown, setPasswordShown] = useState(false);
 
     const togglePassword = () => {
 		setPasswordShown(!passwordShown);
 	};
 
-    const {mutate, isSuccess, isLoading, error} = useMutation(userServices.register, {
+
+    const {mutate, isSuccess, isLoading, error, data} = useMutation(userServices.register, {
         onSuccess: (data) => {
             localStorage.setItem("jwt-token", data.accessToken);
 			setTimeout(() => {
@@ -38,6 +53,7 @@ export const SignupForm = () => {
         },
     })
 
+    console.log(data, isSuccess, error)
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
 		mutate(data)
@@ -72,18 +88,18 @@ export const SignupForm = () => {
         {errorMsg()}
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-start items-center w-full gap-y-[1rem] md:gap-y-[2.12rem]'>
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='fullName'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='name'>
                     Full Name
                 </label>
                 <input
                     style={{
-                        borderBottom: errors.fullName && "2px solid red",
+                        borderBottom: errors.name && "2px solid red",
                     }}
                     className={`focus:outline-none text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2 `}
                     type='text'
-                    id="fullName"
+                    id="name"
                     placeholder='Enter your full name'
-                    {...register("fullName", {
+                    {...register("name", {
                         required: "Name cannot be empty",
                         minLength: {
                             value: 3,
@@ -101,11 +117,11 @@ export const SignupForm = () => {
                         },
                     })}
                 />
-                {errors.fullName && (
+                {errors.name && (
                     <p
                         className='right-0 bottom-[-37px] italic text-sm mt-2'
                         style={{ color: "red" }}>
-                        {errors.fullName?.message}
+                        {errors.name?.message}
                     </p>
                 )}
             </div>
@@ -258,6 +274,7 @@ export const SignupForm = () => {
 
             </div>
         </form>
+        {verify && <VerifyPopup verify={verify} />}
     </>
   )
 }

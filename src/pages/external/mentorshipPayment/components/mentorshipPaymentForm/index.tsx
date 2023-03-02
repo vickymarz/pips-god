@@ -18,6 +18,7 @@ export const MentorshipPaymentForm = ({id}:{id:string}) => {
     const {mutate, isError, isLoading, data} = useMutation(userServices.initializeTransaction, {
         onSuccess: (data) => {
             if (data?.code !== 400) {
+            localStorage.setItem('reference', data.reference)
 			setTimeout(() => {
                 window.location.href = data.authorizationUrl;
 			}, 1000);
@@ -29,7 +30,6 @@ export const MentorshipPaymentForm = ({id}:{id:string}) => {
 		reset();
 		mutate({...data, "subscriptionPlanName": "training_and_mentoring"})
 	};
-
 
 	const errorMsg = () => {
 		let element;

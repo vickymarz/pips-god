@@ -1,6 +1,11 @@
 import {useQuery} from 'react-query'
 import userServices from 'services/userServices'
 
+export const useTransactions = (id: string | undefined, onSuccess: (data:any) => void) => {
+ return useQuery(['verify-transaction', id], () => userServices.verifyTransaction(id), {
+   onSuccess
+ })
+}
 export const useAnalyticsData = () => {
  return useQuery('users-data', userServices.getAnalyticsData, {
     staleTime: 60000

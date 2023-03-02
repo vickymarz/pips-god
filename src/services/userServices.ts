@@ -6,6 +6,7 @@ import {
 import {
   BASE_URL,
   INITIALIZE_TRANSACTION,
+  VERIFY_TRANSACTION,
   SIGNUP_URL,
   LOGIN_URL,
   PASSWORD_RECOVERY_URL,
@@ -31,6 +32,15 @@ const initializeTransaction = async (params:paymentTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_TRANSACTION}`, params);
     console.log(result)
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const verifyTransaction = async (id: string | undefined) => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${VERIFY_TRANSACTION}/${id}`);
     return result;
   } catch (err) {
     return err;
@@ -301,6 +311,7 @@ const getCourse = async (id: number) => {
 
 const userServices = {
   initializeTransaction,
+  verifyTransaction,
   register,
   login,
   recoverPassword,
