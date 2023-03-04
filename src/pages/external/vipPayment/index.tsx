@@ -9,7 +9,7 @@ export const VipPayment = () => {
     <>
     <section className="flex flex-col md:flex-row justify-start">
         <div className='py-[34px] px-[20px] md:pl-[76px] md:pr-[22px] md:py-[80px] flex flex-col justify-start items-start'>
-          <Link to={''} className='flex justify-start items-center gap-x-[9px] md:gap-x-[21px]'>
+          <Link to={'/'} className='flex justify-start items-center gap-x-[9px] md:gap-x-[21px]'>
             <div>
               <img src={arrowDesktop} alt="" className='hidden md:block'/>
                <img src={arrow} alt="back" className='md:hidden'/>

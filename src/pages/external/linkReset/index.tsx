@@ -15,7 +15,7 @@ export const ResetLink = () => {
                 type="submit"
                 className="my-[20px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]"
               >
-                <Link to="/reset_password">Click here to reset password</Link>
+                <Link to="/reset_token">Click here to enter code</Link>
               </button>
             </div>
             <p className="mt-[5px] mt-[50px] font-medium text-[0.87rem] md:text-[1.31rem] text-center text-[#666666]">

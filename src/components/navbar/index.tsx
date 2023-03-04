@@ -12,21 +12,16 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
     const nav = [
         {
           id: 1,
-          path: '',
-          children: 'Home',
-        },
-        {
-          id: 2,
           path: 'about',
           children: 'About Us',
         },
         {
-          id: 3,
+          id: 2,
           path: 'academy',
           children: 'The Academy',
         },
         {
-          id: 4,
+          id: 3,
           path: 'faq',
           children: 'FAQs',
         },
@@ -58,7 +53,9 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
          matches && (
             <div className='flex justify-center items-center gap-x-[10px]'>
           <Button type="button" onClick={handleMenuOpen} className={`font-productSans rounded-lg bg-white text-[#0D142E] px-[0.9rem] py-[0.3rem] text-[1rem] ${view ? 'bg-white text-[#0D142E]' : 'bg-[#0D142E] text-[#fff]'} `}>
-          Get Started
+          <Link to={'/mentorship_payment'}>
+            Get Started
+          </Link>
         </Button>
         </div>
          )

@@ -3,7 +3,7 @@ import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
 import userServices from 'services/userServices';
-import {useFiles} from 'hooks';
+import {useMutation} from 'react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import {CreateCourseContextUse} from 'context'
@@ -54,11 +54,12 @@ const removeTag = (index:number) => {
   setTags(tags.filter((el:any, i:number) => i !== index))
 }
 
-const onSuccess = (data:any) => {
-  console.log(data)
-}
 
-const {mutate} = useFiles(userServices.createCourses, onSuccess)
+const {mutate, isSuccess, isError} = useMutation(userServices.createCourses, {
+  onSuccess: (data) => {
+    setCourse(data)
+  }
+})
 
 const onSubmit = (e:React.FormEvent) => {
   e.preventDefault()
@@ -69,13 +70,31 @@ const onSubmit = (e:React.FormEvent) => {
     selectedVideo,
     tags
   }
-  console.log(parameters)
   mutate(parameters)
-  setCourse(parameters)
 }
+
+const errorMsg = () => {
+  let element;
+  if (isSuccess) {
+    element = (
+      <p className='mt-4 text-xl text-green-600 text-center'>
+        Course added successfully!
+      </p>
+    );
+  } else if (isError) {
+    element = (
+      <p className='mt-4 text-xl text-red-600 text-center'>
+        Something went wrong. Please try again!
+      </p>
+    );
+  }
+  return element;
+};
+
 
     return (
       <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
+        {errorMsg()}
         <form className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
           <div className="p-[32px]">
             <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
