@@ -50,7 +50,7 @@ const publicRoutesData: RouteObject[] = [
     },
     {
       id: '11',
-      path: "paystack/success",
+      path: "paystack/success/:id",
       element: <PaystackCallback />,
     }
   ];
