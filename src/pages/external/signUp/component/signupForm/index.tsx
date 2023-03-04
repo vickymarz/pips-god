@@ -8,7 +8,8 @@ import { useTransactions } from 'hooks'
 import { VerifyPopup } from "../verifyPopUp";
 
 type FormValues = {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
     mobile: string;
@@ -46,22 +47,24 @@ export const SignupForm = () => {
 
     const {mutate, isSuccess, isLoading, error, data} = useMutation(userServices.register, {
         onSuccess: (data) => {
+          if (data?.code !== 400 && data?.code === 200) {
             localStorage.setItem("jwt-token", data.accessToken);
 			setTimeout(() => {
 				navigate("/dashboard");
 			}, 1000);
+          }
         },
     })
 
     console.log(data, isSuccess, error)
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-		mutate(data)
+		mutate({...data, transactionReference: reference})
 	};
 
 	const errorMsg = () => {
 		let element;
-		if (isSuccess) {
+		if (data?.code === 200) {
 			element = (
 				<p className='mt-4 text-xl text-green-600 text-center'>
 					Registration completed!
@@ -87,45 +90,85 @@ export const SignupForm = () => {
     <>
         {errorMsg()}
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-start items-center w-full gap-y-[1rem] md:gap-y-[2.12rem]'>
+          <div className="w-full flex gap-y-[1rem] md:gap-y-[2.12rem] md:gap-x-[2.12rem] flex-col md:flex-row justify-start items-start">
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='name'>
-                    Full Name
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='firstName'>
+                    First Name
                 </label>
                 <input
                     style={{
-                        borderBottom: errors.name && "2px solid red",
+                        borderBottom: errors.firstName && "2px solid red",
                     }}
                     className={`focus:outline-none text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2 `}
                     type='text'
-                    id="name"
-                    placeholder='Enter your full name'
-                    {...register("name", {
-                        required: "Name cannot be empty",
+                    id="firstName"
+                    placeholder='Enter your first name'
+                    {...register("firstName", {
+                        required: "First name cannot be empty",
                         minLength: {
                             value: 3,
-                            message: "Name must be at least 3 characters",
+                            message: "First name must be at least 3 characters",
                         },
                         maxLength: {
                             value: 30,
-                            message: "Name must not be more than 30 characters",
+                            message: "First name must not be more than 30 characters",
                         },
 
                         pattern: {
                             value: thirdPattern,
                             message:
-                                "Name must start with a letter and no special characters are allowed",
+                                "First name must start with a letter and no special characters are allowed",
                         },
                     })}
                 />
-                {errors.name && (
+                {errors.firstName && (
                     <p
                         className='right-0 bottom-[-37px] italic text-sm mt-2'
                         style={{ color: "red" }}>
-                        {errors.name?.message}
+                        {errors.firstName?.message}
+                    </p>
+                )}
+            </div>
+            <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='lastName'>
+                    Last Name
+                </label>
+                <input
+                    style={{
+                        borderBottom: errors.lastName && "2px solid red",
+                    }}
+                    className={`focus:outline-none text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2 `}
+                    type='text'
+                    id="lastName"
+                    placeholder='Enter your last name'
+                    {...register("lastName", {
+                        required: "last name cannot be empty",
+                        minLength: {
+                            value: 3,
+                            message: "Last name must be at least 3 characters",
+                        },
+                        maxLength: {
+                            value: 30,
+                            message: "Last name must not be more than 30 characters",
+                        },
+
+                        pattern: {
+                            value: thirdPattern,
+                            message:
+                                "Last name must start with a letter and no special characters are allowed",
+                        },
+                    })}
+                />
+                {errors.lastName && (
+                    <p
+                        className='right-0 bottom-[-37px] italic text-sm mt-2'
+                        style={{ color: "red" }}>
+                        {errors.lastName?.message}
                     </p>
                 )}
             </div>
 
+            </div>
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[8px]'>
                 <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='email'>
                     Email
@@ -253,7 +296,7 @@ export const SignupForm = () => {
                         },
                         maxLength: {
                             value: 50,
-                            message: "Name must not be more than 50 characters",
+                            message: "firstName must not be more than 50 characters",
                         },
                     })}
                 />
