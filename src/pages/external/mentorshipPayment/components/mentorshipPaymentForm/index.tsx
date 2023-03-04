@@ -17,12 +17,9 @@ export const MentorshipPaymentForm = ({id}:{id:string}) => {
 
     const {mutate, isError, isLoading, data} = useMutation(userServices.initializeTransaction, {
         onSuccess: (data) => {
-            if (data?.code !== 400 && data?.code === 200) {
-            localStorage.setItem('reference', data.reference)
 			setTimeout(() => {
                 window.location.href = data.authorizationUrl;
-			}, 1000);
-        }
+		}, 1000);
       }
     })
 
