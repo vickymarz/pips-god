@@ -1,8 +1,28 @@
-import { Link } from 'react-router-dom'
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useTransactions } from 'hooks'
 import success from '../../assets/images/success.png'
+import { VerifyPopup } from "../verifyPopUp";
 
 export const PaystackCallback = () => {
+  const [verify, setVerify] = useState(false)
+
+  const { reference } = useParams()
+  const navigate = useNavigate();
+
+  const onSuccess = (data:any) => {
+    if (data.code === 404 || isError) {
+      setVerify(true)
+      setTimeout(() => {
+         navigate('/')
+      }, 3000);
+    }
+}
+const { isError } = useTransactions(reference, onSuccess)
+
+
   return (
+    <>
     <div className='flex justify-center flex-col px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] w-full min-h-full'>
         <div className='text-[#0D142E] flex justify-center flex-col gap-y-[20px] items-center md:font-semiBold'>
           <h2 className='text-[1.37rem] md:text-[2.5rem] font-bold'>Payment Successful.</h2>
@@ -15,6 +35,8 @@ export const PaystackCallback = () => {
           Continue Registration
         </Link>
     </div>
+      {verify && <VerifyPopup verify={verify} />}
+    </>
   )
 }
 

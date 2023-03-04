@@ -5,7 +5,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
 import { useTransactions } from 'hooks'
-import { VerifyPopup } from "../verifyPopUp";
+import { VerifyPopup } from "../../../../../components";
 
 type FormValues = {
     firstName: string;
@@ -45,7 +45,7 @@ export const SignupForm = () => {
 	};
 
 
-    const {mutate, isSuccess, isLoading, error, data} = useMutation(userServices.register, {
+    const {mutate, isLoading, error, data} = useMutation(userServices.register, {
         onSuccess: (data) => {
           if (data?.code !== 400 && data?.code === 200) {
             localStorage.setItem("jwt-token", data.accessToken);
@@ -56,7 +56,6 @@ export const SignupForm = () => {
         },
     })
 
-    console.log(data, isSuccess, error)
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
 		mutate({...data, transactionReference: reference})
