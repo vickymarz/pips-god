@@ -75,7 +75,13 @@ export const SignupForm = () => {
 					{error?.message}
 				</p>
 			);
-		}
+		} else if (data?.code === 400) {
+           element = (
+                <p className='mt-4 text-xl text-red-600 text-center'>
+                    This email has already been registered!
+                </p>
+            );
+        }
 		return element;
 	};
 
