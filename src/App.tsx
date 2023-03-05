@@ -1,5 +1,5 @@
 import { GoTop } from 'components';
-import { PublicRoutes  } from './routes';
+import { PublicRoutes, PortalRoutes } from './routes';
 import { GetCourseContextProvider } from 'context'
 
 function App() {
