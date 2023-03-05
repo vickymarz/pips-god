@@ -43,7 +43,7 @@ export const MentorshipPaymentForm = ({id}:{id:string}) => {
         if (isLoading) {
 			element = (
                 <div className="w-full justify-center items-center">
-                    <p className='mt-4 text-green-600 text-center'>
+                    <p className='mt-4 text-green-600 md:text-[20px] text-center'>
                        Transaction initialization in progress...
                     </p>
                 </div>

@@ -38,7 +38,7 @@ export const VipPaymentForm = ({id}:{id:string}) => {
 		 if (isLoading) {
 			element = (
                 <div className="w-full justify-center items-center">
-                    <p className='mt-4 text-green-600 text-center'>
+                    <p className='mt-4 text-green-600 text-center md:text-[20px]'>
                        Transaction initialization in progress...
                     </p>
                 </div>

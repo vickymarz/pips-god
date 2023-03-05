@@ -3,7 +3,8 @@ import userServices from 'services/userServices'
 
 export const useTransactions = (id: string | undefined, onSuccess: (data:any) => void) => {
  return useQuery(['verify-transaction', id], () => userServices.verifyTransaction(id), {
-   onSuccess
+   onSuccess,
+   refetchOnWindowFocus: false,
  })
 }
 export const useAnalyticsData = () => {
