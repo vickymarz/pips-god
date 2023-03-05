@@ -18,14 +18,12 @@ export const ForgotPasswordForm = () => {
 
 const navigate = useNavigate();
 
-const {mutate, data, isLoading, isError} = useMutation(userServices.recoverPassword, {
+const {mutate, isSuccess, isLoading, isError} = useMutation(userServices.recoverPassword, {
   onSuccess: () => {
-    if (data?.code === 200) {
 			setTimeout(() => {
 				navigate("/reset_link");
-			}, 1000);
+			}, 3000);
     }
-  }
   })
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
@@ -35,15 +33,15 @@ const {mutate, data, isLoading, isError} = useMutation(userServices.recoverPassw
 
   const errorMsg = () => {
     let element;
-    if (data?.code === 204) {
+    if (isSuccess) {
       element = (
-        <p className="mt-4 text-xl text-green-600 text-center">
+        <p className="mt-4 md:text-[20px] text-green-600 text-center">
           Successful, Kindly proceed to your email!
         </p>
       );
-    } else if (isError || data?.code === 404) {
+    } else if (isError) {
       element = (
-        <p className="mt-4 text-xl text-red-600 text-center">
+        <p className="mt-4 md:text-[20px] text-red-600 text-center">
           Incorrect email address
         </p>
       );

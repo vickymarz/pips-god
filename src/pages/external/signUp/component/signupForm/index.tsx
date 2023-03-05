@@ -49,7 +49,7 @@ export const SignupForm = () => {
         onSuccess: (data) => {
           if (data?.tokens) {
             localStorage.setItem("jwt-token", data.tokens.access.token);
-            localStorage.setItem("current-user", data.user);
+            localStorage.setItem("current-user", JSON?.stringify(data.user));
 			setTimeout(() => {
 				navigate("/portal");
 			}, 1000);
