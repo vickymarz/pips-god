@@ -11,9 +11,9 @@ function App() {
       {/* <CreateCourseContextProvider>
         <AdminRoutes />
       </CreateCourseContextProvider> */}
-      {/* <GetCourseContextProvider>
+      <GetCourseContextProvider>
         <PortalRoutes />
-      </GetCourseContextProvider> */}
+      </GetCourseContextProvider>
     </div>
   );
 }
