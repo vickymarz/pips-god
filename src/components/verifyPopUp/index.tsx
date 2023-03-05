@@ -7,7 +7,7 @@ export const VerifyPopup = ({verify, verifyData}: {verify: boolean, verifyData?:
             verifyData.code === 409 ?
             <>
                <h2 className=' mb-[20px] text-[#0D142E] font-bold text-[2rem] text-center'>Apologies!</h2>
-               <p>Kindly proceed to login, your account has been registered.</p>
+               <p>Kindly proceed to login, your account has already been registered.</p>
             </> :
             <>
               <h2 className=' mb-[20px] text-[#0D142E] font-bold text-[2rem] text-center'>Registration Failed!</h2>

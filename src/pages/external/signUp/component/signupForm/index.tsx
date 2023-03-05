@@ -63,7 +63,7 @@ export const SignupForm = () => {
 
 	const errorMsg = () => {
 		let element;
-		if (registerData?.token) {
+		if (registerData?.tokens) {
 			element = (
 				<p className='mt-4 text-xl text-green-600 text-center'>
 					Registration completed!

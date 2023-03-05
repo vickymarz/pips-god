@@ -29,12 +29,14 @@ export const SigninForm = () => {
 		setPasswordShown(!passwordShown);
 	};
 
-    const {mutate, isSuccess, isLoading, isError} = useMutation(userServices.register, {
+    const {mutate, data, isLoading, isError} = useMutation(userServices.register, {
         onSuccess: (data) => {
-            localStorage.setItem("jwt-token", data.accessToken);
-			setTimeout(() => {
-				navigate("/dashboard");
-			}, 1000);
+          if (data?.tokens) {
+            localStorage.setItem("jwt-token", data.tokens.access.token);
+            setTimeout(() => {
+              navigate("/portal");
+            }, 1000);
+          }
         },
     })
 
@@ -46,7 +48,7 @@ export const SigninForm = () => {
 
 	const errorMsg = () => {
 		let element;
-		if (isSuccess) {
+		if (data?.tokens) {
 			element = (
 				<p className='mt-4 text-xl text-green-600 text-center'>
 					Login Successful!
