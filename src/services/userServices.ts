@@ -9,7 +9,7 @@ import {
   VERIFY_TRANSACTION,
   SIGNUP_URL,
   LOGIN_URL,
-  PASSWORD_RECOVERY_URL,
+  FORGOT_PASSWORD_URL,
   RESET_TOKEN,
   RESET_PASSWORD_URL,
   GET_COURSES,
@@ -68,7 +68,7 @@ const login = async (params: any) => {
 const recoverPassword = async (params: any) => {
   try {
     const result = await fetchApi.post(
-      `${BASE_URL}/${PASSWORD_RECOVERY_URL}`,
+      `${BASE_URL}/${FORGOT_PASSWORD_URL}`,
       params
     );
     return result;
