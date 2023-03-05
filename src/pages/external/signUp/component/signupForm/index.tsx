@@ -29,7 +29,7 @@ export const SignupForm = () => {
           }, 3000);
         }
     }
-    const { isError } = useTransactions(reference, onSuccess)
+    const { isError, data: verifyData } = useTransactions(reference, onSuccess)
 
     const {
 		register,
@@ -45,7 +45,7 @@ export const SignupForm = () => {
 	};
 
 
-    const {mutate, isLoading, error, data} = useMutation(userServices.register, {
+    const {mutate, isLoading, error, data: registerData} = useMutation(userServices.register, {
         onSuccess: (data) => {
           if (data?.code !== 400 && data?.code === 200) {
             localStorage.setItem("jwt-token", data.accessToken);
@@ -63,7 +63,7 @@ export const SignupForm = () => {
 
 	const errorMsg = () => {
 		let element;
-		if (data?.code === 200) {
+		if (registerData?.code === 200) {
 			element = (
 				<p className='mt-4 text-xl text-green-600 text-center'>
 					Registration completed!
@@ -75,7 +75,7 @@ export const SignupForm = () => {
 					{error?.message}
 				</p>
 			);
-		} else if (data?.code === 400) {
+		} else if (registerData?.code === 400) {
            element = (
                 <p className='mt-4 text-xl text-red-600 text-center'>
                     This email has already been registered!
@@ -322,7 +322,7 @@ export const SignupForm = () => {
 
             </div>
         </form>
-        {verify && <VerifyPopup verify={verify} />}
+        {verify && <VerifyPopup verify={verify} verifyData={verifyData}/>}
     </>
   )
 }
