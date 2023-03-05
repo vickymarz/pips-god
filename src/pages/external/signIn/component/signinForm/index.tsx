@@ -21,7 +21,7 @@ export const SigninForm = () => {
 		formState: { errors },
 	} = useForm<FormValues>();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
 	const [passwordShown, setPasswordShown] = useState(false);
 
@@ -33,6 +33,7 @@ export const SigninForm = () => {
         onSuccess: (data) => {
           if (data?.tokens) {
             localStorage.setItem("jwt-token", data.tokens.access.token);
+            localStorage.setItem("current-user", data.user);
             setTimeout(() => {
               navigate("/portal");
             }, 1000);

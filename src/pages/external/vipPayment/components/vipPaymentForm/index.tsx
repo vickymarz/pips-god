@@ -91,8 +91,8 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                 )}
             </div>
         </form>
-        <div className="hidden md:flex justify-center items-center w-full mt-[105px]">
-            <img src={card} alt="" />
+        <div className="hidden md:flex justify-center items-center w-full0 mt-[105px] md:mt-[80px]">
+            <img src={card} alt="" className="md:object-scale-down"/>
         </div>
     </>
   )
