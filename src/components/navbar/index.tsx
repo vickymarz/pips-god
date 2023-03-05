@@ -53,8 +53,8 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
          matches && (
             <div className='flex justify-center items-center gap-x-[10px]'>
           <Button type="button" onClick={handleMenuOpen} className={`font-productSans rounded-lg bg-white text-[#0D142E] px-[0.9rem] py-[0.3rem] text-[1rem] ${view ? 'bg-white text-[#0D142E]' : 'bg-[#0D142E] text-[#fff]'} `}>
-          <Link to={'/mentorship_payment'}>
-            Get Started
+          <Link to={'/login'}>
+            Login
           </Link>
         </Button>
         </div>
