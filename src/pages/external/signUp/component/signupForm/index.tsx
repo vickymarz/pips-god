@@ -12,7 +12,7 @@ type FormValues = {
     lastName: string;
     email: string;
     password: string;
-    mobile: string;
+    phone: string;
     address: string;
 };
 
@@ -22,7 +22,7 @@ export const SignupForm = () => {
     const navigate = useNavigate();
 
       const onSuccess = (data:any) => {
-        if (data.code === 404 || isError) {
+        if (data.code === 404 || isError || data.status !== 'success') {
           setVerify(true)
           setTimeout(() => {
              navigate('/')
@@ -196,18 +196,18 @@ export const SignupForm = () => {
             </div>
 
             <div className='relative flex flex-col justify-start items-start gap-y-[8px] w-full'>
-                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='mobile'>
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='phone'>
                     Phone Number
                 </label>
                 <input
                     style={{
-                        borderBottom: errors.mobile && "2px solid red"
+                        borderBottom: errors.phone && "2px solid red"
                     }}
                     className={`focus:outline-none text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
                     type='number'
-                    id="mobile"
+                    id="phone"
                     placeholder='Enter your phone number'
-                    {...register("mobile", {
+                    {...register("phone", {
                         required: "Phone number cannot be empty",
                         minLength: {
                             value: 5,
@@ -215,15 +215,15 @@ export const SignupForm = () => {
                         },
                         maxLength: {
                             value: 11,
-                            message: "phone number must not be more than 11 digits",
+                            message: "Phone number must not be more than 11 digits",
                         }
                     })}
                 />
-                {errors.mobile && (
+                {errors.phone && (
                     <p
                         className='right-0 bottom-[-37px] italic text-sm mt-2'
                         style={{ color: "red" }}>
-                        {errors.mobile?.message}
+                        {errors.phone?.message}
                     </p>
                 )}
             </div>
