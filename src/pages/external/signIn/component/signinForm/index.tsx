@@ -54,7 +54,7 @@ export const SigninForm = () => {
 					Login Successful!
 				</p>
 			);
-		} else if (isError) {
+		} else if (isError || data?.code === 401) {
 			element = (
 				<p className='mt-4 text-xl text-red-600 text-center'>
 					Incorrect Email or Password
