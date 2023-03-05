@@ -3,7 +3,6 @@ import { PublicRoutes, PortalRoutes } from './routes';
 import { GetCourseContextProvider } from 'context'
 
 function App() {
-
   return (
     <div className="App">
        <PublicRoutes />

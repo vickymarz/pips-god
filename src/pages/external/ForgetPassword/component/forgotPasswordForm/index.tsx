@@ -35,13 +35,13 @@ const {mutate, data, isLoading, isError} = useMutation(userServices.recoverPassw
 
   const errorMsg = () => {
     let element;
-    if (data?.code === 200) {
+    if (data?.code === 204) {
       element = (
         <p className="mt-4 text-xl text-green-600 text-center">
           Successful, Kindly proceed to your email!
         </p>
       );
-    } else if (isError || data?.code === 401) {
+    } else if (isError || data?.code === 404) {
       element = (
         <p className="mt-4 text-xl text-red-600 text-center">
           Incorrect email address
