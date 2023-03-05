@@ -58,7 +58,7 @@ export const SignupForm = () => {
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-		mutate({...data, transactionReference: reference})
+		mutate({...data, transactionAccessCode: reference})
 	};
 
 	const errorMsg = () => {
