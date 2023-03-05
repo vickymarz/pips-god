@@ -29,7 +29,7 @@ export const SigninForm = () => {
 		setPasswordShown(!passwordShown);
 	};
 
-    const {mutate, data, isLoading, isError} = useMutation(userServices.register, {
+    const {mutate, data, isLoading, isError} = useMutation(userServices.login, {
         onSuccess: (data) => {
           if (data?.tokens) {
             localStorage.setItem("jwt-token", data.tokens.access.token);
