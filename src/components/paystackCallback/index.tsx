@@ -7,7 +7,7 @@ import { VerifyPopup } from "../verifyPopUp";
 export const PaystackCallback = () => {
   const [verify, setVerify] = useState(false)
 
-  const { reference } = useParams()
+  const { id } = useParams()
   const navigate = useNavigate();
 
   const onSuccess = (data:any) => {
@@ -15,10 +15,10 @@ export const PaystackCallback = () => {
       setVerify(true)
       setTimeout(() => {
          navigate('/')
-      }, 3000);
+      }, 5000);
     }
 }
-const { isError } = useTransactions(reference, onSuccess)
+const { isError } = useTransactions(id, onSuccess)
 
 
   return (
