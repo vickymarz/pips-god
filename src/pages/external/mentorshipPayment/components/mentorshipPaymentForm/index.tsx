@@ -15,7 +15,7 @@ export const MentorshipPaymentForm = ({id}:{id:string}) => {
 		formState: { errors },
 	} = useForm<FormValues>();
 
-    const {mutate, isError, isLoading, data} = useMutation(userServices.initializeTransaction, {
+    const {mutate, isError, isLoading} = useMutation(userServices.initializeTransaction, {
         onSuccess: (data) => {
 			setTimeout(() => {
                 window.location.href = data.authorizationUrl;
@@ -30,7 +30,7 @@ export const MentorshipPaymentForm = ({id}:{id:string}) => {
 
 	const errorMsg = () => {
 		let element;
-		 if (isError || data?.code === 400) {
+		 if (isError) {
 			element = (
                 <div className="w-full justify-center items-center">
                     <p className='mt-4 text-red-600 text-center'>
