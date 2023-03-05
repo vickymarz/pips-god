@@ -1,6 +1,7 @@
 export const BASE_URL = process.env.REACT_APP_BASE_URL
 export const INITIALIZE_TRANSACTION = 'transactions'
-export const SIGNUP_URL = 'auth/signup'
+export const VERIFY_TRANSACTION = 'transactions/verify'
+export const SIGNUP_URL = 'auth/register'
 export const LOGIN_URL ='auth/signin'
 export const PASSWORD_RECOVERY_URL ='auth/recover/generate'
 export const RESET_TOKEN ='auth/recover/token'
