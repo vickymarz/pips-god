@@ -19,9 +19,9 @@ export const ForgotPasswordForm = () => {
 const navigate = useNavigate();
 
 const {mutate, isSuccess, isLoading, isError} = useMutation(userServices.recoverPassword, {
-  onSuccess: () => {
+  onSuccess: (variables, data) => {
 			setTimeout(() => {
-				navigate("/reset_link");
+				navigate("/reset_link", {state: {email: data.email}});
 			}, 3000);
     }
   })

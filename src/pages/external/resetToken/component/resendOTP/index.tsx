@@ -10,10 +10,17 @@ type ResendOtpProp = {
   renderTime?: (remainingTime:number) => void
   renderButton?: ({disabled }: ButtonProps) => void
   className?: string
+  handleForgotPassword: () => void
 }
 
-export const ResendOTP = ({ renderTime, renderButton,  className, ...props }: ResendOtpProp ) => {
+export const ResendOTP = ({ renderTime, renderButton,  className, handleForgotPassword, ...props }: ResendOtpProp ) => {
   const { remainingTime, handelResendClick } = useResendOTP(props);
+
+  const resendToken = () => {
+    handleForgotPassword()
+    handelResendClick()
+  }
+
   return (
     <div
       className={className || ""}
@@ -23,10 +30,10 @@ export const ResendOTP = ({ renderTime, renderButton,  className, ...props }: Re
         gap: "10px"
       }}
     >
-      <button disabled={remainingTime !== 0} onClick={handelResendClick} type="button">
+      <button disabled={remainingTime !== 0} onClick={resendToken} type="button">
           Resend OTP
-        </button>
-        <span> {remainingTime} sec</span>
+      </button>
+      <span> {remainingTime} sec</span>
     </div>
   );
 }

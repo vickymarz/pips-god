@@ -1,6 +1,7 @@
 import fetchApi from "./fetchApi.js";
 import {
-  paymentTypes
+  paymentTypes,
+  tokenTypes
  } from "./dataTypes";
 
 import {
@@ -10,7 +11,6 @@ import {
   SIGNUP_URL,
   LOGIN_URL,
   FORGOT_PASSWORD_URL,
-  RESET_TOKEN,
   RESET_PASSWORD_URL,
   GET_COURSES,
   GET_COURSE,
@@ -67,9 +67,18 @@ const login = async (params: any) => {
 
 const recoverPassword = async (params: any) => {
   try {
+    const result = await fetchApi.post(`${BASE_URL}/${FORGOT_PASSWORD_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const resetToken = async (params: tokenTypes) => {
+  try {
     const result = await fetchApi.post(
-      `${BASE_URL}/${FORGOT_PASSWORD_URL}`,
-      params
+      `${BASE_URL}/${RESET_PASSWORD_URL}?token=${params?.token}`,
+      {'email': params?.email}
     );
     return result;
   } catch (err) {
@@ -77,23 +86,11 @@ const recoverPassword = async (params: any) => {
   }
 };
 
-const resetToken = async (params: string) => {
+const resetPassword = async (params: tokenTypes) => {
   try {
     const result = await fetchApi.post(
-      `${BASE_URL}/${RESET_TOKEN}`,
-      params
-    );
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const resetPassword = async (params: any) => {
-  try {
-    const result = await fetchApi.post(
-      `${BASE_URL}/${RESET_PASSWORD_URL}`,
-      params
+      `${BASE_URL}/${RESET_PASSWORD_URL}?token=${params?.token}`,
+       params
     );
     return result;
   } catch (err) {

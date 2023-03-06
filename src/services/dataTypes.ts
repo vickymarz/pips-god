@@ -3,4 +3,11 @@ export type paymentTypes = {
     subscriptionPlanName: string
 }
 
+export type tokenTypes = {
+    email: string
+    token?: string
+    password?: string
+    save?: boolean
+}
+
 
