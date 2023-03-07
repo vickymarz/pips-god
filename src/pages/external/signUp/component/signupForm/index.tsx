@@ -298,10 +298,6 @@ export const SignupForm = () => {
                             value: 10,
                             message: "Address must be at least 10 characters",
                         },
-                        maxLength: {
-                            value: 50,
-                            message: "firstName must not be more than 50 characters",
-                        },
                     })}
                 />
                 {errors.address && (
