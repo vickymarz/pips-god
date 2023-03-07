@@ -12,6 +12,7 @@ import {
   LOGIN_URL,
   FORGOT_PASSWORD_URL,
   RESET_PASSWORD_URL,
+  VERIFY_EMAIL,
   GET_COURSES,
   GET_COURSE,
   DELETE_COURSE,
@@ -49,6 +50,15 @@ const verifyTransaction = async (id: string | undefined) => {
 const register = async (params: any) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${SIGNUP_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const verifyEmail = async (id: string | undefined) => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${VERIFY_EMAIL}/${id}`);
     return result;
   } catch (err) {
     return err;
@@ -309,6 +319,7 @@ const userServices = {
   initializeTransaction,
   verifyTransaction,
   register,
+  verifyEmail,
   login,
   recoverPassword,
   resetToken,

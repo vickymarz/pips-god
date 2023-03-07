@@ -7,6 +7,13 @@ export const useTransactions = (id: string | undefined, onSuccess: (data:any) =>
    refetchOnWindowFocus: false,
  })
 }
+
+export const useEmailVerification = (id: string | undefined) => {
+ return useQuery(['verify-email', id], () => userServices.verifyEmail(id), {
+   refetchOnWindowFocus: false,
+ })
+}
+
 export const useAnalyticsData = () => {
  return useQuery('users-data', userServices.getAnalyticsData, {
     staleTime: 60000
