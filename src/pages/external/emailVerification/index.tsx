@@ -13,7 +13,7 @@ export const EmailVerification = () => {
             </Link>
             <h2 className='text-[#0D142E] font-bold text-[2rem] md:text-[2.5rem] font-productSans text-center'>Welcome to Pipsgod Academy!</h2>
             <p className=' text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
-              An email verification code has been sent to your email.
+              An email verification link has been sent to your email.
             </p>
             <p className='text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
                KIndly proceed to your email to continue the verification process. Thanks!

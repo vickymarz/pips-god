@@ -47,10 +47,10 @@ export const SignupForm = () => {
 
     const {mutate, isLoading, error, data: registerData} = useMutation(userServices.register, {
         onSuccess: (data) => {
-          if (data?.tokens) {
-            localStorage.setItem("jwt-token", data.tokens.access.token);
+          if (data?.code === 200) {
+            // localStorage.setItem("jwt-token", data.tokens.access.token);
 			setTimeout(() => {
-				navigate("/portal");
+				navigate("/email/verify_email");
 			}, 1000);
           }
         },
@@ -63,7 +63,7 @@ export const SignupForm = () => {
 
 	const errorMsg = () => {
 		let element;
-		if (registerData?.tokens) {
+		if (registerData?.code === 200) {
 			element = (
 				<p className='mt-4 text-xl text-green-600 text-center'>
 					Registration completed!
