@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router'
 
-const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
+export const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
@@ -28,4 +28,3 @@ const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
   )
 }
 
-export default ProtectedRoute
