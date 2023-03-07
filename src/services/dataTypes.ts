@@ -10,4 +10,17 @@ export type tokenTypes = {
     save?: boolean
 }
 
+export type RegisterTypes = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    transactionAccessCode: string | undefined
+};
 
+export type EmailVerifyTypes = {
+    token?: string | null
+    trans?: string | null
+}

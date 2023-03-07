@@ -66,7 +66,7 @@ const publicRoutesData: RouteObject[] = [
     },
     {
       id: '14',
-      path: "email/verify_success/:id",
+      path: "email/verify_success/",
       element: <EmailVerificationSuccess  />
     }
   ];

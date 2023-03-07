@@ -1,7 +1,9 @@
 import fetchApi from "./fetchApi.js";
 import {
   paymentTypes,
-  tokenTypes
+  tokenTypes,
+  RegisterTypes,
+  EmailVerifyTypes
  } from "./dataTypes";
 
 import {
@@ -47,7 +49,7 @@ const verifyTransaction = async (id: string | undefined) => {
   }
 };
 
-const register = async (params: any) => {
+const register = async (params: RegisterTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${SIGNUP_URL}`, params);
     return result;
@@ -56,9 +58,9 @@ const register = async (params: any) => {
   }
 };
 
-const verifyEmail = async (id: string | undefined) => {
+const verifyEmail = async (params: EmailVerifyTypes ) => {
   try {
-    const result = await fetchApi.get(`${BASE_URL}/${VERIFY_EMAIL}/${id}`);
+    const result = await fetchApi.post(`${BASE_URL}/${VERIFY_EMAIL}?token=${params.token}&trans=${params.trans}`);
     return result;
   } catch (err) {
     return err;

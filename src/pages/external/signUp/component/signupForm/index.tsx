@@ -47,8 +47,7 @@ export const SignupForm = () => {
 
     const {mutate, isLoading, error, data: registerData} = useMutation(userServices.register, {
         onSuccess: (data) => {
-          if (data?.code === 200) {
-            // localStorage.setItem("jwt-token", data.tokens.access.token);
+          if (data?.code === 201) {
 			setTimeout(() => {
 				navigate("/email/verify_email");
 			}, 1000);

@@ -1,13 +1,34 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import {  useEmailVerification } from 'hooks'
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useMutation } from "react-query";
+import userServices from "services/userServices";
 import success from '../../../assets/images/success.png'
 import fail from '../../../assets/images/fail.png'
 
 export const EmailVerificationSuccess = () => {
-  const { id } = useParams()
 
-  const { data } =  useEmailVerification(id)
+const [searchParams] = useSearchParams();
+const navigate = useNavigate();
+
+const {mutate, data} = useMutation(userServices.verifyEmail, {
+  onSuccess: (data) => {
+    if (data?.code === 201) {
+      setTimeout(() => {
+        navigate("/email/verify_email");
+      }, 1000);
+    }
+  },
+})
+
+useEffect(() => {
+  const token = searchParams.get('token');
+  const trans= searchParams.get('trans');
+  console.log(token, trans)
+  mutate({token, trans})
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [])
+
 
 const verifySuccess = (
   <div className="w-full min-h-screen bg-authImg bg-cover bg-no-repeat">
@@ -99,7 +120,7 @@ const displayUI = () => {
        return verifySuccess
     } else if(data?.code === 400) {
        return verifyStale
-    } else if(data?.code === 404) {
+    } else if(data?.code === 401) {
         return verifyFailed
     } else {
         return verifyProgress
