@@ -12,8 +12,9 @@ const [searchParams] = useSearchParams();
 
 const {mutate, data} = useMutation(userServices.verifyEmail, {
   onSuccess: (data) => {
+    console.log(data)
     if (data?.code === 201) {
-       localStorage.setItem('jwt-token', data?.tokens.token);
+       localStorage.setItem('jwt-token', data?.data.tokens.token);
     }
   },
 })
@@ -98,6 +99,29 @@ const verifyFailed = (
     </div>
   </div>
 )
+const verifyExpired = (
+    <div className="w-full min-h-screen bg-authImg bg-cover bg-no-repeat">
+    <div className="w-full min-h-screen flex bg-[#ffffffe6] px-[33px] md:px-[38px] pt-[45px]">
+      <div className="flex flex-col items-center justify-start items-center gap-y-[30px] w-full mt-[50px]">
+        <h2 className='text-[#0D142E] font-bold text-[2rem] md:text-[2.5rem] font-productSans text-center'>Verification Failed!</h2>
+        <p className=' text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
+          Your email could not be verified. <br /> A new verification link will be sent to your email shortly.
+        </p>
+        <div className='flex justify-center items-center w-[100px]'>
+          <img src={fail} alt="fail" className="mix-blend-darken"/>
+        </div>
+        <div className="mt-5">
+          <button
+            type="button"
+            className="my-[20px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]"
+          >
+            <Link to="/">Click here to return to the website</Link>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)
 
 const verifyProgress = (
     <div className="w-full min-h-screen bg-authImg bg-cover bg-no-repeat">
@@ -119,6 +143,8 @@ const displayUI = () => {
        return verifyStale
     } else if(data?.code === 401) {
         return verifyFailed
+    } else if (data?.code === 308) {
+       return verifyExpired
     } else {
         return verifyProgress
     }
