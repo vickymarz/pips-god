@@ -118,7 +118,7 @@ const verifyProgress = (
 const displayUI = () => {
     if(data?.code === 200) {
        return verifySuccess
-    } else if(data?.code === 400) {
+    } else if(data?.code === 304) {
        return verifyStale
     } else if(data?.code === 401) {
         return verifyFailed
