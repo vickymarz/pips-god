@@ -1,7 +1,7 @@
-import { ForgetPassword, Homepage, ResetLink, SignIn, Signup,  ResetPassword, ResetToken, VipPayment, MentorshipPayment } from '../../pages'
-import type {RouteObject} from 'react-router-dom'
+import { ForgetPassword, Homepage, ResetLink, SignIn, Signup,  ResetPassword, ResetToken, VipPayment, MentorshipPayment, EmailVerification } from '../../pages'
+import type { RouteObject } from 'react-router-dom'
 import { PaystackCallback } from 'components';
-import {ResetPasswordModal} from 'pages/external/resetPassword/component/resetPasswordModal'
+import { ResetPasswordModal } from 'pages/external/resetPassword/component/resetPasswordModal'
 
 const publicRoutesData: RouteObject[] = [
     {
@@ -58,6 +58,11 @@ const publicRoutesData: RouteObject[] = [
       id: '12',
       path: "reset_password/success",
       element: <ResetPasswordModal />
+    },
+    {
+      id: '13',
+      path: "email/verify_email",
+      element: <EmailVerification />
     }
   ];
 

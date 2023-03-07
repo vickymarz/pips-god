@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../../assets/images/pipsgod.png'
 
 type authHeaderType = {
@@ -9,7 +10,9 @@ export const AuthHeader = ({title, text}:authHeaderType) => {
   return (
     <div className="flex flex-col justify-center items-center gap-y-[1.8rem]">
      <div className="flex justify-center items-center md:hidden">
-       <img src={logo} alt="pipsgod logo" />
+      <Link to={'/'}>
+        <img src={logo} alt="pipsgod logo" />
+      </Link>
      </div>
      <div className='flex flex-col justify-center md:justify-start md:items-start items-center gap-y-[0.5rem]'>
         <h2 className='text-[#0D142E] font-bold text-[1.4rem] md:text-[1.87rem] font-productSans'>{title}</h2>

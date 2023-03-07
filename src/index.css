@@ -83,4 +83,15 @@ li {
   top: -2px;
 }
 
+@media only screen and (max-width: 768px){
+  #checkbox::before {
+    content: "\2714";
+    font-size: 1rem;
+    color: #0D142E;
+    position: absolute;
+    left: 1px;
+    top: -5px;
+  }
+}
+
 
