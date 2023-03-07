@@ -22,7 +22,6 @@ const {mutate, data} = useMutation(userServices.verifyEmail, {
 useEffect(() => {
   const token = searchParams.get('token');
   const trans= searchParams.get('trans');
-  console.log(token, trans)
   mutate({token, trans})
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
