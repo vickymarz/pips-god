@@ -14,8 +14,8 @@ export const PaystackCallback = () => {
     if (data.code === 404 || isError) {
       setVerify(true)
       setTimeout(() => {
-         navigate('/')
-      }, 5000);
+         navigate("/")
+      }, 2000);
     }
 }
 const { isError } = useTransactions(id, onSuccess)
