@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import userServices from "services/userServices";
 import success from '../../../assets/images/success.png'
@@ -9,14 +9,11 @@ import fail from '../../../assets/images/fail.png'
 export const EmailVerificationSuccess = () => {
 
 const [searchParams] = useSearchParams();
-const navigate = useNavigate();
 
 const {mutate, data} = useMutation(userServices.verifyEmail, {
   onSuccess: (data) => {
     if (data?.code === 201) {
-      setTimeout(() => {
-        navigate("/email/verify_email");
-      }, 1000);
+       localStorage.setItem('jwt-token', data?.tokens.token);
     }
   },
 })
