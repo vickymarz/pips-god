@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
@@ -10,9 +10,12 @@ type FormValues = {
     passwordConfirm: string;
   };
 
-export const ResetPasswordForm = () => {
-  const {state} = useLocation();
-  console.log(state)
+type PropValues = {
+    email: string;
+    token: string;
+  };
+
+export const ResetPasswordForm = ({email, token}: PropValues) => {
   const [passwordShown, setPasswordShown] = useState(false);
 
   const {
@@ -50,11 +53,10 @@ const getValues = () => {
     }
 }
 
-console.log(getValues()?.password, getValues())
 
 const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     reset();
-    mutate({'token': state?.token, 'password': data.password, 'email':state?.email, 'save': true})
+    mutate({'token': token, 'password': data.password, 'email': email, 'save': true})
 };
 
   const errorMsg = () => {

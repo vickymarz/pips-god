@@ -31,7 +31,6 @@ import {
 const initializeTransaction = async (params:paymentTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${INITIALIZE_TRANSACTION}`, params);
-    console.log(result)
     return result;
   } catch (err) {
     return err;
