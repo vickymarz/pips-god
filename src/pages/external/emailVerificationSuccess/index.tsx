@@ -12,8 +12,8 @@ const [searchParams] = useSearchParams();
 
 const {mutate, data} = useMutation(userServices.verifyEmail, {
   onSuccess: (data) => {
-
     if (data?.code === 201) {
+      console.log(data?.data.tokens)
        localStorage.setItem('jwt-token', data?.data.tokens.access.token);
     }
   },
@@ -31,9 +31,9 @@ const verifySuccess = (
   <div className="w-full min-h-screen bg-authImg bg-cover bg-no-repeat">
     <div className="w-full min-h-screen flex bg-[#ffffffe6] px-[33px] md:px-[38px] pt-[45px]">
       <div className="flex flex-col items-center justify-start items-center gap-y-[30px] w-full mt-[50px]">
-        <h2 className='text-[#0D142E] font-bold text-[2rem] md:text-[2.5rem] font-productSans text-center'>Verified!</h2>
+        <h2 className='text-[#0D142E] font-bold text-[2rem] md:text-[2.5rem] font-productSans text-center'>Congratulations!</h2>
         <p className=' text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
-          Your email has already been verified.
+          Your email has been verified successfully!.
         </p>
         <div className='flex justify-center items-center'>
           <img src={success} alt="success" />
@@ -55,9 +55,9 @@ const verifyStale = (
     <div className="w-full min-h-screen bg-authImg bg-cover bg-no-repeat">
     <div className="w-full min-h-screen flex bg-[#ffffffe6] px-[33px] md:px-[38px] pt-[45px]">
       <div className="flex flex-col items-center justify-start items-center gap-y-[30px] w-full mt-[50px]">
-        <h2 className='text-[#0D142E] font-bold text-[2rem] md:text-[2.5rem] font-productSans text-center'>Congratulations!</h2>
+        <h2 className='text-[#0D142E] font-bold text-[2rem] md:text-[2.5rem] font-productSans text-center'>Verified!</h2>
         <p className=' text-center text-[#8B8B8B] leading-[1.37rem] text-[1rem] md:text-[1.31rem] font-medium'>
-          Your email has been verified successfully.
+          Your email has already been verified successfully.
         </p>
         <div className='flex justify-center items-center'>
           <img src={success} alt="success" />
@@ -138,7 +138,7 @@ const verifyProgress = (
 const displayUI = () => {
     if(data?.code === 200) {
        return verifySuccess
-    } else if(data?.code === 304) {
+    } else if(data?.code === 208) {
        return verifyStale
     } else if(data?.code === 401) {
         return verifyFailed
