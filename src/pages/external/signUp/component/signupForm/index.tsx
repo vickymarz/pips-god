@@ -266,14 +266,14 @@ export const SignupForm = () => {
                 />
                 <span
                     className={`absolute ${
-                        errors.password ? "bottom-11" : "bottom-3.5"
+                        errors.password ? "top-[45px]" : "bottom-3.5"
                     } right-3 cursor-pointer`}
                     onClick={togglePassword}>
                     {passwordShown ? <FiEyeOff /> : <FiEye />}
                 </span>
                 {errors.password && (
                     <p
-                        className='right-0 bottom-[-37px] italic text-sm mt-2'
+                        className='right-0 bottom-[-37px] italic text-sm'
                         style={{ color: "red" }}>
                         {errors.password?.message}
                     </p>

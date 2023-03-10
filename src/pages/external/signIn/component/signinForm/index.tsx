@@ -72,7 +72,7 @@ export const SigninForm = () => {
 	const pattern =
 		// eslint-disable-next-line no-useless-escape
 		/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	const secondPattern = /^[a-z][a-z0-9]+$/gi;
+	const secondPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{9,20}$/;
 
   return (
     <>
@@ -129,7 +129,7 @@ export const SigninForm = () => {
               pattern: {
                 value: secondPattern,
                 message:
-                  "Password has to start with a letter, can contain numbers. No spaces and special characters allowed",
+                  "Password must have at least 9 characters. It must include a letter, a number and a special character",
                 },
             })}
         />
