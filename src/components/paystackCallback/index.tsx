@@ -29,7 +29,7 @@ export const PaystackCallback = () => {
 const { isError } = useTransactions(id, onSuccess)
 
 const vip = (
-  <div className='bg-authImg bg-cover bg-no-repeat flex justify-center flex-col px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] w-full min-h-screen'>
+  <div className='flex justify-center flex-col px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] w-full min-h-full'>
   <div className='flex justify-center items-center'>
     <img src={success} alt="success" />
   </div>
@@ -41,7 +41,7 @@ const vip = (
 )
 
 const mentorship = (
-    <div className='bg-authImg bg-cover bg-no-repeat flex justify-center flex-col px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] w-full min-h-screen'>
+    <div className='flex justify-center flex-col px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] w-full min-h-full'>
     <div className='text-[#0D142E] flex justify-center flex-col gap-y-[20px] items-center md:font-semiBold'>
       <h2 className='text-[1.37rem] md:text-[2.5rem] font-bold'>Payment Successful.</h2>
       <p className='text-center text-[0.75rem] md:text-[0.93rem]'>Payment has been processed successfully, you can proceed to continue your registration </p>
@@ -56,7 +56,7 @@ const mentorship = (
 )
 
 const pending = (
-    <div className='bg-authImg bg-cover bg-no-repeat flex justify-center flex-col px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] w-full min-h-screen'>
+    <div className='flex justify-center flex-col px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] w-full min-h-full'>
     <div className='text-[#0D142E] flex justify-center flex-col gap-y-[20px] items-center md:font-semiBold'>
       <p className='text-center text-[0.75rem] md:text-[0.93rem]'>Please wait...</p>
     </div>
