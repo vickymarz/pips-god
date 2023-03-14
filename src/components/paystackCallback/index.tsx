@@ -15,7 +15,6 @@ export const PaystackCallback = () => {
   useEffect(() => {
     const vip_signal = searchParams?.get('vip_signal');
     setVipSignal(vip_signal)
-    console.log(vip_signal === 'false')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -74,6 +73,7 @@ const displayUI = () => {
   if(vipSignal === 'true') {
      return vip
   } else if(vipSignal === 'false') {
+    console.log('false')
      return mentorship
    } else {
       return pending
