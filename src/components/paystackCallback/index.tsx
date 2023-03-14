@@ -36,7 +36,7 @@ const vip = (
       </div>
       <div className='text-[#0D142E] flex justify-center flex-col gap-y-[20px] items-center md:font-semiBold'>
         <h2 className='text-[2rem] md:text-[2.5rem] font-bold'>Payment Successful.</h2>
-        <p className='text-center  md:text-[0.93rem]'>Payment has been processed successfully, you can now proceed to your email to join the vip telegram group via a link that will be sent to you. </p>
+        <p className='text-center'>Payment has been processed successfully, you can now proceed to your email to join the vip telegram group via a link that will be sent to you. </p>
       </div>
   </div>
 </div>
@@ -44,10 +44,10 @@ const vip = (
 
 const mentorship = (
   <div className='bg-authImg bg-cover bg-no-repeat w-full min-h-screen'>
-    <div className="w-full min-h-screen px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] flex jjustify-start pt-[45px] flex-col bg-[#ffffffe6] md:bg-[#F8FAFC]">
+    <div className="w-full min-h-screen px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] flex justify-start pt-[45px] flex-col bg-[#ffffffe6] md:bg-[#F8FAFC]">
       <div className='text-[#0D142E] flex justify-center flex-col gap-y-[20px] items-center md:font-semiBold'>
         <h2 className='text-[2rem] md:text-[2.5rem] font-bold'>Payment Successful.</h2>
-        <p className='text-center  md:text-[0.93rem]'>Payment has been processed successfully, you can proceed to continue your registration </p>
+        <p className='text-center'>Payment has been processed successfully, you can proceed to continue your registration </p>
       </div>
       <div className='flex justify-center items-center'>
         <img src={success} alt="success" />
@@ -63,7 +63,7 @@ const pending = (
   <div className='bg-authImg bg-cover bg-no-repeat w-full min-h-screen'>
   <div className="w-full min-h-screen px-[20px] py-[80px] md:px-[80px] items-center gap-y-[50px] flex justify-start pt-[45px] flex-col bg-[#ffffffe6] md:bg-[#F8FAFC]">
     <div className='text-[#0D142E] flex justify-center flex-col gap-y-[20px] items-center md:font-semiBold'>
-      <p className='text-center  md:text-[0.93rem]'>Please wait...</p>
+      <p className='text-center'>Please wait...</p>
     </div>
   </div>
 </div>
@@ -72,7 +72,7 @@ const pending = (
 const displayUI = () => {
   if(vipSignal) {
      return vip
-  } else if(!vipSignal) {
+  } else if(vipSignal === undefined) {
      return mentorship
    } else {
       return pending
