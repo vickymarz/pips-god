@@ -3,7 +3,8 @@ import {
   paymentTypes,
   tokenTypes,
   RegisterTypes,
-  EmailVerifyTypes
+  EmailVerifyTypes,
+  AdminTypes,
  } from "./dataTypes";
 
 import {
@@ -11,10 +12,11 @@ import {
   INITIALIZE_TRANSACTION,
   VERIFY_TRANSACTION,
   SIGNUP_URL,
+  VERIFY_EMAIL,
   LOGIN_URL,
   FORGOT_PASSWORD_URL,
   RESET_PASSWORD_URL,
-  VERIFY_EMAIL,
+  ADMIN_SIGNUP_URL,
   GET_COURSES,
   GET_COURSE,
   DELETE_COURSE,
@@ -103,6 +105,15 @@ const resetPassword = async (params: tokenTypes) => {
       `${BASE_URL}/${RESET_PASSWORD_URL}?token=${params?.token}`,
        params
     );
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const adminRegister = async (params: AdminTypes) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${ADMIN_SIGNUP_URL}`, params);
     return result;
   } catch (err) {
     return err;
@@ -326,6 +337,7 @@ const userServices = {
   recoverPassword,
   resetToken,
   resetPassword,
+  adminRegister,
   uploadThumbnail,
   uploadVideo,
   uploadFile,

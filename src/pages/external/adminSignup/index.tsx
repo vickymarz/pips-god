@@ -1,8 +1,8 @@
-import { AdminSignupForm, AdminSignupFooter } from "./component"
+import { AdminSignupForm, AdminSignupFooter } from "./components"
 import { AuthHeader } from "components";
 import cap from '../../../assets/images/white-cap.png'
 
-export const Signup = () => {
+export const AdminSignup = () => {
 	return (
 		<section className='w-full min-h-screen bg-authImg md:bg-none bg-cover bg-no-repeat flex justify-start'>
 			<div className='hidden md:block bg-authDesktop min-h-screen basis-2/4 bg-no-repeat md:pt-[91px] md:px-[58px]'>

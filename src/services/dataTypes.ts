@@ -24,3 +24,12 @@ export type EmailVerifyTypes = {
     token?: string | null
     trans?: string | null
 }
+
+export type AdminTypes = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    superAdminEmail: string;
+    superAdminPassword: string;
+};
