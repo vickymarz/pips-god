@@ -11,10 +11,29 @@ import {useAnalyticsData} from 'hooks'
 
 const dummy = [
   {
-    days: new Date().toDateString(),
+    days: 1,
     learners: 0,
   },
-
+  {
+    days: 2,
+    learners: 3,
+  },
+  {
+    days: 3,
+    learners: 4,
+  },
+  {
+    days: 4,
+    learners: 2,
+  },
+  {
+    days: 4,
+    learners: 0,
+  },
+  {
+    days: 5,
+    learners: 8,
+  },
 ];
 
 export const AnalyticsGraph = () => {

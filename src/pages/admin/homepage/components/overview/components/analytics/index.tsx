@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { AnalyticsCard, AnalyticsGraph } from "./components"
 import {Button} from 'components'
 import {DatePicker} from '../datePicker'
+
 export const Analytics = () => {
   const [modal, setModal] = useState(false)
 

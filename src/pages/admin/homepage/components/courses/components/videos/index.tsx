@@ -9,7 +9,7 @@ import { useDocumentData } from 'hooks'
 
 export const Videos = () => {
   const {setModal, setCourse }  = CreateCourseContextUse()
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   // type videoType = {
   //   title: string

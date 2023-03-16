@@ -1,15 +1,15 @@
 import { GoTop } from 'components';
-import { PublicRoutes, PortalRoutes } from './routes';
-import { GetCourseContextProvider } from 'context'
+import { PublicRoutes, PortalRoutes, AdminRoutes } from './routes';
+import { GetCourseContextProvider, CreateCourseContextProvider } from 'context'
 
 function App() {
   return (
     <div className="App">
        <PublicRoutes />
        <GoTop />
-      {/* <CreateCourseContextProvider>
+      <CreateCourseContextProvider>
         <AdminRoutes />
-      </CreateCourseContextProvider> */}
+      </CreateCourseContextProvider>
       <GetCourseContextProvider>
         <PortalRoutes />
       </GetCourseContextProvider>

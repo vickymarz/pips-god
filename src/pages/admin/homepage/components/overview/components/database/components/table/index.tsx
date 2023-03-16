@@ -8,11 +8,11 @@ export const Table = () => {
     email: string
     date: string
     amount: string
-    number: string
+    mobile: string
   }
    const {data} = useMentorshipData()
-   
-   const mentorshipList = data?.mentorshipData?.map(({name, email, date, number, amount}: mentorshipDataType) => (
+
+   const mentorshipList = data?.mentorshipData?.map(({name, email, date, mobile, amount}: mentorshipDataType) => (
      <tr className='border-b-[10px] border-[#F8FAFC] bg-[#fff] text-[#040F1A] font-medium text-[0.87rem] mb-[12px]'>
     <td className='px-[9px] py-[16px] flex justify-start items-center gap-x-[25px]'>
       <div className="bg-[#0F375A] rounded-full h-[49px] w-[49px] flex justify-center items-center text-[21px] text-white font-bold">
@@ -21,7 +21,7 @@ export const Table = () => {
       <h2 className='text-[#040F1A] font-medium text-[0.87rem]'>{name}</h2>
     </td>
     <td className='py-[16px] '>${amount}</td>
-    <td className='py-[16px]'>{number}</td>
+    <td className='py-[16px]'>{mobile}</td>
     <td className='py-[16px]'>{date}</td>
     <td className='py-[16px]'>{email}</td>
     <td className="py-[16px] flex flex-start items-center gap-x-[7px]">

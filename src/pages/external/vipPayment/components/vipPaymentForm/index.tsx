@@ -18,11 +18,13 @@ export const VipPaymentForm = ({id}:{id:string}) => {
 		formState: { errors },
 	} = useForm<FormValues>();
 
-    const {mutate, isError, isLoading} = useMutation(userServices.initializeTransaction, {
+    const {mutate, isError, isLoading, data} = useMutation(userServices.initializeTransaction, {
         onSuccess: (data) => {
-			setTimeout(() => {
-                window.location.href = data.authorizationUrl;
-			}, 1000);
+            if(data?.authorizationUrl) {
+                setTimeout(() => {
+                    // window.location.href = data.authorizationUrl;
+                }, 1000);
+            }
       }
     })
 
@@ -47,6 +49,26 @@ export const VipPaymentForm = ({id}:{id:string}) => {
                 </div>
 			);
 		}
+
+        if(data?.code === 208) {
+            element = (
+                <div className="w-full justify-center items-center">
+                    <p className='mt-4 text-red-600 text-center'>
+                        A user with this email has already been registered. Kindly use another active email!
+                    </p>
+                </div>
+			);
+        }
+
+        if(data?.code === 226) {
+            element = (
+                <div className="w-full justify-center items-center">
+                    <p className='mt-4 text-red-600 text-center'>
+                        A user with this telegram username has already been registered. Kindly use another active telegram username!
+                    </p>
+                </div>
+			);
+        }
 		return element;
 	};
 
