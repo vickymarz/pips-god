@@ -7,7 +7,9 @@ export const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
 
     const checkUserToken = () => {
         const userToken = localStorage.getItem('jwt-token')
-        if (!userToken || userToken === undefined) {
+        const adminToken = localStorage.getItem('admin-token')
+
+        if (!userToken || !adminToken || userToken === undefined || adminToken === undefined) {
           setIsLoggedIn(false)
           return navigate('/login')
         }

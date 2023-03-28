@@ -20,6 +20,11 @@ export type RegisterTypes = {
     transactionAccessCode: string | undefined
 };
 
+export type LoginTypes = {
+    email: string;
+    password: string;
+}
+
 export type EmailVerifyTypes = {
     token?: string | null
     trans?: string | null
@@ -30,6 +35,7 @@ export type AdminTypes = {
     lastName: string;
     email: string;
     password: string;
-    superAdminEmail: string;
+    superAdminUsername: string;
     superAdminPassword: string;
+    role: string;
 };

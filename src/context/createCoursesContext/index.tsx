@@ -1,14 +1,31 @@
 import { useContext, createContext, useState } from "react";
 
-interface CourseType {
-	course: any,
+type CourseType = {
+	file: string;
+	video: string;
+	thumbnail: string;
+	title: string;
+	tags: Array<string>;
+	image: string;
+};
+interface CourseComponentType {
+	course: CourseType,
 	modal: boolean,
-	setCourse: React.Dispatch<React.SetStateAction<any>>
+	setCourse: React.Dispatch<React.SetStateAction<CourseType>>
 	setModal: React.Dispatch<React.SetStateAction<boolean>>
   }
-  
-const CreateCourseContext = createContext<CourseType>({
-	course: [],
+
+  const courseProp = {
+	file: "",
+	video: "",
+	thumbnail: "",
+	title: "",
+	tags: [],
+	image: "",
+};
+
+const CreateCourseContext = createContext<CourseComponentType>({
+	course: courseProp,
 	modal: false,
 	setCourse: () => {},
 	setModal: () => {},
@@ -16,7 +33,7 @@ const CreateCourseContext = createContext<CourseType>({
 
 
 export const CreateCourseContextProvider = ({ children }: {children: React.ReactNode}) => {
-	const [course, setCourse] = useState<string[]>([]);
+	const [course, setCourse] = useState<CourseType>(courseProp);
 	const [modal, setModal] = useState(false);
 
 	const values = {

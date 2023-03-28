@@ -10,7 +10,7 @@ type FormValues = {
     lastName: string;
     email: string;
     password: string;
-    superAdminEmail: string;
+    superAdminUsername: string;
     superAdminPassword: string;
 };
 
@@ -32,7 +32,9 @@ export const AdminSignupForm = () => {
 
     const { mutate, isLoading, error, data } = useMutation(userServices.adminRegister, {
         onSuccess: (data) => {
+            console.log(data)
           if (data?.code === 201) {
+            localStorage.setItem('admin-token', data?.data.tokens.access.token);
 			setTimeout(() => {
 				navigate("/admin");
 			}, 1000);
@@ -42,15 +44,15 @@ export const AdminSignupForm = () => {
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-		mutate( data )
+		mutate( {...data, 'role': 'admin'} )
 	};
 
 	const errorMsg = () => {
 		let element;
-		if (data?.code === 200) {
+		if (data?.code === 201) {
 			element = (
 				<p className='mt-4 text-xl text-green-600 text-center'>
-					Registration completed!
+					Admin Registration completed!
 				</p>
 			);
 		} else if (error instanceof Error) {
@@ -63,6 +65,12 @@ export const AdminSignupForm = () => {
            element = (
                 <p className='mt-4 text-xl text-red-600 text-center'>
                     This email has already been registered!
+                </p>
+            );
+        } else if (data?.code === 401) {
+            element = (
+                <p className='mt-4 text-xl text-red-600 text-center'>
+                    Incorrect super admin username or password!
                 </p>
             );
         }
@@ -233,28 +241,24 @@ export const AdminSignupForm = () => {
             </div>
 
             <div className='relative flex flex-col justify-start items-start w-full gap-y-[8px]'>
-                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='superAdminEmail'>
-                    Super Admin Email
+                <label className='pb-0 md:text-[#888888] text-[#666666] md:text-[1.25rem] text-[1rem] font-medium' htmlFor='superAdminUsername'>
+                    Super Admin Username
                 </label>
                 <input
                     style={{
-                        borderBottom: errors.superAdminEmail && "2px solid red"
+                        borderBottom: errors.superAdminUsername && "2px solid red"
                     }}
                     className={`focus:outline-none  text-[#666666] text-[0.75rem] md:text-[1rem] w-full py-[12px] md:py-[0] md:pb-[7px] px-[10px] md:px-[0] rounded-lg md:rounded-none bg-transparent border border-[#666666] md:border-x-0 md:border-t-0 border-2`}
-                    type='email'
-                    id="superAdminEmail"
-                    placeholder='Enter the super admin email'
-                    {...register("superAdminEmail", {
-                        required: "Super admin email cannot be empty",
-                        pattern: {
-                            value: pattern,
-                            message: "Please enter a valid email",
-                        },
+                    type='text'
+                    id="superAdminUsername"
+                    placeholder='Enter the super admin username'
+                    {...register("superAdminUsername", {
+                        required: "Super admin username cannot be empty",
                     })}
                 />
-                {errors.superAdminEmail && (
+                {errors.superAdminUsername && (
                     <p className='italic text-sm mt-2' style={{ color: "red" }}>
-                        {errors.superAdminEmail?.message}
+                        {errors.superAdminUsername?.message}
                     </p>
                 )}
             </div>

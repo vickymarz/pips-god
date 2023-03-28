@@ -6,7 +6,6 @@ export const LOGIN_URL ='auth/login'
 export const FORGOT_PASSWORD_URL ='auth/forgot-password'
 export const RESET_PASSWORD_URL = 'auth/reset-password'
 export const VERIFY_EMAIL = 'auth/verify-email'
-export const ADMIN_SIGNUP_URL = 'auth/admin-register'
 export const CLOUDINARY_BASE_URL = process.env.REACT_APP_CLOUDINARY_BASE_URL
 export const UPLOAD_THUMBNAIL = 'image/upload'
 export const UPLOAD_VIDEO = 'video/upload'
