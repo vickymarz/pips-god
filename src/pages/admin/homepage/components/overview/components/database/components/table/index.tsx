@@ -11,7 +11,7 @@ export const Table = () => {
     mobile: string
   }
    const {data} = useMentorshipData()
-
+   
    const mentorshipList = data?.mentorshipData?.map(({name, email, date, mobile, amount}: mentorshipDataType) => (
      <tr className='border-b-[10px] border-[#F8FAFC] bg-[#fff] text-[#040F1A] font-medium text-[0.87rem] mb-[12px]'>
     <td className='px-[9px] py-[16px] flex justify-start items-center gap-x-[25px]'>

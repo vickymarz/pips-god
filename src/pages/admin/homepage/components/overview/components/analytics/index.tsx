@@ -3,7 +3,7 @@ import { AnalyticsCard, AnalyticsGraph } from "./components"
 import {Button} from 'components'
 import {DatePicker} from '../datePicker'
 
-export const Analytics = () => {
+export const Analytics = ({data}: {data: any}) => {
   const [modal, setModal] = useState(false)
 
   const handleModal = () => {
@@ -27,7 +27,7 @@ export const Analytics = () => {
         </Button>
       </div>
       <AnalyticsCard />
-      <AnalyticsGraph />
+      <AnalyticsGraph data={data} />
     </div>
     {modal && <DatePicker setModal={setModal} modal={modal}/>}
     </>

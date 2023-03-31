@@ -4,6 +4,7 @@ import {useAnalyticsData} from 'hooks'
 
 export const AnalyticsCard = () => {
    const { data } = useAnalyticsData()
+   console.log(data)
 
    const percentage = (members:number) => {
       const percent = (data?.total_users/members) * 100

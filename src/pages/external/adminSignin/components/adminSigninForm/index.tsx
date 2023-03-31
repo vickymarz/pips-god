@@ -31,10 +31,10 @@ export const AdminSigninForm = () => {
 
     const {mutate, data, isLoading, isError} = useMutation(userServices.login, {
       onSuccess: (data) => {
-          if (data?.tokens) {
+          if (data?.tokens  ) {
             localStorage.setItem('admin-token', data?.tokens.access.token);
             setTimeout(() => {
-              navigate("/admin");
+              navigate("/admin", {state: data?.user});
             }, 1000);
           }
         },
@@ -50,13 +50,13 @@ export const AdminSigninForm = () => {
 		let element;
 		if (data?.tokens) {
 			element = (
-				<p className='mt-4 text-xl text-green-600 text-center'>
+				<p className='w-full mt-4 text-xl text-green-600 text-center'>
 					Login Successful!
 				</p>
 			);
 		} else if (isError || data?.code === 401) {
 			element = (
-				<p className='mt-4 text-xl text-red-600 text-center'>
+				<p className='w-full mt-4 text-xl text-red-600 text-center'>
 					Incorrect Email or Password
 				</p>
 			);
@@ -135,14 +135,14 @@ export const AdminSigninForm = () => {
         />
         <span
             className={`absolute ${
-              errors.password ? "bottom-14" : "bottom-3.5"
+              errors.password ? "top-[45px]" : "bottom-3.5"
             } right-3 cursor-pointer`}
             onClick={togglePassword}>
             {passwordShown ? <FiEyeOff /> : <FiEye />}
         </span>
         {errors.password && (
             <p
-                className='italic text-sm'
+                className='right-0 bottom-[-37px] italic text-sm'
                 style={{ color: "red" }}>
                 {errors.password?.message}
             </p>

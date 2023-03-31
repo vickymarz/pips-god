@@ -129,6 +129,15 @@ const adminLogin = async (params: LoginTypes) => {
   }
 };
 
+const getAnalyticsData = async () => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${ANALYTICS_URL}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
 const uploadThumbnail = async (file: File) => {
 
   const formData = new FormData()
@@ -175,15 +184,6 @@ const uploadFile = async (file: File) => {
 const createCourses = async (params:any) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${COURSES_URL}`, params);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const getAnalyticsData = async () => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${ANALYTICS_URL}`);
     return result;
   } catch (err) {
     return err;

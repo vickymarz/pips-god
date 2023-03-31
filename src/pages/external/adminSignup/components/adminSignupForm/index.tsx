@@ -57,19 +57,19 @@ export const AdminSignupForm = () => {
 			);
 		} else if (error instanceof Error) {
 			element = (
-				<p className='mt-4 text-xl text-red-600 text-center'>
+				<p className='w-full mt-4 text-xl text-red-600 text-center'>
 					{error?.message}
 				</p>
 			);
 		} else if (data?.code === 400) {
            element = (
-                <p className='mt-4 text-xl text-red-600 text-center'>
+                <p className='w-full mt-4 text-xl text-red-600 text-center'>
                     This email has already been registered!
                 </p>
             );
         } else if (data?.code === 401) {
             element = (
-                <p className='mt-4 text-xl text-red-600 text-center'>
+                <p className='w-full mt-4 text-xl text-red-600 text-center'>
                     Incorrect super admin username or password!
                 </p>
             );
