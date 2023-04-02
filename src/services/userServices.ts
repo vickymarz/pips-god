@@ -3,18 +3,20 @@ import {
   paymentTypes,
   tokenTypes,
   RegisterTypes,
-  EmailVerifyTypes
- } from "./dataTypes";
+  EmailVerifyTypes,
+  LoginTypes,
+  AdminTypes,
+} from "./dataTypes";
 
 import {
   BASE_URL,
   INITIALIZE_TRANSACTION,
   VERIFY_TRANSACTION,
   SIGNUP_URL,
+  VERIFY_EMAIL,
   LOGIN_URL,
   FORGOT_PASSWORD_URL,
   RESET_PASSWORD_URL,
-  VERIFY_EMAIL,
   GET_COURSES,
   GET_COURSE,
   DELETE_COURSE,
@@ -67,7 +69,7 @@ const verifyEmail = async (params: EmailVerifyTypes ) => {
   }
 };
 
-const login = async (params: any) => {
+const login = async (params: LoginTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${LOGIN_URL}`, params);
     return result;
@@ -103,6 +105,24 @@ const resetPassword = async (params: tokenTypes) => {
       `${BASE_URL}/${RESET_PASSWORD_URL}?token=${params?.token}`,
        params
     );
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const adminRegister = async (params: AdminTypes) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${SIGNUP_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const adminLogin = async (params: LoginTypes) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${LOGIN_URL}`, params);
     return result;
   } catch (err) {
     return err;
@@ -326,6 +346,8 @@ const userServices = {
   recoverPassword,
   resetToken,
   resetPassword,
+  adminRegister,
+  adminLogin,
   uploadThumbnail,
   uploadVideo,
   uploadFile,
@@ -338,18 +360,6 @@ const userServices = {
   getAllCourses,
   getCourse,
   deleteCourse,
-  // createEvents,
-  // getAllEvents,
-  // getEventsById,
-  // getParticipants,
-  // addToGoogleCalender,
-  // addParticipants,
-  // deleteParticipants,
-  // deleteEvent,
-  // sendInvite,
-  // getUser,
-  // updateUser,
-  // getEventsByToken
 };
 
 export default userServices;

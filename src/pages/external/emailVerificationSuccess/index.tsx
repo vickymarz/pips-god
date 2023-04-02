@@ -13,7 +13,7 @@ const [searchParams] = useSearchParams();
 const {mutate, data} = useMutation(userServices.verifyEmail, {
   onSuccess: (data) => {
     if (data?.code === 200) {
-       localStorage.setItem('jwt-token', data?.data.tokens.access.token);
+       return localStorage.setItem('jwt-token', data?.data.tokens.access.token);
     }
   },
 })
