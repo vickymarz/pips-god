@@ -2,9 +2,11 @@ import {useState} from 'react'
 import { AnalyticsCard, AnalyticsGraph } from "./components"
 import {Button} from 'components'
 import {DatePicker} from '../datePicker'
+import { AnalyticsContextUse } from 'context'
 
 export const Analytics = ({data}: {data: any}) => {
   const [modal, setModal] = useState(false)
+  const { startDate, endDate } = AnalyticsContextUse()
 
   const handleModal = () => {
     setModal(!modal)
@@ -23,10 +25,10 @@ export const Analytics = ({data}: {data: any}) => {
           </p>
         </div>
         <Button type='button' onClick={handleModal} className="border-0 outline-0 rounded-[8px] border-0 outline-0 bg-[#F5F9FA] py-[14px] px-[16px] text-[#19275E] font-semibold">
-          Dec 21st 2022 - Jan 14th 2023
+          {startDate && endDate ? `${startDate.toDateString()} - ${endDate.toDateString()}` : 'View data by date'}
         </Button>
       </div>
-      <AnalyticsCard />
+      <AnalyticsCard data={data} />
       <AnalyticsGraph data={data} />
     </div>
     {modal && <DatePicker setModal={setModal} modal={modal}/>}

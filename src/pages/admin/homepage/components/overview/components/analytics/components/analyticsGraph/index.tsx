@@ -10,8 +10,8 @@ import {
 
 export const AnalyticsGraph = ({data}: {data: any}) => {
 
-  const mentorship = data?.activeUsersAndPlans.map((plans: any )=> {
-    return plans.subscription_plans.filter(({name}: {name: string}) => name === "vip_signals")
+  const mentorship = data?.activeUsersAndPlans?.map((plans: any )=> {
+    return plans.subscription_plans.filter(({name}: {name: string}) => name === "training_and_mentoring")
   })
 
   const userCountByDate:any = {};

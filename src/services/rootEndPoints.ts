@@ -21,10 +21,5 @@ export const MENTORSHIP_URL = 'mentorship'
 export const DELETE_COURSE = 'delete'
 export const GET_COURSES = 'courses'
 export const GET_COURSE = 'course'
-// export const GET_PARTICIPANTS,
-//   ADD_PARTICIPANTS,
-//   DELETE_PARTICIPANTS,
-//   SEND_INVITE,
-//   GET_USER,
-//   DELETE_EVENT,
-//   EVENT_BY_TOKEN,
+export const CONTACT_URL = 'contact'
+

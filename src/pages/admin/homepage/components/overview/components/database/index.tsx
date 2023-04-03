@@ -1,6 +1,6 @@
 import { Table } from "./components"
 
-export const Database = () => {
+export const Database = ({data}: {data: any}) => {
   return (
     <div className='rounded-[8px] w-full bg-[#F8FAFC] mt-[32px] p-[28px]'>
       <div className='flex flex-col justify-start items-start gap-y-[10px] mb-[26px]'>
@@ -12,7 +12,7 @@ export const Database = () => {
         </p>
       </div>
       <div className='max-h-[30rem] overflow-y-scroll'>
-        <Table />
+        <Table data={data}/>
       </div>
     </div>
   )

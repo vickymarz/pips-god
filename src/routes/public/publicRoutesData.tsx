@@ -1,4 +1,4 @@
-import { ForgetPassword, Homepage, ResetLink, SignIn, Signup,  ResetPassword, ResetToken, VipPayment, MentorshipPayment, EmailVerification, EmailVerificationSuccess, AdminSignup, AdminSignIn  } from '../../pages'
+import { ForgetPassword, Homepage, ResetLink, SignIn, Signup,  ResetPassword, ResetToken, VipPayment, MentorshipPayment, EmailVerification, EmailVerificationSuccess, AdminSignup, AdminSignIn, ContactUs  } from '../../pages'
 import type { RouteObject } from 'react-router-dom'
 import { PaystackCallback } from 'components';
 import { ResetPasswordModal } from 'pages/external/resetPassword/component/resetPasswordModal'
@@ -78,6 +78,11 @@ const publicRoutesData: RouteObject[] = [
       id: '14',
       path: "admin-login",
       element: <AdminSignIn  />
+    },
+    {
+      id: '15',
+      path: "contact-us",
+      element: <ContactUs />
     }
   ];
 

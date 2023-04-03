@@ -18,11 +18,13 @@ export const ForgotPasswordForm = () => {
 
 const navigate = useNavigate();
 
-const {mutate, isSuccess, isLoading, isError} = useMutation(userServices.recoverPassword, {
-  onSuccess: (variables, data) => {
-			setTimeout(() => {
-				navigate("/reset_link", {state: {email: data.email}});
-			}, 3000);
+const {mutate, data, isLoading, isError} = useMutation(userServices.recoverPassword, {
+  onSuccess: (data) => {
+      if(data?.code === 200) {
+        setTimeout(() => {
+          navigate("/reset_link", {state: {email: data.email}});
+        }, 3000);
+      }
     }
   })
 
@@ -33,16 +35,16 @@ const {mutate, isSuccess, isLoading, isError} = useMutation(userServices.recover
 
   const errorMsg = () => {
     let element;
-    if (isSuccess) {
+    if (data?.code === 200) {
       element = (
-        <p className="mt-4 md:text-[20px] text-green-600 text-center">
+        <p className="w-full mt-4 md:text-[20px] text-green-600 text-center">
           Successful, Kindly proceed to your email!
         </p>
       );
     } else if (isError) {
       element = (
-        <p className="mt-4 md:text-[20px] text-red-600 text-center">
-          Incorrect email address
+        <p className="w-full mt-4 md:text-[20px] text-red-600 text-center">
+          If there's is an account associated with this email address, we will send you an email an OTP shortly.
         </p>
       );
     }

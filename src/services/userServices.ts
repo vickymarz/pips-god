@@ -6,6 +6,8 @@ import {
   EmailVerifyTypes,
   LoginTypes,
   AdminTypes,
+  AnalyticsType,
+  ContactType,
 } from "./dataTypes";
 
 import {
@@ -29,7 +31,7 @@ import {
   GET_DOCUMENTS,
   GET_DOCUMENT,
   ANALYTICS_URL,
-  MENTORSHIP_URL,
+  CONTACT_URL,
 } from "./rootEndPoints";
 
 
@@ -138,6 +140,15 @@ const getAnalyticsData = async () => {
   }
 };
 
+const updateAnalyticsData = async (params: AnalyticsType) => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${ANALYTICS_URL}?startDate=${params.startDate}&endDate=${params.endDate}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
 const uploadThumbnail = async (file: File) => {
 
   const formData = new FormData()
@@ -163,7 +174,6 @@ const uploadVideo = async (file: File) => {
     body: formData,
   })
   const result = await res.json()
-  console.log(result.secure_url)
   return result.secure_url
 };
 
@@ -177,22 +187,12 @@ const uploadFile = async (file: File) => {
     body: formData,
   })
   const result = await res.json()
-  console.log(result.secure_url)
   return result.secure_url
 };
 
 const createCourses = async (params:any) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${COURSES_URL}`, params);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const getMentorshipData = async () => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${MENTORSHIP_URL}`);
     return result;
   } catch (err) {
     return err;
@@ -254,6 +254,14 @@ const getCourse = async (id: number) => {
   }
 };
 
+const contact = async (params: ContactType ): Promise<unknown> => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${CONTACT_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
 
 
 // const getEventsByToken = async (id) => {
@@ -277,17 +285,6 @@ const getCourse = async (id: number) => {
 //   }
 // };
 
-// const addToGoogleCalender = async (params) => {
-//   try {
-//     const result = await fetchApi.post(
-//       `${BASE_URL}/${GOOGLE_CALENDER}`,
-//       params
-//     );
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// };
 
 // const sendInvite = async (params) => {
 //   try {
@@ -353,13 +350,14 @@ const userServices = {
   uploadFile,
   createCourses,
   getAnalyticsData,
-  getMentorshipData,
+  updateAnalyticsData,
   getVideos,
   getDocuments,
   getDocument,
   getAllCourses,
   getCourse,
   deleteCourse,
+  contact
 };
 
 export default userServices;
