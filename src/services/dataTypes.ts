@@ -50,3 +50,19 @@ export type ContactType = {
     email: string;
     text: string;
 }
+
+export type CourseType = {
+  courseResources: {
+    description?: string,
+    type: string,
+    url: string | React.ReactNode,
+    thumbnail?: string | Blob
+  }[],
+  courseModule: {
+    title: string,
+    description?: string,
+    tags: string
+    sequenceNo: number
+    courseId: number
+  }
+}

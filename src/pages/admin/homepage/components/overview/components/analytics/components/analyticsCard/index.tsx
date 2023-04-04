@@ -3,8 +3,13 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 export const AnalyticsCard = ({data}: {data: any}) => {
    const percentage = (members:number) => {
-      const percent = Math.round(((members || 0) / (data?.activeUsers?.total || 0)) * 100)
+    let percent: number
+      if(data?.activeUsers?.total === 0) {
+        return percent = 0
+      } else {
+      percent = Math.round(((members) / (data?.activeUsers?.total)) * 100)
       return percent
+    }
    }
 
   return (

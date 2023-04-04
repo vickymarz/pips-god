@@ -3,10 +3,10 @@ import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
 import userServices from 'services/userServices';
-import {useMutation} from 'react-query';
+import { useMutation } from 'react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import {CreateCourseContextUse} from 'context'
+import { CreateCourseContextUse } from 'context'
 
 export const CourseModal = () => {
   const {modal, setModal, course, setCourse}  = CreateCourseContextUse()
@@ -54,28 +54,43 @@ const removeTag = (index:number) => {
   setTags(tags.filter((el:any, i:number) => i !== index))
 }
 
-
-const {mutate, isSuccess, isError} = useMutation(userServices.createCourses, {
-  onSuccess: (data) => {
-    setCourse(data)
+const {mutate, data, isError, isLoading} = useMutation(userServices.createModule, {
+  onSuccess: (data, variables) => {
+    const responseData = data as {status: number, data: object}
+    if(responseData.status === 200) {
+      console.log(variables)
+      // setCourse(variables)
+    }
   }
 })
 
 const onSubmit = (e:React.FormEvent) => {
   e.preventDefault()
-  const parameters = {
-    title,
-    image,
-    selectedFile,
-    selectedVideo,
-    tags
-  }
-  mutate(parameters)
+  mutate({
+    "courseResources": [
+      {
+        "type": "video",
+        "url": selectedVideo,
+        "thumbnail": image,
+      },
+      {
+        "type": "text",
+        "url": selectedFile,
+      }
+    ],
+    "courseModule": {
+      "title": title,
+      "tags": tags.join(','),
+      "sequenceNo": 1,
+      "courseId": 1
+    }
+  })
 }
 
 const errorMsg = () => {
   let element;
-  if (isSuccess) {
+  const responseData = data as {status: number, data: object}
+  if (responseData?.status === 200) {
     element = (
       <p className='mt-4 text-xl text-green-600 text-center'>
         Course added successfully!
@@ -91,11 +106,10 @@ const errorMsg = () => {
   return element;
 };
 
-
     return (
       <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
-        {errorMsg()}
         <form className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
+        {errorMsg()}
           <div className="p-[32px]">
             <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
 	          <div className="flex flex-col justify-center items-center gap-y-[32px]">
@@ -104,7 +118,7 @@ const errorMsg = () => {
                   :
                   (
                   <div className='flex justify-center items-center w-[50px] h-[33.3px]'>
-                    <img src={`${upload || course?.image}`} alt="uploaded thumbnail" />
+                    <img src={`${upload || course?.courseResources[0]?.thumbnail}`} alt="uploaded thumbnail" />
                   </div>
                   )}
 		          </div>
@@ -124,7 +138,7 @@ const errorMsg = () => {
                 type='text'
                 required
                 id='title'
-                value={course?.title}
+                value={title || course?.courseModule.title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder='Provide your course title'
                 />
@@ -147,7 +161,7 @@ const errorMsg = () => {
               </label>
               <div className="w-full p-[0.6em] rounded-[8px] flex flex-col justify-start items-start wrap gap-[0.5em] border border-[#B0B0B0]">
                <div className='flex justify-start items-center wrap gp-x-[10px]'>
-               { course?.tags || tags.map((tag, index) => (
+               { course?.courseModule?.tags || tags.map((tag, index) => (
                   <div key={index} className='bg-[#EBEBEB] flex justify-start items-center gap-x-[20px] px-[0.75em] py-[0.5em] rounded-[20px]'>
                     <span>{tag}</span>
                     <Button type='button' onClick={() => removeTag(index)}>
@@ -174,8 +188,8 @@ const errorMsg = () => {
                 </div>
               </label>
               {isVideoPicked && (
-				        <span>
-					        <p>{selectedVideo || course?.video}</p>
+				        <span className="w-[50%] text-[12px]">
+					        <p >{selectedVideo || course?.courseResources[0]?.url}</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -186,8 +200,8 @@ const errorMsg = () => {
                 </div>
               </label>
               {isFilePicked && (
-				        <span>
-					        <p>{selectedFile ||  course?.file}</p>
+				        <span className="w-[50%] text-[12px]">
+					        <p >{selectedFile ||  course?.courseResources[1]?.url}</p>
 				        </span>
 			        )}
             </div>
@@ -196,7 +210,7 @@ const errorMsg = () => {
                 Cancel
               </Button>
               <Button type='submit' className="text-white bg-[#0D142E] rounded-[8px] py-[17px] px-[34px]">
-                Create
+                {isLoading ? 'Please wait...' : 'Create'}
               </Button>
             </div>
           </div>

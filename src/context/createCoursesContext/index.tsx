@@ -1,13 +1,20 @@
 import { useContext, createContext, useState } from "react";
 
-type CourseType = {
-	file: string;
-	video: string;
-	thumbnail: string;
-	title: string;
-	tags: Array<string>;
-	image: string;
-};
+export type CourseType = {
+	courseResources: {
+	  description?: string,
+	  type: string,
+	  url: string | React.ReactNode,
+	  thumbnail?: string | Blob
+	}[],
+	courseModule: {
+	  title: string,
+	  description?: string,
+	  tags: string,
+	  sequenceNo: number
+	  courseId: number
+	}
+  };
 interface CourseComponentType {
 	course: CourseType,
 	modal: boolean,
@@ -16,13 +23,24 @@ interface CourseComponentType {
   }
 
   const courseProp = {
-	file: "",
-	video: "",
-	thumbnail: "",
-	title: "",
-	tags: [],
-	image: "",
-};
+    "courseResources": [
+      {
+        "type": "video",
+        "url": "",
+        "thumbnail": "",
+      },
+      {
+        "type": "text",
+        "url": "",
+      }
+    ],
+    "courseModule": {
+      "title": "",
+      "tags": "",
+      "sequenceNo": 1,
+	  "courseId": 1
+    }
+  }
 
 const CreateCourseContext = createContext<CourseComponentType>({
 	course: courseProp,

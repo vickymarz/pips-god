@@ -18,29 +18,21 @@ export const useUpdateAnalyticsData = (params: object) => {
    return useQuery(['update-user-data', params], () => userServices.updateAnalyticsData(params))
 }
 
-export const useVideosData = () => {
- return useQuery('mentorship-data', userServices.getVideos)
-}
+// export const useDocument = (id:number) => {
+//  return useQuery(['document-data', id], () => userServices.getDocument(id))
+// }
 
-export const useDocumentData = () => {
- return useQuery('documents-data', userServices.getDocuments)
-}
-
-export const useDocument = (id:number) => {
- return useQuery(['document-data', id], () => userServices.getDocument(id))
-}
-
-export const useGetCourses = () => {
- return useQuery('get-all-courses', userServices.getAllCourses,
+export const useGetModules = () => {
+ return useQuery('get-all-modules', userServices.getAllModules,
  {
    staleTime: 60000
  })
 }
 
-export const useGetCourse = (id:number) => {
-   return useQuery(['course', id], () => userServices.getCourse(id), {
-      enabled: false,
-   })
-}
+// export const useGetCourse = (id:number) => {
+//    return useQuery(['course', id], () => userServices.getCourse(id), {
+//       enabled: false,
+//    })
+// }
 
 
