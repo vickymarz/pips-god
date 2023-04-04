@@ -70,6 +70,9 @@ export const Videos = ({data}:{data:ModuleType}) => {
            <FontAwesomeIcon icon={faTimes} className={`text-white text-[25px] text-[#232323]`}/>
          </Button>
       </div>
+      <div className='flex justify-start items-start gap-x-[36px]'>
+          <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{title}</h4>
+        </div>
        <video controls width="100%" height="100%" poster={course_resources[0]?.thumbnail}>
          <source src={course_resources[0]?.url} type="video/webm" />
          <source src={course_resources[0]?.url} type="video/mp4" />

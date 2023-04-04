@@ -7,6 +7,8 @@ import file from '../../../../../../../assets/images/file.png'
 import { CreateCourseContextUse} from 'context'
 import userServices from 'services/userServices';
 import { Document, Page, pdfjs } from "react-pdf";
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 type ModuleType = {
   docs: {
@@ -22,23 +24,32 @@ type ModuleType = {
   total: number
 }
 
+
+type readingType = {
+  id: number
+  title: string
+  course_resources: {
+    type: string
+    url: string
+    thumbnail: string
+  }[]
+}
+
+
 export const Readings = ({data}:{data:ModuleType}) => {
+  const [numPages, setNumPages] = useState(null);
   const {setModal, setCourse}  = CreateCourseContextUse()
   const [isOpen, setIsOpen] = useState(false)
 
-  type readingType = {
-    id: number
-    title: string
-    course_resources: {
-      type: string
-      url: string
-      thumbnail: string
-    }[]
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+  }, [])
+
+
+  function onDocumentLoadSuccess({ numPages: nextNumPages} : {numPages: null | number}) {
+    setNumPages(nextNumPages);
   }
 
-  useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = `https//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
-  }[])
   const handleEdit = () => {
     // refetch()
     // setCourse(data)
@@ -77,17 +88,20 @@ export const Readings = ({data}:{data:ModuleType}) => {
           </Button>
         </div>
         <div className='flex justify-start items-start gap-x-[36px]'>
-          <h4>{title}</h4>
+          <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{title}</h4>
         </div>
       <div>
-      <Document file={course_resources[1]?.url} >
-        <Page pageNumber={1} />
+
+      <Document file={course_resources[1]?.url} onLoadSuccess={onDocumentLoadSuccess}>
+      {Array.from(new Array(numPages), (el, index) => (
+          <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+        ))}
       </Document>
     </div>
   </div>
   </div>
 </div>
-  ))
+))
 
   return (
     <div className='flex flex-col gap-y-[16px] p-[32px] bg-[#F8FAFC] rounded-[8px] w-full'>
