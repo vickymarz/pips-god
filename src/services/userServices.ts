@@ -221,14 +221,14 @@ const deleteModule = async (id: number):Promise<unknown> => {
   }
 }
 
-// const getCourse = async (id: number) => {
-//   try {
-//     const result = await fetchApi.get(`${BASE_URL}/${GET_COURSE}/${id}`);
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// };
+const getModule = async (id: null | number ):Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
 
 const contact = async (params: ContactType ): Promise<unknown> => {
   try {
@@ -257,12 +257,12 @@ const userServices = {
   updateAnalyticsData,
   createModule,
   getAllModules,
+  getModule,
   deleteModule,
   uploadThumbnail,
   uploadVideo,
   uploadFile,
   // getDocument,
-  // getCourse,
   contact
 };
 

@@ -9,7 +9,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CreateCourseContextUse } from 'context'
 
 export const CourseModal = () => {
-  const {modal, setModal, course, setCourse}  = CreateCourseContextUse()
+  const {modal, setModal, module }  = CreateCourseContextUse()
   const [image, setImage] = useState<string | Blob>('')
   const [selectedFile, setSelectedFile] =  useState<string | React.ReactNode>('')
 	const [isFilePicked, setIsFilePicked] = useState(false);
@@ -43,6 +43,7 @@ export const CourseModal = () => {
 
 const handleKeyDown = (event: React.KeyboardEvent) => {
   if(event.key !== 'Enter') return
+  event.preventDefault()
   const target = event.target as HTMLInputElement
   const values = target.value
   if(!values.trim()) return
@@ -55,14 +56,20 @@ const removeTag = (index:number) => {
 }
 
 const {mutate, data, isError, isLoading} = useMutation(userServices.createModule, {
-  onSuccess: (data, variables) => {
+  onSuccess: (data) => {
     const responseData = data as {status: number, data: object}
-    if(responseData.status === 200) {
-      console.log(variables)
-      // setCourse(variables)
+    if (responseData?.status === 200) {
+      setImage('')
+      setSelectedFile('')
+      setSelectedVideo('')
+      setTags([])
+      setTitle('')
+      setTimeout(() => {
+        setModal(false)
+      }, 2000);
     }
-  }
-})
+}})
+
 
 const onSubmit = (e:React.FormEvent) => {
   e.preventDefault()
@@ -81,7 +88,6 @@ const onSubmit = (e:React.FormEvent) => {
     "courseModule": {
       "title": title,
       "tags": tags.join(','),
-      "sequenceNo": 1,
       "courseId": 1
     }
   })
@@ -89,17 +95,29 @@ const onSubmit = (e:React.FormEvent) => {
 
 const errorMsg = () => {
   let element;
-  const responseData = data as {status: number, data: object}
+  const responseData = data as {code: number, status: number, data: object}
   if (responseData?.status === 200) {
     element = (
-      <p className='mt-4 text-xl text-green-600 text-center'>
+      <p className='w-full mt-4 text-[24px] text-green-600 text-center'>
         Course added successfully!
       </p>
     );
   } else if (isError) {
     element = (
-      <p className='mt-4 text-xl text-red-600 text-center'>
+      <p className='mt-4 text-[24px] text-red-600 text-center'>
         Something went wrong. Please try again!
+      </p>
+    );
+  } else if (responseData?.code === 208) {
+    element = (
+      <p className='mt-4 text-[24px] text-red-600 text-center'>
+        A course module with this title already exist. KIndly use another descriptive title
+      </p>
+    );
+  } else if(responseData?.code === 400) {
+    element = (
+      <p className='mt-4 text-[24px] text-red-600 text-center'>
+        Kindly upload a thumbnail for your course and ensure that you fill all the fields
       </p>
     );
   }
@@ -108,8 +126,8 @@ const errorMsg = () => {
 
     return (
       <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
-        <form className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
         {errorMsg()}
+        <form className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
           <div className="p-[32px]">
             <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
 	          <div className="flex flex-col justify-center items-center gap-y-[32px]">
@@ -118,7 +136,7 @@ const errorMsg = () => {
                   :
                   (
                   <div className='flex justify-center items-center w-[50px] h-[33.3px]'>
-                    <img src={`${upload || course?.courseResources[0]?.thumbnail}`} alt="uploaded thumbnail" />
+                    <img src={`${upload || module?.docs?.course_resources[0]?.thumbnail}`} alt="uploaded thumbnail" />
                   </div>
                   )}
 		          </div>
@@ -138,7 +156,7 @@ const errorMsg = () => {
                 type='text'
                 required
                 id='title'
-                value={title || course?.courseModule.title}
+                value={title || module?.docs?.title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder='Provide your course title'
                 />
@@ -161,7 +179,7 @@ const errorMsg = () => {
               </label>
               <div className="w-full p-[0.6em] rounded-[8px] flex flex-col justify-start items-start wrap gap-[0.5em] border border-[#B0B0B0]">
                <div className='flex justify-start items-center wrap gp-x-[10px]'>
-               { course?.courseModule?.tags || tags.map((tag, index) => (
+               { module?.docs?.tags.split(',')[0] ? module?.docs?.tags.split(',') : tags.map((tag, index) => (
                   <div key={index} className='bg-[#EBEBEB] flex justify-start items-center gap-x-[20px] px-[0.75em] py-[0.5em] rounded-[20px]'>
                     <span>{tag}</span>
                     <Button type='button' onClick={() => removeTag(index)}>
@@ -189,7 +207,7 @@ const errorMsg = () => {
               </label>
               {isVideoPicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedVideo || course?.courseResources[0]?.url}</p>
+					        <p >{selectedVideo || module?.docs?.course_resources[0]?.url}</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -201,7 +219,7 @@ const errorMsg = () => {
               </label>
               {isFilePicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedFile ||  course?.courseResources[1]?.url}</p>
+					        <p >{selectedFile ||  module?.docs.course_resources[1]?.url}</p>
 				        </span>
 			        )}
             </div>

@@ -62,7 +62,6 @@ export type CourseType = {
     title: string,
     description?: string,
     tags: string
-    sequenceNo: number
     courseId: number
   }
 }

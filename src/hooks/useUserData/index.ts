@@ -1,4 +1,4 @@
-import {useQuery} from 'react-query'
+import { useQuery } from 'react-query'
 import userServices from 'services/userServices'
 
 export const useTransactions = (id: string | undefined, onSuccess: (data:any) => void) => {
@@ -29,10 +29,10 @@ export const useGetModules = () => {
  })
 }
 
-// export const useGetCourse = (id:number) => {
-//    return useQuery(['course', id], () => userServices.getCourse(id), {
-//       enabled: false,
-//    })
-// }
+export const useGetModule = (id:number | null) => {
+   return useQuery(['course', id], () => userServices.getModule(id), {
+      enabled: false,
+   })
+}
 
 

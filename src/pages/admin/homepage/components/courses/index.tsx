@@ -2,25 +2,12 @@ import {Videos, Readings} from './components'
 import { Button } from "components";
 import { useState } from "react";
 import { useGetModules } from 'hooks'
-
-type ModuleType = {
-  docs: {
-    id: number,
-    title: string
-    course_resources: {
-      type: string
-      url: string
-      thumbnail: string
-    }[]
-  }[]
-  pages: number
-  total: number
-}
+import { ModulesType } from './moduleTypes'
 
 export const Courses = () => {
   const [status, setStatus] = useState("videos");
   const { data } = useGetModules()
-  const responseData = data as ModuleType
+  const responseData = data as ModulesType
 
   return (
     <div>

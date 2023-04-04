@@ -1,62 +1,38 @@
-import { useState, useEffect } from 'react'
-import { useMutation } from 'react-query'
+import { useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrashCan, faTimes  } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import file from '../../../../../../../assets/images/file.png'
 import { CreateCourseContextUse} from 'context'
 import userServices from 'services/userServices';
-import { Document, Page, pdfjs } from "react-pdf";
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-type ModuleType = {
-  docs: {
-    id: number
-    title: string
-    course_resources: {
-      type: string
-      url: string
-      thumbnail: string
-    }[]
-  }[]
-  pages: number
-  total: number
-}
+import { useGetModule } from 'hooks';
+import { ModulesType, ModuleType, readingType } from '../../moduleTypes'
+import { TextModal } from '../textModal';
 
 
-type readingType = {
-  id: number
-  title: string
-  course_resources: {
-    type: string
-    url: string
-    thumbnail: string
-  }[]
-}
-
-
-export const Readings = ({data}:{data:ModuleType}) => {
-  const [numPages, setNumPages] = useState(null);
-  const {setModal, setCourse}  = CreateCourseContextUse()
+export const Readings = ({data}:{data:ModulesType}) => {
+  const [selectedModuleId, setSelectedModuleId] = useState<null | number>(null)
+  const {setModal, setModule}  = CreateCourseContextUse()
   const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
-  }, [])
+  const queryClient = useQueryClient()
 
-
-  function onDocumentLoadSuccess({ numPages: nextNumPages} : {numPages: null | number}) {
-    setNumPages(nextNumPages);
-  }
-
-  const handleEdit = () => {
-    // refetch()
-    // setCourse(data)
+  const { data:moduleData } = useGetModule(selectedModuleId)
+  const responseData = moduleData as ModuleType
+  const handleModuleClick = (id: null | number) => {
+    setSelectedModuleId(id)
+    setModule(responseData)
     setModal(true)
+    console.log(responseData)
+    console.log('true')
   }
 
-  const { mutate } = useMutation(userServices.deleteModule)
+  const { mutate } = useMutation(userServices.deleteModule, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('get-all-modules')
+    },
+  })
 
   const documents = data?.docs?.map(({id, course_resources, title }: readingType) => (
   <div key={id}>
@@ -74,33 +50,14 @@ export const Readings = ({data}:{data:ModuleType}) => {
           <FontAwesomeIcon icon={faTrashCan} className='text-[18px]'/>
           <span className='text-[14px] text-productSans'>Delete file</span>
         </Button>
-        <Button type='button' onClick={handleEdit} className="rounded-[3.5px]  bg-[#19275E] py-[11px] px-[13px] flex justify-start items-center gap-x-[11px] text-[#fff]">
+        <Button type='button' onClick={() => handleModuleClick(id)} className="rounded-[3.5px]  bg-[#19275E] py-[11px] px-[13px] flex justify-start items-center gap-x-[11px] text-[#fff]">
            <FontAwesomeIcon icon={faPen} className='text-[18px]'/>
            <span className='text-[14px] text-productSans'>Edit file</span>
         </Button>
       </div>
     </div>
-    <div className={`${isOpen ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
-      <div className='w-[80%] ml-auto mr-auto relative my-[50px] rounded-[27px] bg-white px-[40px] py-[20px]'>
-        <div className='w-full flex justify-end items-end mb-[10px] text-end'>
-          <Button type="button" onClick={() => setIsOpen(false)} className="z-10 flex justify-end items-end mb-[50px] text-end w-full">
-            <FontAwesomeIcon icon={faTimes} className={`text-white text-[25px] text-[#232323]`}/>
-          </Button>
-        </div>
-        <div className='flex justify-start items-start gap-x-[36px]'>
-          <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{title}</h4>
-        </div>
-      <div>
-
-      <Document file={course_resources[1]?.url} onLoadSuccess={onDocumentLoadSuccess}>
-      {Array.from(new Array(numPages), (el, index) => (
-          <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-        ))}
-      </Document>
-    </div>
+    <TextModal isOpen={isOpen} setIsOpen={setIsOpen} files={course_resources[1]?.url} title={title}/>
   </div>
-  </div>
-</div>
 ))
 
   return (
