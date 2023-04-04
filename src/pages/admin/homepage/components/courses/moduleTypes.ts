@@ -51,3 +51,11 @@ export type ModuleType = {
     files: string
     title: string
   }
+
+  export type VideoModalType = {
+    isOpen: boolean
+    setIsOpen: (value: boolean) => void
+    videoUrl: string
+    title: string
+    thumbnail?: string
+  }

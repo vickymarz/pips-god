@@ -3,7 +3,7 @@ import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
 import userServices from 'services/userServices';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CreateCourseContextUse } from 'context'
@@ -17,6 +17,8 @@ export const CourseModal = () => {
 	const [isVideoPicked, setIsVideoPicked] = useState(false);
   const [tags, setTags] = useState<Array<string>>([])
   const [title, setTitle] = useState('')
+
+  const queryClient = useQueryClient()
 
   const onFileChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
@@ -59,6 +61,7 @@ const {mutate, data, isError, isLoading} = useMutation(userServices.createModule
   onSuccess: (data) => {
     const responseData = data as {status: number, data: object}
     if (responseData?.status === 200) {
+      queryClient.invalidateQueries('get-all-modules')
       setImage('')
       setSelectedFile('')
       setSelectedVideo('')
