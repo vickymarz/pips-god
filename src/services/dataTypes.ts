@@ -39,3 +39,14 @@ export type AdminTypes = {
     superAdminPassword: string;
     role: string;
 };
+
+export type AnalyticsType = {
+    startDate?: string;
+    endDate?: string;
+}
+
+export type ContactType = {
+    name: string;
+    email: string;
+    text: string;
+}

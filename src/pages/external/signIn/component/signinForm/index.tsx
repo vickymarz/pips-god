@@ -50,13 +50,13 @@ export const SigninForm = () => {
 		let element;
 		if (data?.tokens) {
 			element = (
-				<p className='mt-4 text-xl text-green-600 text-center'>
+				<p className='w-full mt-4 md:text-[20px] text-green-600 text-center'>
 					Login Successful!
 				</p>
 			);
 		} else if (isError || data?.code === 401) {
 			element = (
-				<p className='mt-4 text-xl text-red-600 text-center'>
+				<p className='w-full mt-4 md:text-[20px] text-red-600 text-center'>
 					Incorrect Email or Password
 				</p>
 			);

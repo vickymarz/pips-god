@@ -7,43 +7,26 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
-import {useAnalyticsData} from 'hooks'
 
-const dummy = [
-  {
-    days: 1,
-    learners: 0,
-  },
-  {
-    days: 2,
-    learners: 3,
-  },
-  {
-    days: 3,
-    learners: 4,
-  },
-  {
-    days: 4,
-    learners: 2,
-  },
-  {
-    days: 4,
-    learners: 0,
-  },
-  {
-    days: 5,
-    learners: 8,
-  },
-];
+export const AnalyticsGraph = ({data}: {data: any}) => {
 
-export const AnalyticsGraph = () => {
-  const { data } = useAnalyticsData()
-  const serverData = data?.mentorshipData?.map((days:number, learners:string) => (
-    {
-      days,
-      learners
-    }
-  ))
+  const mentorship = data?.activeUsersAndPlans?.map((plans: any )=> {
+    return plans.subscription_plans.filter(({name}: {name: string}) => name === "training_and_mentoring")
+  })
+
+  const userCountByDate:any = {};
+  const plansArray = mentorship?.reduce((accumulator: any, currentValue: any) => accumulator.concat(currentValue), [])
+  plansArray?.forEach((user: {subscription: {createdAt: string}}) => {
+    const createdDate = user.subscription.createdAt.split("T")[0]
+    if(createdDate in userCountByDate) {
+      userCountByDate[createdDate]++
+    } else {
+      userCountByDate[createdDate] = 1
+    }});
+
+    const joinDatesArray = Object.entries(userCountByDate).map(([date, count]) => {
+      return {date, count}
+    })
 
   return (
     <div className="flex justify-between w-full">
@@ -57,7 +40,7 @@ export const AnalyticsGraph = () => {
         <div style={{ width: "100%", height: '300px'}}>
         <ResponsiveContainer>
             <AreaChart
-            data={serverData === undefined ? dummy : serverData}
+            data={joinDatesArray}
             margin={{
                 top: 0,
                 right: 30,
@@ -66,10 +49,10 @@ export const AnalyticsGraph = () => {
             }}
             >
             <CartesianGrid strokeDasharray="1 2" stroke="#E0E0E0" />
-            <XAxis dataKey="days" />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
-            <Area type="monotone" dataKey="learners" stroke="#1A2B88" fill="#3d37f133" />
+            <Area type="monotone" dataKey="count" stroke="#1A2B88" fill="#3d37f133" />
             </AreaChart>
         </ResponsiveContainer>
         </div>

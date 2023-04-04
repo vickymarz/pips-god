@@ -1,28 +1,34 @@
+import { getInitials } from 'helpers'
+import { TbCurrencyNaira } from "react-icons/tb";
 import completed from '../../../../../../../../../assets/images/completed.png'
-import { useMentorshipData } from 'hooks'
 
-export const Table = () => {
+export const Table = ({data}: {data: any}) => {
 
   type mentorshipDataType = {
-    name: string
+    firstName: string
+    lastName: string
     email: string
-    date: string
-    amount: string
-    mobile: string
+    completedAt: string
+    totalAmountPaid: number
+    phone: string
   }
-   const {data} = useMentorshipData()
 
-   const mentorshipList = data?.mentorshipData?.map(({name, email, date, mobile, amount}: mentorshipDataType) => (
+   const mentorshipList = data?.completedTrainingAndMentoring?.users.training_and_mentoring?.map(({firstName, lastName, email, completedAt, phone, totalAmountPaid}: mentorshipDataType) => (
      <tr className='border-b-[10px] border-[#F8FAFC] bg-[#fff] text-[#040F1A] font-medium text-[0.87rem] mb-[12px]'>
     <td className='px-[9px] py-[16px] flex justify-start items-center gap-x-[25px]'>
       <div className="bg-[#0F375A] rounded-full h-[49px] w-[49px] flex justify-center items-center text-[21px] text-white font-bold">
-        {name.slice(0, 2)}
+        {getInitials(firstName, lastName)}
       </div>
-      <h2 className='text-[#040F1A] font-medium text-[0.87rem]'>{name}</h2>
+      <h2 className='text-[#040F1A] font-medium text-[0.87rem]'>{`${firstName} ${lastName}`}</h2>
     </td>
-    <td className='py-[16px] '>${amount}</td>
-    <td className='py-[16px]'>{mobile}</td>
-    <td className='py-[16px]'>{date}</td>
+    <td className='py-[16px]'>
+      <div className='flex justify-start items-center'>
+        <TbCurrencyNaira />
+        <span>{totalAmountPaid / 100}</span>
+      </div>
+      </td>
+    <td className='py-[16px]'>{phone}</td>
+    <td className='py-[16px]'>{completedAt.toString().split('T')[0]}</td>
     <td className='py-[16px]'>{email}</td>
     <td className="py-[16px] flex flex-start items-center gap-x-[7px]">
       <div className="w-[9px] h-[9px]">
@@ -36,7 +42,7 @@ export const Table = () => {
   return (
     <>
       {
-      data?.data === undefined  ?
+      data === undefined  ?
         <div className='flex justify-center items-center'>
           <p className='text-[30px]'>Your data will appear here</p>
         </div>

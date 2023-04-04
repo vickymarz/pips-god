@@ -27,7 +27,7 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
         },
         {
           id: 4,
-          path: 'contact',
+          path: 'contact-us',
           children: 'Contact & Support',
         },
       ];

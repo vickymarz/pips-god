@@ -14,11 +14,8 @@ export const useAnalyticsData = () => {
  })
 }
 
-export const useMentorshipData = () => {
- return useQuery('mentorship-data', userServices.getMentorshipData,
- {
-    staleTime: 60000
- })
+export const useUpdateAnalyticsData = (params: object) => {
+   return useQuery(['update-user-data', params], () => userServices.updateAnalyticsData(params))
 }
 
 export const useVideosData = () => {

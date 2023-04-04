@@ -1,6 +1,5 @@
 import { createContext, useState, useContext } from "react"
 
-
 type courseType = {
     index: string,
     videoUrl: string

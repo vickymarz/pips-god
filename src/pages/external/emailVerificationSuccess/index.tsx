@@ -40,7 +40,7 @@ const verifySuccess = (
         <div className="mt-5">
           <button
             type="button"
-            className="my-[20px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]"
+            className="my-[20px] text-[0.75rem] md:text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]"
           >
             <Link to="/portal">Click here to proceed to the learning portal</Link>
           </button>

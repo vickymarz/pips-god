@@ -53,7 +53,6 @@ const getValues = () => {
     }
 }
 
-
 const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     reset();
     mutate({'token': token, 'password': data.password, 'email': email, 'save': true})
@@ -78,7 +77,7 @@ const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
   };
 
   /* eslint-disable-next-line */
-  const secondPattern = /^[a-z][a-z0-9]+$/gi;
+  const secondPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{9,20}$/;
 
   return (
     <>
@@ -111,20 +110,20 @@ const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
                         pattern: {
                             value: secondPattern,
                             message:
-                                "Password has to start with a letter, can contain numbers. No spaces and special characters allowed",
+                            "Password must have at least 9 characters. It must include a letter, a number and a special character",
                         },
                     })}
                 />
                 <span
                     className={`absolute ${
-                        errors.password ? "bottom-12" : "bottom-3.5"
+                        errors.password ? "top-[45px]" : "bottom-3.5"
                     } right-3 cursor-pointer`}
                     onClick={togglePassword}>
                     {passwordShown ? <FiEyeOff /> : <FiEye />}
                 </span>
                 {errors.password && (
                     <p
-                        className=' italic text-sm '
+                        className='right-0 bottom-[-37px] italic text-sm '
                         style={{ color: "red" }}>
                         {errors.password?.message }
                     </p>
@@ -157,7 +156,7 @@ const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
                         pattern: {
                             value: secondPattern,
                             message:
-                                "Password has to start with a letter, can contain numbers. No spaces and special characters allowed",
+                            "Password must have at least 9 characters. It must include a letter, a number and a special character",
                         },
                         validate: (value) => {
                             if (value !== getValues().password) {
@@ -169,14 +168,14 @@ const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
                 />
                 <span
                     className={`absolute ${
-                        errors.passwordConfirm ? "bottom-12" : "bottom-3.5"
+                        errors.passwordConfirm ? "top-[45px]" : "bottom-3.5"
                     } right-3 cursor-pointer`}
                     onClick={togglePassword}>
                     {passwordShown ? <FiEyeOff /> : <FiEye />}
                 </span>
                 {errors.passwordConfirm && (
                     <p
-                        className=' italic text-sm '
+                        className='right-0 bottom-[-37px] italic text-sm '
                         style={{ color: "red" }}>
                         {errors.passwordConfirm?.message || (errors?.passwordConfirm.type === "validate" && "Passwords do not match")}
                     </p>

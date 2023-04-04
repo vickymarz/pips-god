@@ -6,7 +6,6 @@ import {CreateCourseContextUse} from 'context'
 
 export const Admin = () => {
   const [status, setStatus] = useState("overview");
-  // const [modal, setModal] = useState(false)
   const {modal }  = CreateCourseContextUse()
 
   return (

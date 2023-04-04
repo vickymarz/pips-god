@@ -1,13 +1,19 @@
-// import {useState} from 'react'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Button } from 'components'
 import admin from '../../../../../assets/images/admin.png'
 import moment from 'moment'
-// import { CourseModal } from '../courses/components'
-import {CreateCourseContextUse} from 'context'
+import {CreateCourseContextUse, AdminAuthContextUse} from 'context'
 
 export const AdminHeader = () => {
   const {setModal}  = CreateCourseContextUse()
-  // const [modal, setModal] = useState(false)
+  const { user, setUser }  = AdminAuthContextUse()
+  const location = useLocation()
+
+  useEffect(() => {
+     setUser(location?.state)
+  }, [location?.state, setUser])
+
 
   const handleModal = () => {
     setModal(true)
@@ -22,7 +28,7 @@ export const AdminHeader = () => {
         </div>
         <div className='flex flex-col justify-start items-start gap-y-[5px] '>
           <h2 className='text-[#19275E] text-[1.37rem] font-semibold'>
-            Joseph - Admin Access
+            {user?.firstName} - Admin Access
           </h2>
           <p className='text-[#19275E]'>
             {moment().toString()}

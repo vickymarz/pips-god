@@ -22,7 +22,7 @@ export const VipPaymentForm = ({id}:{id:string}) => {
         onSuccess: (data) => {
             if(data?.authorizationUrl) {
                 setTimeout(() => {
-                    // window.location.href = data.authorizationUrl;
+                    window.location.href = data.authorizationUrl;
                 }, 1000);
             }
       }

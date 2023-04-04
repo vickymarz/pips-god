@@ -73,7 +73,6 @@ const displayUI = () => {
   if(vipSignal === 'true') {
      return vip
   } else if(vipSignal === 'false') {
-    console.log('false')
      return mentorship
    } else {
       return pending
