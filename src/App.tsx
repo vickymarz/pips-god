@@ -1,6 +1,6 @@
 import { GoTop } from 'components';
 import { PublicRoutes, PortalRoutes, AdminRoutes } from './routes';
-import { GetCourseContextProvider, CreateCourseContextProvider, AdminAuthContextProvider, AnalyticsContextProvider } from 'context'
+import { CreateCourseContextProvider, AdminAuthContextProvider, AnalyticsContextProvider } from 'context'
 
 function App() {
   return (
@@ -13,10 +13,8 @@ function App() {
                <AdminRoutes />
              </AnalyticsContextProvider>
           </AdminAuthContextProvider>
+         <PortalRoutes />
         </CreateCourseContextProvider>
-      <GetCourseContextProvider>
-        <PortalRoutes />
-      </GetCourseContextProvider>
     </div>
   );
 }
