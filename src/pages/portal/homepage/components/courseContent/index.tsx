@@ -3,8 +3,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import video from '../../../../../assets/images/video-player.png'
 import checked from '../../../../../assets/images/checked.png'
-import { useGetCourses, useGetCourse } from 'hooks'
-import { GetCourseContextUse } from 'context';
+import { useGetModules, useGetModule } from 'hooks'
+import { CreateCourseContextUse } from 'context';
 
   type courseType ={
     title: string,
@@ -13,16 +13,16 @@ import { GetCourseContextUse } from 'context';
   }
 
 export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClose: React.Dispatch<React.SetStateAction<boolean>>}) => {
-  const { data: allCourses } = useGetCourses()
-  const {data: singleCourse, refetch}  = useGetCourse(allCourses?.id)
-  const {setCourse} = GetCourseContextUse()
+  const { data: allModules } = useGetModules()
+  const {data: singleModule, refetch}  = useGetModule(allModules?.id)
+  const {setModule} = CreateCourseContextUse()
 
   const handleClick = () => {
     refetch()
-    setCourse(singleCourse)
+    setModule(singleModule)
   }
 
-  const courses = allCourses?.data.map(({title, index, watched}: courseType) => (
+  const courses = allModules?.map(({title, index, watched}: courseType) => (
     <li onClick = {handleClick} className='border border-[#D3D3D3] bg-white px-[23px] py-[7px] flex flex-col justify-start gap-y-[16px] visited:bg-[#EFEFEF]'>
       <div className='flex justify-start items-center gap-x-[5px]'>
         <div className={`hidden ${watched && 'flex'} justify-start items-center w-[16px] h-[16px]`}>
@@ -48,7 +48,7 @@ export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClos
 			  </Button>
       </h2>
       <ul className='flex flex-col justify-start gap-y-[12px] mt-[12px]'>
-        { allCourses?.data === undefined ?
+        { allModules === undefined ?
           <li className="text-[#0D142E] flex justify-center items-center">Not available</li>
             :
           courses
