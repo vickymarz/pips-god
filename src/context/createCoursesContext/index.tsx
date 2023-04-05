@@ -1,61 +1,27 @@
 import { useContext, createContext, useState } from "react";
 
-// export type CourseType = {
-// 	courseResources: {
-// 	  description?: string,
-// 	  type: string,
-// 	  url: string | React.ReactNode,
-// 	  thumbnail?: string | Blob
-// 	}[],
-// 	courseModule: {
-// 	  title: string,
-// 	  description?: string,
-// 	  tags: string,
-// 	  sequenceNo: number
-// 	  courseId: number
-// 	}
-//   };
-
   type ModuleType = {
-	docs: {
+	  id: number
 	  title: string
 	  tags: string,
 	  course_resources: {
+		id?: number
 		type: string
 		url: string
 		thumbnail?: string
 	  }[]
-	}
   }
 interface ModuleComponentType {
 	module: ModuleType,
 	modal: boolean,
+	action: string,
+	setAction: React.Dispatch<React.SetStateAction<string>>
 	setModule: React.Dispatch<React.SetStateAction<ModuleType>>
 	setModal: React.Dispatch<React.SetStateAction<boolean>>
   }
 
-//   const courseProp = {
-//     "courseResources": [
-//       {
-//         "type": "video",
-//         "url": "",
-//         "thumbnail": "",
-//       },
-//       {
-//         "type": "text",
-//         "url": "",
-//       }
-//     ],
-//     "courseModule": {
-//       "title": "",
-//       "tags": "",
-//       "sequenceNo": 1,
-// 	  "courseId": 1
-//     }
-//   }
-
   const ModuleProp  = {
-	"docs": {
+			"id": 0,
 			"title": "",
 			 'tags': "",
 			"course_resources": [
@@ -69,7 +35,6 @@ interface ModuleComponentType {
 				"url": ""
 			  }
 			]
-		}
   }
 
 const CreateCourseContext = createContext<ModuleComponentType>({
@@ -77,18 +42,23 @@ const CreateCourseContext = createContext<ModuleComponentType>({
 	modal: false,
 	setModule: () => {},
 	setModal: () => {},
+	action: 'add',
+	setAction: () => {}
 });
 
 
 export const CreateCourseContextProvider = ({ children }: {children: React.ReactNode}) => {
 	const [module, setModule] = useState<ModuleType>(ModuleProp);
 	const [modal, setModal] = useState(false);
+    const [action, setAction] = useState('add');
 
 	const values = {
         module,
 		setModule,
 		modal,
 		setModal,
+		action,
+		setAction
 	};
 
 	return (

@@ -1,31 +1,48 @@
-import {useState} from 'react'
-import { useMutation } from 'react-query'
+import { useState, useEffect } from 'react'
+import { useMutation,  useQueryClient } from 'react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import video from '../../../../../../../assets/images/video-player.png'
-import {CreateCourseContextUse} from 'context'
+import { CreateCourseContextUse } from 'context'
 import { useGetModule } from 'hooks';
 import userServices from 'services/userServices';
 import { ModulesType, ModuleType, VideoType } from '../../moduleTypes'
 import { VideoModal } from '../videoModal';
 
-
-
 export const Videos = ({data}:{data:ModulesType}) => {
   const [selectedModuleId, setSelectedModuleId] = useState<null | number>(null)
-  const {setModal, setModule }  = CreateCourseContextUse()
+  const {setModal, setModule, setAction }  = CreateCourseContextUse()
   const [isOpen, setIsOpen] = useState(false)
 
-  const { data:moduleData } = useGetModule(selectedModuleId)
+  const queryClient = useQueryClient()
+
+  const { data:moduleData, refetch } = useGetModule(selectedModuleId)
   const responseData = moduleData as ModuleType
   const handleModuleClick = (id: null | number) => {
     setSelectedModuleId(id)
-    setModule(responseData)
-    setModal(true)
+
   }
 
-  const { mutate } = useMutation(userServices.deleteModule)
+  useEffect(() => {
+    if (selectedModuleId) {
+      refetch()
+      setModule(responseData)
+    }
+
+    if(responseData) {
+      setAction('edit')
+      setModal(true)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedModuleId, responseData, setModule])
+
+  const { mutate } = useMutation(userServices.deleteModule, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('get-all-modules')
+      queryClient.refetchQueries('get-all-modules');
+    },
+  })
 
   const videos = data?.docs?.map(({id, course_resources, title }: VideoType) => (
     <div key={id}>

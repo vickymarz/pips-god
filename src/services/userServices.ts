@@ -8,7 +8,8 @@ import {
   AdminTypes,
   AnalyticsType,
   ContactType,
-  CourseType,
+  AddModuleType,
+  UpdateModuleType
 } from "./dataTypes";
 
 import {
@@ -144,7 +145,7 @@ const updateAnalyticsData = async (params: AnalyticsType) => {
   }
 };
 
-const createModule = async (params:CourseType): Promise<unknown> => {
+const createModule = async (params:AddModuleType): Promise<unknown> => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${COURSE_MODULES_URL}`, params);
     return result;
@@ -162,8 +163,34 @@ const getAllModules = async ():Promise<unknown> => {
   }
 };
 
-const uploadThumbnail = async (file: File) => {
+const deleteModule = async (id: number):Promise<unknown> => {
+  try {
+    const result = await fetchApi.deleteE(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
 
+const getModule = async (id: null | number ):Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const updateModule = async (params:UpdateModuleType):Promise<unknown> => {
+  try {
+    const result = await fetchApi.patch(`${BASE_URL}/${COURSE_MODULES_URL}/${params?.courseModule.courseModuleId}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const uploadThumbnail = async (file: File) => {
   const formData = new FormData()
    formData.append('file', file)
    formData.append('upload_preset', `${process.env.REACT_APP_CLOUDINARY_KEY}`)
@@ -212,23 +239,6 @@ const uploadFile = async (file: File) => {
 //   }
 // };
 
-const deleteModule = async (id: number):Promise<unknown> => {
-  try {
-    const result = await fetchApi.deleteE(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
-    return result;
-  } catch (err) {
-    return err;
-  }
-}
-
-const getModule = async (id: null | number ):Promise<unknown> => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
 
 const contact = async (params: ContactType ): Promise<unknown> => {
   try {
@@ -259,6 +269,7 @@ const userServices = {
   getAllModules,
   getModule,
   deleteModule,
+  updateModule,
   uploadThumbnail,
   uploadVideo,
   uploadFile,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import upload from '../../../../../../../assets/images/upload.png'
 import pin from '../../../../../../../assets/images/pin.png'
 import { Button } from 'components';
@@ -9,8 +9,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CreateCourseContextUse } from 'context'
 
 export const CourseModal = () => {
-  const {modal, setModal, module }  = CreateCourseContextUse()
-  const [image, setImage] = useState<string | Blob>('')
+  const {modal, setModal, module, action, setAction, setModule }  = CreateCourseContextUse()
+  const [image, setImage] = useState<string | Blob | undefined>('')
   const [selectedFile, setSelectedFile] =  useState<string | React.ReactNode>('')
 	const [isFilePicked, setIsFilePicked] = useState(false);
   const [selectedVideo, setSelectedVideo] =  useState<string | React.ReactNode>('')
@@ -19,6 +19,19 @@ export const CourseModal = () => {
   const [title, setTitle] = useState('')
 
   const queryClient = useQueryClient()
+  console.log(module)
+  useEffect(() => {
+    if(module) {
+      setImage(module?.course_resources[0]?.thumbnail)
+      setSelectedFile(module?.course_resources[1]?.url)
+      setSelectedVideo(module?.course_resources[0]?.url)
+      setTags(module?.tags.split(','))
+      setTitle(module?.title)
+      setIsFilePicked(true)
+      setIsVideoPicked(true)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const onFileChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
@@ -57,67 +70,143 @@ const removeTag = (index:number) => {
   setTags(tags.filter((el:any, i:number) => i !== index))
 }
 
-const {mutate, data, isError, isLoading} = useMutation(userServices.createModule, {
+const {mutate:addModule, data:addModuleData, isError:addModuleError, isLoading:addModuleLoader} = useMutation(userServices.createModule, {
   onSuccess: (data) => {
     const responseData = data as {status: number, data: object}
     if (responseData?.status === 200) {
       queryClient.invalidateQueries('get-all-modules')
-      setImage('')
-      setSelectedFile('')
-      setSelectedVideo('')
-      setTags([])
-      setTitle('')
       setTimeout(() => {
         setModal(false)
       }, 2000);
     }
 }})
 
+const {mutate:updateModule, data:updateModuleData, isError:updateModuleError, isLoading:updateModuleLoader} = useMutation(userServices.updateModule, {
+  onSuccess: (data) => {
+    const responseData = data as {status: number, data: object}
+    if (responseData?.status === 200) {
+      queryClient.invalidateQueries('get-all-modules')
+      setModule({
+        "id": 0,
+        "title": "",
+         'tags': "",
+        "course_resources": [
+          {
+          "type": "video",
+          "url": "",
+          "thumbnail": "",
+          },
+          {
+          "type": "text",
+          "url": ""
+          }
+        ]
+    })
+      setTimeout(() => {
+        setModal(false)
+      }, 2000);
+    }
+}})
 
 const onSubmit = (e:React.FormEvent) => {
   e.preventDefault()
-  mutate({
-    "courseResources": [
-      {
-        "type": "video",
-        "url": selectedVideo,
-        "thumbnail": image,
-      },
-      {
-        "type": "text",
-        "url": selectedFile,
+    setImage('')
+    setSelectedFile('')
+    setSelectedVideo('')
+    setTags([])
+    setTitle('')
+  if(action === 'add') {
+    addModule({
+      "courseResources": [
+        {
+          "type": "video",
+          "url": selectedVideo,
+          "thumbnail": image,
+        },
+        {
+          "type": "text",
+          "url": selectedFile,
+        }
+      ],
+      "courseModule": {
+        "title": title,
+        "tags": tags.join(','),
+        "courseId": 1
       }
-    ],
-    "courseModule": {
-      "title": title,
-      "tags": tags.join(','),
-      "courseId": 1
-    }
-  })
+    })
+  }
+
+  if (action === 'edit') {
+    updateModule({
+      "courseResources": [
+        {
+          "id": module?.course_resources[0]?.id,
+          "type": "video",
+          "url": selectedVideo,
+          "thumbnail": image,
+        },
+        {
+          "id": module?.course_resources[1]?.id,
+          "type": "text",
+          "url": selectedFile,
+        }
+      ],
+      "courseModule": {
+        "title": title,
+        "tags": tags.join(','),
+        "courseModuleId": module?.id
+      }
+    })
+    setAction('add')
+  }
 }
+
+const closeModal = () => {
+  setModule(
+    {
+        "id": 0,
+        "title": "",
+         'tags': "",
+        "course_resources": [
+          {
+          "type": "video",
+          "url": "",
+          "thumbnail": "",
+          },
+          {
+          "type": "text",
+          "url": ""
+          }
+        ]
+    })
+    setModal(false)
+  }
+
+
 
 const errorMsg = () => {
   let element;
-  const responseData = data as {code: number, status: number, data: object}
-  if (responseData?.status === 200) {
+  const responseData = addModuleData as {code: number, status: number, data: object}
+  const responseData2 = updateModuleData as {code: number, status: number, data: object}
+  if (responseData?.status === 200 || responseData2?.status === 200) {
     element = (
       <p className='w-full mt-4 text-[24px] text-green-600 text-center'>
         Course added successfully!
       </p>
     );
-  } else if (isError) {
+  } else if (addModuleError || updateModuleError) {
     element = (
       <p className='mt-4 text-[24px] text-red-600 text-center'>
         Something went wrong. Please try again!
       </p>
     );
-  } else if (responseData?.code === 208) {
+  } else if (responseData?.code === 208 || responseData2?.code === 208) {
     element = (
       <p className='mt-4 text-[24px] text-red-600 text-center'>
         A course module with this title already exist. KIndly use another descriptive title
       </p>
     );
-  } else if(responseData?.code === 400) {
+  } else if(responseData?.code === 400 || responseData2?.code === 400) {
     element = (
       <p className='mt-4 text-[24px] text-red-600 text-center'>
         Kindly upload a thumbnail for your course and ensure that you fill all the fields
@@ -139,7 +228,7 @@ const errorMsg = () => {
                   :
                   (
                   <div className='flex justify-center items-center w-[50px] h-[33.3px]'>
-                    <img src={`${upload || module?.docs?.course_resources[0]?.thumbnail}`} alt="uploaded thumbnail" />
+                    <img src={`${upload}`} alt="uploaded thumbnail" />
                   </div>
                   )}
 		          </div>
@@ -159,7 +248,7 @@ const errorMsg = () => {
                 type='text'
                 required
                 id='title'
-                value={title || module?.docs?.title}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder='Provide your course title'
                 />
@@ -182,7 +271,8 @@ const errorMsg = () => {
               </label>
               <div className="w-full p-[0.6em] rounded-[8px] flex flex-col justify-start items-start wrap gap-[0.5em] border border-[#B0B0B0]">
                <div className='flex justify-start items-center wrap gp-x-[10px]'>
-               { module?.docs?.tags.split(',')[0] ? module?.docs?.tags.split(',') : tags.map((tag, index) => (
+               { tags.map((tag, index) => (
+                tag.length === 0 ? null :
                   <div key={index} className='bg-[#EBEBEB] flex justify-start items-center gap-x-[20px] px-[0.75em] py-[0.5em] rounded-[20px]'>
                     <span>{tag}</span>
                     <Button type='button' onClick={() => removeTag(index)}>
@@ -210,7 +300,7 @@ const errorMsg = () => {
               </label>
               {isVideoPicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedVideo || module?.docs?.course_resources[0]?.url}</p>
+					        <p >{selectedVideo}</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -222,16 +312,16 @@ const errorMsg = () => {
               </label>
               {isFilePicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedFile ||  module?.docs.course_resources[1]?.url}</p>
+					        <p >{selectedFile }</p>
 				        </span>
 			        )}
             </div>
             <div className='mt-[59px] w-full flex justify-end items-start text-[1.12rem] font-bold font-productSans gap-x-[32px]'>
-              <Button type='button' onClick={() => setModal(false)}  className="text-[#B0B0B0] bg-[#fff] rounded-[8px] py-[17px] px-[34px] border border-[#B0B0B0]">
+              <Button type='button' onClick={closeModal}  className="text-[#B0B0B0] bg-[#fff] rounded-[8px] py-[17px] px-[34px] border border-[#B0B0B0]">
                 Cancel
               </Button>
               <Button type='submit' className="text-white bg-[#0D142E] rounded-[8px] py-[17px] px-[34px]">
-                {isLoading ? 'Please wait...' : 'Create'}
+                {addModuleLoader || updateModuleLoader  ? 'Please wait...' : 'Create'}
               </Button>
             </div>
           </div>

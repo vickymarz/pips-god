@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -13,24 +13,34 @@ import { TextModal } from '../textModal';
 
 export const Readings = ({data}:{data:ModulesType}) => {
   const [selectedModuleId, setSelectedModuleId] = useState<null | number>(null)
-  const {setModal, setModule}  = CreateCourseContextUse()
+  const {setModal, setModule, setAction }  = CreateCourseContextUse()
   const [isOpen, setIsOpen] = useState(false)
 
   const queryClient = useQueryClient()
 
-  const { data:moduleData } = useGetModule(selectedModuleId)
+  const { data:moduleData, refetch } = useGetModule(selectedModuleId)
   const responseData = moduleData as ModuleType
   const handleModuleClick = (id: null | number) => {
     setSelectedModuleId(id)
-    setModule(responseData)
-    setModal(true)
-    console.log(responseData)
-    console.log('true')
   }
+
+  useEffect(() => {
+    if (selectedModuleId) {
+      refetch()
+      setModule(responseData)
+    }
+
+    if(responseData) {
+      setAction('edit')
+      setModal(true)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedModuleId, responseData, setModule])
 
   const { mutate } = useMutation(userServices.deleteModule, {
     onSuccess: () => {
       queryClient.invalidateQueries('get-all-modules')
+      queryClient.refetchQueries('get-all-modules');
     },
   })
 

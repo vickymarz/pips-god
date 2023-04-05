@@ -4,6 +4,7 @@ export type ModulesType = {
       title: string
       tags: string
       course_resources: {
+        id?: number
         type: string
         url: string
         thumbnail?: string
@@ -14,21 +15,22 @@ export type ModulesType = {
 }
 
 export type ModuleType = {
-	docs: {
+    id: number
 	  title: string
 	  tags: string,
 	  course_resources: {
+    id?: number
 		type: string
 		url: string
 		thumbnail?: string
 	  }[]
-	}
   }
 
   export type VideoType = {
     id: number
     title: string
     course_resources: {
+      id?: number
       type: string
       url: string
       thumbnail?: string
@@ -39,6 +41,7 @@ export type ModuleType = {
     id: number
     title: string
     course_resources: {
+      id?: number
       type: string
       url: string
       thumbnail?: string

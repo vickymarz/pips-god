@@ -10,7 +10,7 @@ export const useTransactions = (id: string | undefined, onSuccess: (data:any) =>
 
 export const useAnalyticsData = () => {
  return useQuery('users-data', userServices.getAnalyticsData, {
-    staleTime: 60000
+    staleTime: 50000
  })
 }
 
