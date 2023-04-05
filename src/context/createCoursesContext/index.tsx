@@ -1,46 +1,64 @@
 import { useContext, createContext, useState } from "react";
 
-type CourseType = {
-	file: string;
-	video: string;
-	thumbnail: string;
-	title: string;
-	tags: Array<string>;
-	image: string;
-};
-interface CourseComponentType {
-	course: CourseType,
+  type ModuleType = {
+	  id: number
+	  title: string
+	  tags: string,
+	  course_resources: {
+		id?: number
+		type: string
+		url: string
+		thumbnail?: string
+	  }[]
+  }
+interface ModuleComponentType {
+	module: ModuleType,
 	modal: boolean,
-	setCourse: React.Dispatch<React.SetStateAction<CourseType>>
+	action: string,
+	setAction: React.Dispatch<React.SetStateAction<string>>
+	setModule: React.Dispatch<React.SetStateAction<ModuleType>>
 	setModal: React.Dispatch<React.SetStateAction<boolean>>
   }
 
-  const courseProp = {
-	file: "",
-	video: "",
-	thumbnail: "",
-	title: "",
-	tags: [],
-	image: "",
-};
+  const ModuleProp  = {
+			"id": 0,
+			"title": "",
+			 'tags': "",
+			"course_resources": [
+			  {
+				"type": "video",
+				"url": "",
+				"thumbnail": "",
+			  },
+			  {
+				"type": "text",
+				"url": ""
+			  }
+			]
+  }
 
-const CreateCourseContext = createContext<CourseComponentType>({
-	course: courseProp,
+const CreateCourseContext = createContext<ModuleComponentType>({
+	module: ModuleProp,
 	modal: false,
-	setCourse: () => {},
+	setModule: () => {},
 	setModal: () => {},
+	action: 'add',
+	setAction: () => {}
 });
 
 
 export const CreateCourseContextProvider = ({ children }: {children: React.ReactNode}) => {
-	const [course, setCourse] = useState<CourseType>(courseProp);
+	const [module, setModule] = useState<ModuleType>(ModuleProp);
 	const [modal, setModal] = useState(false);
+    const [action, setAction] = useState('add');
 
 	const values = {
-        course,
-		setCourse,
+        module,
+		setModule,
 		modal,
 		setModal,
+		action,
+		setAction
 	};
 
 	return (

@@ -1,4 +1,4 @@
-import {useQuery} from 'react-query'
+import { useQuery } from 'react-query'
 import userServices from 'services/userServices'
 
 export const useTransactions = (id: string | undefined, onSuccess: (data:any) => void) => {
@@ -10,7 +10,7 @@ export const useTransactions = (id: string | undefined, onSuccess: (data:any) =>
 
 export const useAnalyticsData = () => {
  return useQuery('users-data', userServices.getAnalyticsData, {
-    staleTime: 60000
+    staleTime: 50000
  })
 }
 
@@ -18,27 +18,19 @@ export const useUpdateAnalyticsData = (params: object) => {
    return useQuery(['update-user-data', params], () => userServices.updateAnalyticsData(params))
 }
 
-export const useVideosData = () => {
- return useQuery('mentorship-data', userServices.getVideos)
-}
+// export const useDocument = (id:number) => {
+//  return useQuery(['document-data', id], () => userServices.getDocument(id))
+// }
 
-export const useDocumentData = () => {
- return useQuery('documents-data', userServices.getDocuments)
-}
-
-export const useDocument = (id:number) => {
- return useQuery(['document-data', id], () => userServices.getDocument(id))
-}
-
-export const useGetCourses = () => {
- return useQuery('get-all-courses', userServices.getAllCourses,
+export const useGetModules = () => {
+ return useQuery('get-all-modules', userServices.getAllModules,
  {
    staleTime: 60000
  })
 }
 
-export const useGetCourse = (id:number) => {
-   return useQuery(['course', id], () => userServices.getCourse(id), {
+export const useGetModule = (id:number | null) => {
+   return useQuery(['course', id], () => userServices.getModule(id), {
       enabled: false,
    })
 }

@@ -1,9 +1,14 @@
 import {Videos, Readings} from './components'
 import { Button } from "components";
 import { useState } from "react";
+import { useGetModules } from 'hooks'
+import { ModulesType } from './moduleTypes'
 
 export const Courses = () => {
   const [status, setStatus] = useState("videos");
+  const { data } = useGetModules()
+  const responseData = data as ModulesType
+
   return (
     <div>
         <ul className="flex justify-start items-center gap-x-[45px] mt-[20px]">
@@ -35,10 +40,10 @@ export const Courses = () => {
           </ul>
           <div>
           {status === "videos" && (
-           <Videos />
+           <Videos data={responseData} />
           )}
           {status === "readings" && (
-            <Readings />
+            <Readings data={responseData} />
           )}
         </div>
     </div>

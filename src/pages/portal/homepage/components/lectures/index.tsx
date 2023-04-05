@@ -1,11 +1,11 @@
 import { LessonOverview, Lessons, Transcript } from "./components";
 import { Button } from "components"
 import { useState } from "react";
-import { GetCourseContextUse } from 'context';
+import { CreateCourseContextUse } from 'context';
 
 export const Lectures = () => {
-  const {course} = GetCourseContextUse()
-  console.log(course)
+  const {module} = CreateCourseContextUse()
+  console.log(module)
     const [status, setStatus] = useState("overview");
   return (
     <div className="w-full">

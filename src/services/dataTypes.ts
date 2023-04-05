@@ -50,3 +50,34 @@ export type ContactType = {
     email: string;
     text: string;
 }
+
+export type AddModuleType = {
+  courseResources: {
+    description?: string,
+    type: string,
+    url: string | React.ReactNode,
+    thumbnail?: string | Blob
+  }[],
+  courseModule: {
+    title: string,
+    description?: string,
+    tags: string
+    courseId: number
+  }
+}
+
+export type UpdateModuleType = {
+  courseResources: {
+    id?: number,
+    description?: string,
+    type: string,
+    url: string | React.ReactNode,
+    thumbnail?: string | Blob
+  }[],
+  courseModule: {
+    title: string,
+    description?: string,
+    tags: string
+    courseModuleId?: number
+  }
+}

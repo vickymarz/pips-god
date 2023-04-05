@@ -8,6 +8,8 @@ import {
   AdminTypes,
   AnalyticsType,
   ContactType,
+  AddModuleType,
+  UpdateModuleType
 } from "./dataTypes";
 
 import {
@@ -19,18 +21,12 @@ import {
   LOGIN_URL,
   FORGOT_PASSWORD_URL,
   RESET_PASSWORD_URL,
-  GET_COURSES,
-  GET_COURSE,
-  DELETE_COURSE,
+  ANALYTICS_URL,
+  COURSE_MODULES_URL,
   CLOUDINARY_BASE_URL,
   UPLOAD_THUMBNAIL,
   UPLOAD_VIDEO,
   UPLOAD_RAW_FILE,
-  COURSES_URL,
-  GET_VIDEOS,
-  GET_DOCUMENTS,
-  GET_DOCUMENT,
-  ANALYTICS_URL,
   CONTACT_URL,
 } from "./rootEndPoints";
 
@@ -149,8 +145,52 @@ const updateAnalyticsData = async (params: AnalyticsType) => {
   }
 };
 
-const uploadThumbnail = async (file: File) => {
+const createModule = async (params:AddModuleType): Promise<unknown> => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${COURSE_MODULES_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
 
+const getAllModules = async ():Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const deleteModule = async (id: number):Promise<unknown> => {
+  try {
+    const result = await fetchApi.deleteE(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
+
+const getModule = async (id: null | number ):Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const updateModule = async (params:UpdateModuleType):Promise<unknown> => {
+  try {
+    const result = await fetchApi.patch(`${BASE_URL}/${COURSE_MODULES_URL}/${params?.courseModule.courseModuleId}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const uploadThumbnail = async (file: File) => {
   const formData = new FormData()
    formData.append('file', file)
    formData.append('upload_preset', `${process.env.REACT_APP_CLOUDINARY_KEY}`)
@@ -190,69 +230,15 @@ const uploadFile = async (file: File) => {
   return result.secure_url
 };
 
-const createCourses = async (params:any) => {
-  try {
-    const result = await fetchApi.post(`${BASE_URL}/${COURSES_URL}`, params);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
+// const getDocument = async (id:number) => {
+//   try {
+//     const result = await fetchApi.get(`${BASE_URL}/${GET_DOCUMENT}/${id}`, );
+//     return result;
+//   } catch (err) {
+//     return err;
+//   }
+// };
 
-const getVideos = async () => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${GET_VIDEOS}`);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const getDocuments = async () => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${GET_DOCUMENTS}`);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const getDocument = async (id:number) => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${GET_DOCUMENT}/${id}`, );
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
-
-const getAllCourses = async () => {
-  try {
-    const dataObj = await fetchApi.get(`${BASE_URL}/${GET_COURSES}`);
-    const datas = await dataObj.data;
-    return datas;
-  } catch (err) {
-    return err;
-  }
-};
-
-const deleteCourse = async (id: number) => {
-  try {
-    const result = await fetchApi.deleteE(`${BASE_URL}/${DELETE_COURSE}/${id}`);
-    return result;
-  } catch (err) {
-    return err;
-  }
-}
-
-const getCourse = async (id: number) => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${GET_COURSE}/${id}`);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
 
 const contact = async (params: ContactType ): Promise<unknown> => {
   try {
@@ -264,74 +250,6 @@ const contact = async (params: ContactType ): Promise<unknown> => {
 };
 
 
-// const getEventsByToken = async (id) => {
-//   try {
-//     const dataObj = await fetchApi.get(`${BASE_URL}/${EVENT_BY_TOKEN}/${id}`);
-//     const datas = await dataObj;
-//     return datas;
-//   } catch (err) {
-//     return err;
-//   }
-// };
-
-
-// const getParticipants = async (id) => {
-//   try {
-//     const dataObj = await fetchApi.get(`${BASE_URL}/${GET_PARTICIPANTS}/${id}`);
-//     const datas = await dataObj.data;
-//     return datas;
-//   } catch (err) {
-//     return err;
-//   }
-// };
-
-
-// const sendInvite = async (params) => {
-//   try {
-//     const result = await fetchApi.post(`${BASE_URL}/${SEND_INVITE}`, params);
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// };
-
-// const addParticipants = async (params) => {
-//   try {
-//     const result = await fetchApi.post(`${BASE_URL}/${ADD_PARTICIPANTS}`, params);
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// }
-
-// const deleteEvent = async (id) => {
-//   try {
-//     const result = await fetchApi.deleteE(`${BASE_URL}/${DELETE_EVENT}/${id}`);
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// }
-
-// const getUser = async () => {
-//   try {
-//     const dataObj = await fetchApi.get(`${BASE_URL}/${GET_USER}`);
-
-//     const datas = await dataObj.data;
-//     return datas;
-//   } catch (err) {
-//     return err;
-//   }
-// };
-
-// const updateUser = async (params) => {
-//   try {
-//     const result = await fetchApi.patch(`${BASE_URL}/${GET_USER}`, params);
-//     return result;
-//   } catch (err) {
-//     return err;
-//   }
-// };
 
 
 const userServices = {
@@ -345,18 +263,17 @@ const userServices = {
   resetPassword,
   adminRegister,
   adminLogin,
+  getAnalyticsData,
+  updateAnalyticsData,
+  createModule,
+  getAllModules,
+  getModule,
+  deleteModule,
+  updateModule,
   uploadThumbnail,
   uploadVideo,
   uploadFile,
-  createCourses,
-  getAnalyticsData,
-  updateAnalyticsData,
-  getVideos,
-  getDocuments,
-  getDocument,
-  getAllCourses,
-  getCourse,
-  deleteCourse,
+  // getDocument,
   contact
 };
 
