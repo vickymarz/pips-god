@@ -1,15 +1,14 @@
 import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router'
 
-export const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
+export const PortalProtectedRoute = ({children}: {children: React.ReactNode}) => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const checkUserToken = () => {
         const userToken = localStorage.getItem('jwt-token')
-        const adminToken = localStorage.getItem('admin-token')
 
-        if (!userToken || !adminToken || userToken === undefined || adminToken === undefined) {
+        if (!userToken  || userToken === undefined) {
           setIsLoggedIn(false)
           return navigate('/login')
         }
