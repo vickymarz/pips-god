@@ -14,6 +14,7 @@ const {mutate, data} = useMutation(userServices.verifyEmail, {
   onSuccess: (data) => {
     console.log(data)
     if (data?.code === 200) {
+      console.log(data, true)
        return localStorage.setItem('jwt-token', data?.data.tokens.access.token);
     }
   },
