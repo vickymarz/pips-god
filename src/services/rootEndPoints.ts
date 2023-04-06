@@ -8,6 +8,7 @@ export const RESET_PASSWORD_URL = 'auth/reset-password'
 export const VERIFY_EMAIL = 'auth/verify-email'
 export const ANALYTICS_URL = 'users/d/dashboard'
 export const COURSE_MODULES_URL = 'course_modules'
+export const GET_ROLES_URL = 'users/is_email_taken'
 export const CLOUDINARY_BASE_URL = process.env.REACT_APP_CLOUDINARY_BASE_URL
 export const UPLOAD_THUMBNAIL = 'image/upload'
 export const UPLOAD_VIDEO = 'video/upload'

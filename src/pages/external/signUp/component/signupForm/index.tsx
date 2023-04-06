@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -19,25 +19,46 @@ type FormValues = {
 
 export const SignupForm = () => {
     const [verify, setVerify] = useState(false)
+
     const { reference } = useParams()
     const navigate = useNavigate();
 
-      const onSuccess = (data:any) => {
+    const onSuccess = (data:any) => {
         if (data.code === 404 || isError || data.status !== 'success') {
-          setVerify(true)
-          setTimeout(() => {
-             navigate('/')
-          }, 3000);
+            setVerify(true)
+            setTimeout(() => {
+                navigate('/')
+            }, 3000);
         }
     }
+
     const { isError, data: verifyData } = useTransactions(reference, onSuccess)
 
+    const { data: getRoleData, mutate:getRole} = useMutation(userServices.getRoles)
+    const getRoleResponse = getRoleData as {data: boolean}
+    
     const {
-		register,
+        register,
 		handleSubmit,
 		reset,
+        watch,
 		formState: { errors },
 	} = useForm<FormValues>();
+
+    const userEmail = watch("email", "");
+
+    useEffect(() => {
+        const pattern =
+		// eslint-disable-next-line no-useless-escape
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(pattern.test(userEmail)) {
+           getRole({
+            "email": userEmail,
+            "role": 'admin',
+           })
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userEmail])
 
 	const [passwordShown, setPasswordShown] = useState(false);
 
@@ -46,7 +67,7 @@ export const SignupForm = () => {
 	};
 
 
-    const {mutate, isLoading, error, data: registerData} = useMutation(userServices.register, {
+    const {mutate:registerUser, isLoading, error, data: registerData} = useMutation(userServices.register, {
         onSuccess: (data) => {
           if (data?.code === 201) {
 			setTimeout(() => {
@@ -58,10 +79,10 @@ export const SignupForm = () => {
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-        mutate({transactionAccessCode: reference, 'firstName': data.firstName, 'lastName': data.lastName, 'email': data.email, 'password': data.password, 'phone': data.phone, 'address': data.address})
+        registerUser({transactionAccessCode: reference, 'firstName': data.firstName, 'lastName': data.lastName, 'email': data.email, 'password': data.password, 'phone': data.phone, 'address': data.address})
 	};
 
-    const getValues = () => {
+    const getValue = () => {
         const password = document.getElementById("password") as HTMLInputElement;
         return {
             password: password?.value,
@@ -86,6 +107,12 @@ export const SignupForm = () => {
            element = (
                 <p className='mt-4 md:text-[20px] text-red-600 text-center'>
                     This email has already been registered!
+                </p>
+            );
+        } else if(getRoleResponse?.data === true) {
+            element = (
+                <p className='w-full mt-4 text-xl text-red-600 text-center'>
+                    This email has already been registered for a different role. Kindly enter the password in your previous registration.
                 </p>
             );
         }
@@ -317,7 +344,7 @@ export const SignupForm = () => {
                             "Password must have at least 9 characters. It must include a letter, a number and a special character",
                         },
                         validate: (value) => {
-                            if (value !== getValues().password) {
+                            if (value !== getValue().password) {
                                 return "Passwords do not match";
                             }
                             return true;

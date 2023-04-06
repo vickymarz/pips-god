@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -24,14 +24,37 @@ export const AdminSignupForm = () => {
         setPasswordShown(!passwordShown);
     };
 
+
     const {
 		register,
 		handleSubmit,
+        getValues,
+        watch,
 		reset,
 		formState: { errors },
 	} = useForm<FormValues>();
 
-    const { mutate, isLoading, error, data } = useMutation(userServices.adminRegister, {
+    const userEmail = watch("email", "");
+
+    const { data: getRoleData, mutate:getRole} = useMutation(userServices.getRoles)
+    const getRoleResponse = getRoleData as {data: boolean}
+
+    useEffect(() => {
+        const pattern =
+		// eslint-disable-next-line no-useless-escape
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(pattern.test(userEmail)) {
+           getRole({
+            "email": userEmail,
+            "role": 'user',
+           })
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userEmail])
+
+
+
+    const { mutate:registerAdmin, isLoading, error, data } = useMutation(userServices.adminRegister, {
         onSuccess: (data) => {
           if (data?.code === 201) {
             localStorage.setItem('admin-token', data?.data.tokens.access.token);
@@ -44,10 +67,11 @@ export const AdminSignupForm = () => {
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-		mutate( {'firstName': data.firstName, 'lastName': data.lastName, 'superAdminUsername': data.superAdminUsername, 'superAdminPassword': data.superAdminPassword, 'password': data.password, 'email': data.email, 'role': 'admin'} )
+        getValues("email",)
+		registerAdmin( {'firstName': data.firstName, 'lastName': data.lastName, 'superAdminUsername': data.superAdminUsername, 'superAdminPassword': data.superAdminPassword, 'password': data.password, 'email': data.email, 'role': 'admin'} )
 	};
 
-    const getValues = () => {
+    const getValue = () => {
         const password = document.getElementById("password") as HTMLInputElement;
         return {
             password: password?.value,
@@ -78,6 +102,12 @@ export const AdminSignupForm = () => {
             element = (
                 <p className='w-full mt-4 text-xl text-red-600 text-center'>
                     Incorrect super admin username or password!
+                </p>
+            );
+        } else if(getRoleResponse?.data === true) {
+            element = (
+                <p className='w-full mt-4 text-xl text-red-600 text-center'>
+                    This email has already been registered for a different role. Kindly enter the password in your previous registration.
                 </p>
             );
         }
@@ -276,7 +306,7 @@ export const AdminSignupForm = () => {
                             "Password must have at least 9 characters. It must include a letter, a number and a special character",
                         },
                         validate: (value) => {
-                            if (value !== getValues().password) {
+                            if (value !== getValue().password) {
                                 return "Passwords do not match";
                             }
                             return true;

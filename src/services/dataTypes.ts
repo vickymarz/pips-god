@@ -81,3 +81,8 @@ export type UpdateModuleType = {
     courseModuleId?: number
   }
 }
+
+export type RolesTypes = {
+  email: string
+  role: 'admin' | 'user'
+}

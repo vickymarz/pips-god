@@ -9,7 +9,8 @@ import {
   AnalyticsType,
   ContactType,
   AddModuleType,
-  UpdateModuleType
+  UpdateModuleType,
+  RolesTypes
 } from "./dataTypes";
 
 import {
@@ -23,6 +24,7 @@ import {
   RESET_PASSWORD_URL,
   ANALYTICS_URL,
   COURSE_MODULES_URL,
+  GET_ROLES_URL,
   CLOUDINARY_BASE_URL,
   UPLOAD_THUMBNAIL,
   UPLOAD_VIDEO,
@@ -121,6 +123,15 @@ const adminRegister = async (params: AdminTypes) => {
 const adminLogin = async (params: LoginTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${LOGIN_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const getRoles = async (params: RolesTypes):Promise<unknown> => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${GET_ROLES_URL}`, params);
     return result;
   } catch (err) {
     return err;
@@ -263,6 +274,7 @@ const userServices = {
   resetPassword,
   adminRegister,
   adminLogin,
+  getRoles,
   getAnalyticsData,
   updateAnalyticsData,
   createModule,
