@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import MediaQuery from 'react-responsive';
+// import { useState } from 'react';
+// import MediaQuery from 'react-responsive';
 import { useInView } from 'react-intersection-observer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import {Button} from "components";
 import { Logo } from 'components';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import star from '../../assets/images/star.png'
-import arrow from '../../assets/images/arrow-up.png'
+// import star from '../../assets/images/star.png'
+// import arrow from '../../assets/images/arrow-up.png'
 
 export const PortalHeader = () => {
   const percentage = 0;
@@ -16,10 +16,10 @@ export const PortalHeader = () => {
     threshold: 0,
   });
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const handleMenuOpen = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
+  //   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  //   const handleMenuOpen = () => {
+	// 	setIsMenuOpen(!isMenuOpen);
+	// };
 
   return (
     <>
@@ -28,29 +28,29 @@ export const PortalHeader = () => {
         <Logo />
         <h2 className='hidden md:block text-[#0D142E] text-[26px] font-bold'>Get Started in Forex Trading.</h2>
       </div>
-      <MediaQuery maxWidth={768}>
-        {matches =>
+      {/* <MediaQuery maxWidth={768}> */}
+        {/* {matches =>
           matches ? (
-            <>
-              {isMenuOpen ? (
-			          <Button type="button" onClick={handleMenuOpen} className="z-10">
-				          <FontAwesomeIcon icon={faTimes} className='text-[25px] text-[#232323]'/>
-				        </Button>
-				      ) : (
-				        <Button type="button" onClick={handleMenuOpen}>
-				          <FontAwesomeIcon icon={faBars}  className='text-[25px] text-[#232323]'/>
-				        </Button>
-				      )
-              }
+            <> */}
+              {/* {isMenuOpen ? (
+			            <Button type="button" onClick={handleMenuOpen} className="z-10">
+				            <FontAwesomeIcon icon={faTimes} className='text-[25px] text-[#232323]'/>
+				          </Button>
+				        ) : (
+				          <Button type="button" onClick={handleMenuOpen}>
+				            <FontAwesomeIcon icon={faBars}  className='text-[25px] text-[#232323]'/>
+				          </Button>
+				        )
+              } */}
 
-               <div className='hidden md:flex justify-start items-center gap-x-[25px]'>
-                <div className='flex justify-start items-center gap-x-[15px]'>
+              {/* <div className='hidden md:flex justify-start items-center gap-x-[25px]'> */}
+                {/* <div className='flex justify-start items-center gap-x-[15px]'>
                   <div className='flex justify-center items-center w-[17px] h-[17px]'>
                     <img src={star} alt="rating" />
                   </div>
                   <span className='text-[#0D142E] font-medium text-[18px]'>Rate this course</span>
-                </div>
-                <div className='flex justify-start items-center gap-x-[12px]'>
+                </div> */}
+                {/* <div className='flex justify-start items-center gap-x-[12px]'>
                   <div className='flex justify-center flex-col items-center gap-y-[1rem]' style={{ width: '26px', height: '26px'}}>
                     <CircularProgressbar value={percentage} text={`${percentage}%`}   styles={buildStyles({
                       strokeLinecap: 'butt',
@@ -62,26 +62,29 @@ export const PortalHeader = () => {
                     })}/>
                   </div>
                   <span className='text-[#0D142E] font-medium text-[18px]'>Your progress</span>
-               </div>
-               <Button type="button" className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
+               </div> */}
+               {/* <Button type="button" className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
                  <span>Share</span>
                  <div className='w-[15px] h-[12px]'>
                   <img src={arrow} alt="share" />
                  </div>
+               </Button> */}
+               {/* <Button type="button" className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
+                 Logout
                </Button>
-             </div>
+             </div> */}
 
-            </>
+            {/* </>
           ) :
-          (
+          ( */}
             <>
              <div className='flex justify-start items-center gap-x-[25px]'>
-                <div className='flex justify-start items-center gap-x-[15px]'>
+                {/* <div className='flex justify-start items-center gap-x-[15px]'>
                   <div className='flex justify-center items-center w-[17px] h-[17px]'>
                     <img src={star} alt="rating" />
                   </div>
                   <span className='text-[#0D142E] font-medium text-[18px]'>Rate this course</span>
-                </div>
+                </div> */}
                 <div className='flex justify-start items-center gap-x-[12px]'>
                   <div className='flex justify-center flex-col items-center gap-y-[1rem]' style={{ width: '26px', height: '26px'}}>
                     <CircularProgressbar value={percentage} text={`${percentage}%`}   styles={buildStyles({
@@ -95,17 +98,20 @@ export const PortalHeader = () => {
                   </div>
                   <span className='text-[#0D142E] font-medium text-[18px]'>Your progress</span>
                </div>
-               <Button type="button" className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
+               {/* <Button type="button" className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
                  <span>Share</span>
                  <div className='w-[15px] h-[12px]'>
                   <img src={arrow} alt="share" />
                  </div>
+               </Button> */}
+                <Button type="button" className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
+                  Logout
                </Button>
              </div>
             </>
-          )
-        }
-        </MediaQuery>
+          {/* ) */}
+        {/* } */}
+        {/* </MediaQuery> */}
     </header>
     <div ref={ref}></div>
   </>
