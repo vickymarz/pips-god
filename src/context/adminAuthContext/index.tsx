@@ -1,13 +1,6 @@
 import { createContext, useContext, useState } from 'react'
+import { UserType, AdminAuthContextType } from 'context/contextDataTypes'
 
-type userType = {
-    firstName: string
-}
-
-type AdminAuthContextType = {
-    user: userType | null
-    setUser: React.Dispatch<React.SetStateAction<userType | null>>
-}
 
 const AdminAuthContext = createContext<AdminAuthContextType>({
     user: null,
@@ -15,7 +8,7 @@ const AdminAuthContext = createContext<AdminAuthContextType>({
 })
 
 export const AdminAuthContextProvider = ({children}: {children: React.ReactNode}) => {
-    const [user, setUser] = useState<userType | null>(null)
+    const [user, setUser] = useState<UserType | null>(null)
 
     const values = {
         user,

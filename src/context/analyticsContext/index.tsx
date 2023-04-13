@@ -1,13 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-
-type AnalyticsContextType = {
-    data: any
-    setData: any
-    startDate: null | Date
-    setStartDate: React.Dispatch<React.SetStateAction<null | Date>>
-    endDate: null | Date
-    setEndDate: React.Dispatch<React.SetStateAction<null | Date>>
-}
+import { AnalyticsContextType } from 'context/contextDataTypes'
 
 const AnalyticsContext = createContext<AnalyticsContextType>({
     data: null,

@@ -1,21 +1,19 @@
-import { LessonOverview, Lessons, Transcript } from "./components";
+import { LessonOverview } from "./components";
+import ReactPlayer from 'react-player'
 import { Button } from "components"
 import { useState } from "react";
-import { CreateCourseContextUse } from 'context';
+import { PortalContextUse } from 'context';
 
 export const Lectures = () => {
-  const {module} = CreateCourseContextUse()
-  console.log(module)
-    const [status, setStatus] = useState("overview");
+  const [status, setStatus] = useState("overview");
+  const { module } = PortalContextUse()
+
   return (
     <div className="w-full">
       <h2 className='md:hidden mb-[21px] text-[#0D142E] text-[20px] font-bold'>Get Started in Forex Trading.</h2>
-        <video controls width="100%" poster=
-         "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png">
-        <source src="/video-example.webm" type="video/webm" />
-        <source src="/video-example.mp4" type="video/mp4" />
-         Sorry, your browser doesn't support videos.
-       </video>
+        <div className="w-full">
+          <ReactPlayer url={module?.course_resources[0].url} controls width="100%" light={module?.course_resources[0].thumbnail}/>
+        </div>
        <ul className="flex justify-start items-center gap-x-[32px] md:gap-x-[45px] border-b border-[#D3D3D3] mt-[20px]">
         <li>
             <Button type='button'
@@ -29,7 +27,7 @@ export const Lectures = () => {
                 Overview
               </Button>
             </li>
-            <li>
+            {/* <li>
               <Button
                 type="button"
                 className={`${
@@ -41,8 +39,8 @@ export const Lectures = () => {
               >
                Transcript
               </Button>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Button
                 type="button"
                 className={`${
@@ -54,17 +52,17 @@ export const Lectures = () => {
               >
                Lesson tools
               </Button>
-            </li>
+            </li> */}
           </ul>
           {status === "overview" && (
             <LessonOverview />
           )}
-          {status === "transcript" && (
+          {/* {status === "transcript" && (
             <Transcript />
           )}
           {status === "lesson" && (
             <Lessons />
-          )}
+          )} */}
     </div>
   )
 }

@@ -1,26 +1,7 @@
 import { useContext, createContext, useState } from "react";
+import { ModuleType, ModuleComponentType } from "context/contextDataTypes";
 
-  type ModuleType = {
-	  id: number
-	  title: string
-	  tags: string,
-	  course_resources: {
-		id?: number
-		type: string
-		url: string
-		thumbnail?: string
-	  }[]
-  }
-interface ModuleComponentType {
-	module: ModuleType,
-	modal: boolean,
-	action: string,
-	setAction: React.Dispatch<React.SetStateAction<string>>
-	setModule: React.Dispatch<React.SetStateAction<ModuleType>>
-	setModal: React.Dispatch<React.SetStateAction<boolean>>
-  }
-
-  const ModuleProp  = {
+const ModuleProp = {
 			"id": 0,
 			"title": "",
 			 'tags': "",

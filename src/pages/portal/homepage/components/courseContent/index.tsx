@@ -1,27 +1,40 @@
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import video from '../../../../../assets/images/video-player.png'
 // import checked from '../../../../../assets/images/checked.png'
-import { useGetModule, useGetModulesBrief } from 'hooks'
-
+import { useGetModulesBrief, useGetModuleDetails } from 'hooks'
+import { PortalContextUse } from 'context';
+import { ModuleType } from 'context/contextDataTypes';
 
 export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClose: React.Dispatch<React.SetStateAction<boolean>>}) => {
+  const [selectedModuleId, setSelectedModuleId] = useState<null | number>(null)
+
+  const { setModule } = PortalContextUse()
+
   const { data: allModulesBrief } = useGetModulesBrief()
 
-  // const {data: singleModule, refetch}  = useGetModule(allModules?.id)
-
-  const handleClick = () => {
-    // refetch()
+  const {data: singleModule}  = useGetModuleDetails(selectedModuleId)
+  const singleModuleResponse = singleModule as ModuleType
+  console.log(singleModuleResponse)
+  const handleModuleClick = (id: null | number) => {
+    setSelectedModuleId(id)
   }
+
+  useEffect(() => {
+    if(singleModuleResponse)
+      setModule(singleModuleResponse)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedModuleId, singleModuleResponse])
 
   const updateIndex = (index: number) => {
     index = index + 1
     return index
   }
 
-  const courses = allModulesBrief?.map(({title}, index) => (
-    <li onClick = {handleClick} className='border border-[#D3D3D3] bg-white px-[23px] py-[7px] flex flex-col justify-start gap-y-[16px] visited:bg-[#EFEFEF]'>
+  const modules = allModulesBrief?.map(({title,id}, index) => (
+    <li key={index} onClick={() => handleModuleClick(id)} role='button' tabIndex={0} className='border border-[#D3D3D3] bg-white px-[23px] py-[7px] flex flex-col justify-start gap-y-[16px] visited:bg-[#EFEFEF]'>
       <div className='flex justify-start items-center gap-x-[5px]'>
         {/* <div className={`hidden ${watched && 'flex'} justify-start items-center w-[16px] h-[16px]`}>
           <img src={checked} alt='checked' className='object-cover'/>
@@ -49,7 +62,7 @@ export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClos
         { allModulesBrief === undefined ?
           <li className="text-[#0D142E] flex justify-center items-center">Not available</li>
             :
-          courses
+          modules
         }
       </ul>
     </div>

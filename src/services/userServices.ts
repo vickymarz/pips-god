@@ -184,6 +184,23 @@ const getAllModulesBrief = async ():Promise<unknown> => {
   }
 };
 
+const getModule = async (id: null | number ):Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+const getModuleDetails = async (id: null | number ):Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}?role=user`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
 const deleteModule = async (id: number):Promise<unknown> => {
   try {
     const result = await fetchApi.deleteE(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
@@ -193,14 +210,6 @@ const deleteModule = async (id: number):Promise<unknown> => {
   }
 }
 
-const getModule = async (id: null | number ):Promise<unknown> => {
-  try {
-    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
-    return result;
-  } catch (err) {
-    return err;
-  }
-};
 
 const updateModule = async (params:UpdateModuleType):Promise<unknown> => {
   try {
@@ -291,6 +300,7 @@ const userServices = {
   getAllModules,
   getAllModulesBrief,
   getModule,
+  getModuleDetails,
   deleteModule,
   updateModule,
   uploadThumbnail,

@@ -1,21 +1,6 @@
 import { useQuery } from 'react-query'
 import userServices from 'services/userServices'
-
-export type ModulesType = {
-   docs: {
-     id: number,
-     title: string
-     tags: string
-     course_resources: {
-       id?: number
-       type: string
-       url: string
-       thumbnail?: string
-     }[]
-   }[]
-   pages?: number
-   total?: number
-}
+import { ModulesType } from 'hooks/hooksDataTypes'
 
 export const useTransactions = (id: string | undefined, onSuccess: (data:any) => void) => {
  return useQuery(['verify-transaction', id], () => userServices.verifyTransaction(id), {
@@ -60,8 +45,14 @@ export const useGetModulesBrief = () => {
 }
 
 export const useGetModule = (id:number | null) => {
-   return useQuery(['course', id], () => userServices.getModule(id), {
+   return useQuery(['module', id], () => userServices.getModule(id), {
       enabled: false,
+   })
+}
+
+export const useGetModuleDetails = (id:number | null) => {
+   return useQuery(['module-details', id], () => userServices.getModuleDetails(id), {
+      enabled: !!id,
    })
 }
 
