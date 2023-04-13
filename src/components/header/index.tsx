@@ -3,7 +3,7 @@ import MediaQuery from 'react-responsive';
 import { useInView } from 'react-intersection-observer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import {Button} from "components";
+import { Button } from "components";
 import { Navbar } from 'components';
 import { Logo } from 'components';
 import { Link } from 'react-router-dom';
