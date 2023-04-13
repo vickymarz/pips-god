@@ -29,6 +29,7 @@ import {
   UPLOAD_THUMBNAIL,
   UPLOAD_VIDEO,
   UPLOAD_RAW_FILE,
+  COURSE_MODULES_BRIEF_URL,
   CONTACT_URL,
 } from "./rootEndPoints";
 
@@ -174,6 +175,15 @@ const getAllModules = async ():Promise<unknown> => {
   }
 };
 
+const getAllModulesBrief = async ():Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_BRIEF_URL}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
 const deleteModule = async (id: number):Promise<unknown> => {
   try {
     const result = await fetchApi.deleteE(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
@@ -279,6 +289,7 @@ const userServices = {
   updateAnalyticsData,
   createModule,
   getAllModules,
+  getAllModulesBrief,
   getModule,
   deleteModule,
   updateModule,

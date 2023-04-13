@@ -14,4 +14,4 @@ export const UPLOAD_THUMBNAIL = 'image/upload'
 export const UPLOAD_VIDEO = 'video/upload'
 export const UPLOAD_RAW_FILE = 'raw/upload'
 export const CONTACT_URL = 'contact'
-
+export const COURSE_MODULES_BRIEF_URL = 'course_modules/brief'
