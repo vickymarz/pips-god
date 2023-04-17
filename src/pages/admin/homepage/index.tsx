@@ -18,7 +18,7 @@ export const Admin = () => {
    
    if(isSuccess) {
       localStorage.removeItem('tokens')
-      navigate('/admin-login)
+      navigate('/admin-login')
    }
     
    const handleLogout = () => {
