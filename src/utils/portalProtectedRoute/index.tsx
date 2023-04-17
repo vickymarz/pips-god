@@ -12,7 +12,7 @@ type TokenType = {
   }
 }
 
-export const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
+export const PortalProtectedRoute = ({children}: {children: React.ReactNode}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const navigate = useNavigate()
