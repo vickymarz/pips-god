@@ -82,7 +82,7 @@ export const AdminSignupForm = () => {
 		let element;
 		if (data?.code === 201) {
 			element = (
-				<p className='mt-4 text-xl text-green-600 text-center'>
+				<p className='w-full mt-4 text-xl text-green-600 text-center'>
 					Admin Registration completed!
 				</p>
 			);
