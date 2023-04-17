@@ -25,7 +25,7 @@ export const PortalHeader = () => {
   //   const handleMenuOpen = () => {
 	// 	setIsMenuOpen(!isMenuOpen);
 	// };
-  const { mutate} = useMutation(userServices.refreshTokens, {
+  const { mutate} = useMutation(userServices.logout, {
     onSuccess: (data) => {
       console.log(data)
       localStorage.removeItem('tokens')
