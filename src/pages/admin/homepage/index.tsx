@@ -5,23 +5,20 @@ import { CourseModal } from "./components/courses/components";
 import {CreateCourseContextUse} from 'context'
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom"
 
 export const Admin = () => {
   const [status, setStatus] = useState("overview");
   const {modal }  = CreateCourseContextUse()
-  
+  const navigate = useNavigate()
   const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
   const refreshToken = tokens?.refresh?.token
   
-   const { mutate, isSuccess } = useMutation(userServices.logout, {
-    onSuccess: (data) => {
-      console.log(data)
-      localStorage.removeItem('tokens')
-    }
-  })
+   const { mutate, isSuccess } = useMutation(userServices.logout)
    
    if(isSuccess) {
-     console.log('hurray')
+      localStorage.removeItem('tokens')
+      navigate('/admin-login)
    }
     
    const handleLogout = () => {
