@@ -9,13 +9,14 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 // import star from '../../assets/images/star.png'
 // import arrow from '../../assets/images/arrow-up.png'
+import { useNavigate } from "react-router-dom"
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
 
 export const PortalHeader = () => {
   const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
   const refreshToken = tokens?.refresh?.token
-
+  const navigate = useNavigate()
   const percentage = 0;
   const { ref, inView } = useInView({
     threshold: 0,
@@ -25,12 +26,12 @@ export const PortalHeader = () => {
   //   const handleMenuOpen = () => {
 	// 	setIsMenuOpen(!isMenuOpen);
 	// };
-  const { mutate} = useMutation(userServices.logout, {
-    onSuccess: (data) => {
-      console.log(data)
+  const { mutate, isSuccess} = useMutation(userServices.logout)
+  
+   if(isSuccess) {
       localStorage.removeItem('tokens')
-    }
-  })
+      navigate('/login')
+   }
 
   const handleLogout = () => {
     mutate({'refreshToken': refreshToken})
