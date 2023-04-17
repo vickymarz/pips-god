@@ -3,15 +3,36 @@ import { AdminHeader, Courses, Overview } from "./components"
 import { Button, Logo } from "components"
 import { CourseModal } from "./components/courses/components";
 import {CreateCourseContextUse} from 'context'
+import userServices from "services/userServices";
+import { useMutation } from "react-query";
 
 export const Admin = () => {
   const [status, setStatus] = useState("overview");
   const {modal }  = CreateCourseContextUse()
+  
+  const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
+  const refreshToken = tokens?.refresh?.token
+  
+   const { mutate} = useMutation(userServices.refreshTokens, {
+    onSuccess: (data) => {
+      console.log(data)
+      localStorage.removeItem('tokens')
+    }
+  })
+    
+   const handleLogout = () => {
+    mutate({'refreshToken': refreshToken})
+  }
 
   return (
     <>
     <div className='px-6 py-[24px] md:px-[80px]'>
-      <Logo />
+      <div className='flex justify-between items-center w-full'>
+        <Logo />
+        <Button type="button" onClick={handleLogout} className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
+         Logout
+        </Button>
+      </div>
       <AdminHeader />
       <ul className="flex justify-start items-center gap-x-[45px] border-b border-[#D3D3D3] mt-[20px]">
         <li>
