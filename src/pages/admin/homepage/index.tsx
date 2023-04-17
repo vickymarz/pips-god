@@ -13,12 +13,16 @@ export const Admin = () => {
   const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
   const refreshToken = tokens?.refresh?.token
   
-   const { mutate} = useMutation(userServices.logout, {
+   const { mutate, isSuccess } = useMutation(userServices.logout, {
     onSuccess: (data) => {
       console.log(data)
       localStorage.removeItem('tokens')
     }
   })
+   
+   if(isSuccess) {
+     console.log('hurray')
+   }
     
    const handleLogout = () => {
     mutate({'refreshToken': refreshToken})
