@@ -58,7 +58,7 @@ export const AdminSignupForm = () => {
         onSuccess: (data) => {
 		console.log(data)
           if (data?.code === 201) {
-            localStorage.setItem("tokens", JSON.stringify(data.tokens));
+            localStorage.setItem("tokens", JSON.stringify(data?.data.tokens));
 			setTimeout(() => {
 				navigate("/admin", {state: data?.data.user});
 			}, 1000);
