@@ -3,7 +3,7 @@ import MediaQuery from 'react-responsive';
 import { useInView } from 'react-intersection-observer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import {Button} from "components";
+import { Button } from "components";
 import { Navbar } from 'components';
 import { Logo } from 'components';
 import { Link } from 'react-router-dom';
@@ -28,11 +28,11 @@ export const Header = () => {
             <>
               {isMenuOpen ? (
 			          <Button type="button" onClick={handleMenuOpen} className="z-10">
-				          <FontAwesomeIcon icon={faTimes} className={`text-white text-[25px] ${inView ? '' : 'text-[#232323]'}`}/>
+				          <FontAwesomeIcon icon={faTimes} className={` text-[25px] ${inView ? 'text-white' : 'text-[#232323]'}`}/>
 				        </Button>
 				      ) : (
 				        <Button type="button" onClick={handleMenuOpen}>
-				          <FontAwesomeIcon icon={faBars}  className={`text-white text-[25px] ${inView ? '' : 'text-[#232323]'}`}/>
+				          <FontAwesomeIcon icon={faBars}  className={` text-[25px] ${inView ? 'text-white' : 'text-[#232323]'}`}/>
 				        </Button>
 				      )
               }
@@ -48,7 +48,7 @@ export const Header = () => {
               <Link to={'./login'} className={`font-productSans rounded-lg py-[0.5rem] px-[0.9rem] text-[0.9rem] ${inView ? 'text-white border border-white' : 'text-[#0D142E] border border-[#0D142E]'}`}>
                 Log in
               </Link>
-              <Link to={'/mentorship_payment'} className={`font-productSans rounded-lg bg-white text-[#0D142E] py-[0.5rem] px-[0.9rem] text-[0.9rem] font-bold ${inView ? '' : 'text-[#fff] bg-[#0D142E]'}`}>
+              <Link to={'/mentorship_payment'} className={`font-productSans rounded-lg  py-[0.5rem] px-[0.9rem] text-[0.9rem] font-bold ${inView ? 'bg-white text-[#0D142E]' : 'text-[#fff] bg-[#0D142E]'}`}>
                 Get Started
               </Link>
              </div>

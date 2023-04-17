@@ -1,14 +1,14 @@
 
 import { Route, Routes } from 'react-router';
-import {adminRoutesData} from '../adminRoutesData';
-import { AdminProtectedRoute } from 'utils';
+import { adminRoutesData } from '../adminRoutesData';
+import { ProtectedRoute } from 'utils';
 
 export const AdminRoutes = () => {
     const adminRoutes = adminRoutesData.map(({ path, id, element }) => {
         return <Route key={id} path={`/${path}`} element={
-            <AdminProtectedRoute>
+            <ProtectedRoute>
             {element}
-           </AdminProtectedRoute>
+           </ProtectedRoute>
         } />;
     });
 

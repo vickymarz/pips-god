@@ -20,6 +20,8 @@ import {
   SIGNUP_URL,
   VERIFY_EMAIL,
   LOGIN_URL,
+  LOGOUT_URL,
+  REFRESH_TOKENS_URL,
   FORGOT_PASSWORD_URL,
   RESET_PASSWORD_URL,
   ANALYTICS_URL,
@@ -29,6 +31,7 @@ import {
   UPLOAD_THUMBNAIL,
   UPLOAD_VIDEO,
   UPLOAD_RAW_FILE,
+  COURSE_MODULES_BRIEF_URL,
   CONTACT_URL,
 } from "./rootEndPoints";
 
@@ -72,6 +75,24 @@ const verifyEmail = async (params: EmailVerifyTypes ) => {
 const login = async (params: LoginTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${LOGIN_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const refreshTokens = async (params: {refreshToken: string}):Promise<unknown> => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${REFRESH_TOKENS_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const logout = async (params: {refreshToken: string}) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${LOGOUT_URL}`, params);
     return result;
   } catch (err) {
     return err;
@@ -174,14 +195,14 @@ const getAllModules = async ():Promise<unknown> => {
   }
 };
 
-const deleteModule = async (id: number):Promise<unknown> => {
+const getAllModulesBrief = async ():Promise<unknown> => {
   try {
-    const result = await fetchApi.deleteE(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_BRIEF_URL}`);
     return result;
   } catch (err) {
     return err;
   }
-}
+};
 
 const getModule = async (id: null | number ):Promise<unknown> => {
   try {
@@ -191,6 +212,24 @@ const getModule = async (id: null | number ):Promise<unknown> => {
     return err;
   }
 };
+const getModuleDetails = async (id: null | number ):Promise<unknown> => {
+  try {
+    const result = await fetchApi.get(`${BASE_URL}/${COURSE_MODULES_URL}/${id}?role=user`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const deleteModule = async (id: number):Promise<unknown> => {
+  try {
+    const result = await fetchApi.deleteE(`${BASE_URL}/${COURSE_MODULES_URL}/${id}`);
+    return result;
+  } catch (err) {
+    return err;
+  }
+}
+
 
 const updateModule = async (params:UpdateModuleType):Promise<unknown> => {
   try {
@@ -269,6 +308,8 @@ const userServices = {
   register,
   verifyEmail,
   login,
+  logout,
+  refreshTokens,
   recoverPassword,
   resetToken,
   resetPassword,
@@ -279,7 +320,9 @@ const userServices = {
   updateAnalyticsData,
   createModule,
   getAllModules,
+  getAllModulesBrief,
   getModule,
+  getModuleDetails,
   deleteModule,
   updateModule,
   uploadThumbnail,

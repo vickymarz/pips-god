@@ -33,7 +33,7 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
       ];
 
       const navigation = nav.map(({ id, path, children }) => (
-        <li key={id} className={`text-center font-productSans text-[#fff] text-[0.9rem] ${view ? '' : 'text-[#232323]'}`}>
+        <li key={id} className={`text-center font-productSans text-[0.9rem] ${view ? 'text-[#fff]' : 'text-[#232323]'}`}>
           <Link
             to={`/${path}`}
             onClick={handleMenuOpen}

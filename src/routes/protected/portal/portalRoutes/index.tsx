@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router';
-import { PortalProtectedRoute } from 'utils';
-import {portalRoutesData} from '../portalRoutesData';
+import { ProtectedRoute } from 'utils';
+import { portalRoutesData } from '../portalRoutesData';
 
 export const PortalRoutes = () => {
     const portalRoutes = portalRoutesData.map(({ path, id, element }) => {
         return <Route key={id} path={`/${path}`} element={
-          <PortalProtectedRoute>
+          <ProtectedRoute>
            {element}
-          </PortalProtectedRoute>
+          </ProtectedRoute>
         } />;
     });
     return <Routes>{portalRoutes}</Routes>;

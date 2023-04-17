@@ -19,7 +19,7 @@ export const CourseModal = () => {
   const [title, setTitle] = useState('')
 
   const queryClient = useQueryClient()
-  console.log(module)
+
   useEffect(() => {
     if(module) {
       setImage(module?.course_resources[0]?.thumbnail)

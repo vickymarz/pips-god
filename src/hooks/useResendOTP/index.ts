@@ -1,9 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-type useResendOtpProps = {
-  onTimerComplete?: () => void
-  onResendClick?: (remainingTime:boolean) => void
-}
+import { useResendOtpProps } from "hooks/hooksDataTypes";
 
 export const useResendOTP = ({
   onTimerComplete,
