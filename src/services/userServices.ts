@@ -20,6 +20,8 @@ import {
   SIGNUP_URL,
   VERIFY_EMAIL,
   LOGIN_URL,
+  LOGOUT_URL,
+  REFRESH_TOKENS_URL,
   FORGOT_PASSWORD_URL,
   RESET_PASSWORD_URL,
   ANALYTICS_URL,
@@ -73,6 +75,24 @@ const verifyEmail = async (params: EmailVerifyTypes ) => {
 const login = async (params: LoginTypes) => {
   try {
     const result = await fetchApi.post(`${BASE_URL}/${LOGIN_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const refreshTokens = async (params: {refreshToken: string}):Promise<unknown> => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${REFRESH_TOKENS_URL}`, params);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
+const logout = async (params: {refreshToken: string}) => {
+  try {
+    const result = await fetchApi.post(`${BASE_URL}/${LOGOUT_URL}`, params);
     return result;
   } catch (err) {
     return err;
@@ -288,6 +308,8 @@ const userServices = {
   register,
   verifyEmail,
   login,
+  logout,
+  refreshTokens,
   recoverPassword,
   resetToken,
   resetPassword,

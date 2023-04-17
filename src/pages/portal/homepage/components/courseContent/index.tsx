@@ -17,7 +17,6 @@ export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClos
 
   const {data: singleModule}  = useGetModuleDetails(selectedModuleId)
   const singleModuleResponse = singleModule as ModuleType
-  console.log(singleModuleResponse)
   const handleModuleClick = (id: null | number) => {
     setSelectedModuleId(id)
   }

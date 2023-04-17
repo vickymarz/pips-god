@@ -7,7 +7,7 @@ import { PortalContextUse } from 'context';
 export const LessonOverview = () => {
   const [numPages, setNumPages] = useState(null);
   const { module } = PortalContextUse()
-  console.log(module)
+  
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
   }, [module])

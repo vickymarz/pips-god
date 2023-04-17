@@ -1,2 +1,1 @@
-export * from './adminProtectedRoutes'
-export * from './portalProtectedRoutes'
+export * from './protectedRoutes'

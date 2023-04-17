@@ -9,8 +9,13 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 // import star from '../../assets/images/star.png'
 // import arrow from '../../assets/images/arrow-up.png'
+import userServices from "services/userServices";
+import { useMutation } from "react-query";
 
 export const PortalHeader = () => {
+  const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
+  const refreshToken = tokens?.refresh?.token
+
   const percentage = 0;
   const { ref, inView } = useInView({
     threshold: 0,
@@ -20,7 +25,16 @@ export const PortalHeader = () => {
   //   const handleMenuOpen = () => {
 	// 	setIsMenuOpen(!isMenuOpen);
 	// };
+  const { mutate} = useMutation(userServices.refreshTokens, {
+    onSuccess: (data) => {
+      console.log(data)
+      localStorage.removeItem('tokens')
+    }
+  })
 
+  const handleLogout = () => {
+    mutate({'refreshToken': refreshToken})
+  }
   return (
     <>
     <header className={`w-full h-20 md:h-24 fixed top-0 left-0 right-0 px-5 py-5 md:px-[5%] flex justify-between items-center z-10 bg-[#fff] ${inView ? '' : 'shadow-headerShadow'}`}>
@@ -104,7 +118,7 @@ export const PortalHeader = () => {
                   <img src={arrow} alt="share" />
                  </div>
                </Button> */}
-                <Button type="button" className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
+                <Button type="button" onClick={handleLogout} className='font-productSans rounded-[8px] bg-[#19275E] text-[#fff] py-[0.5rem] px-[0.9rem] text-[0.9rem] flex justify-center items-center gap-x-[10px]'>
                   Logout
                </Button>
              </div>

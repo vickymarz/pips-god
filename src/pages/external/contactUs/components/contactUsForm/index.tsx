@@ -7,17 +7,16 @@ import userServices from '../../../../../services/userServices'
 import { useMutation } from "react-query";
 
 type ContactResponseType = {
-    code: number;
-    message: string;
+    status: string;
 }
 
 export const ContactUsForm = () => {
 const [modal, setModal] = useState(false)
 const [error, setError] = useState<null | string>(null)
 const [userData, setUserData] = useState({
-  name: '',
+  fullName: '',
   email: '',
-  text: '',
+  message: '',
 })
 
 const emailValidation = () => {
@@ -34,13 +33,13 @@ const onChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTM
 const {mutate, isLoading } = useMutation(userServices.contact, {
     onSuccess: (data) => {
       const responseData = data as ContactResponseType
-      if (responseData?.code === 200) {
+      if (responseData?.status === 'received') {
         setModal(true)
         setUserData({
          ...userData,
-         name: '',
+         fullName: '',
          email: '',
-         text: ''
+         message: ''
         })
         setError(null)
       }
@@ -64,10 +63,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ) => {
         <ContactInputComponent
           type='text'
           id='name'
-          name="name"
+          name="fullName"
           onChange={onChange}
           label='Name'
-          value={userData.name}
+          value={userData.fullName}
           placeholder="Your name"
           errorText="Enter a name"
         />
@@ -92,8 +91,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ) => {
           <textarea
             rows={10}
             id="message"
-            name="text"
-            value={userData.text}
+            name="message"
+            value={userData.message}
             onChange={onChange}
             placeholder="Hello..."
             maxLength={100}

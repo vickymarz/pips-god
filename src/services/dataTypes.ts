@@ -46,9 +46,9 @@ export type AnalyticsType = {
 }
 
 export type ContactType = {
-    name: string;
+    fullName: string;
     email: string;
-    text: string;
+    message: string;
 }
 
 export type AddModuleType = {

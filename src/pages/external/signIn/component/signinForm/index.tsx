@@ -32,7 +32,7 @@ export const SigninForm = () => {
     const {mutate, data, isLoading, isError} = useMutation(userServices.login, {
         onSuccess: (data) => {
           if (data?.tokens) {
-            localStorage.setItem("jwt-token", data.tokens.access.token);
+            localStorage.setItem("tokens", JSON.stringify(data.tokens));
             setTimeout(() => {
               navigate("/portal");
             }, 1000);
@@ -60,7 +60,14 @@ export const SigninForm = () => {
 					Incorrect Email or Password
 				</p>
 			);
-		}
+		} else if(data?.code === 403) {
+      element = (
+				<p className='w-full mt-4 md:text-[20px] text-red-600 text-center'>
+					Please verify your email
+				</p>
+			)
+
+    }
 		return element;
 	};
 
@@ -135,14 +142,14 @@ export const SigninForm = () => {
         />
         <span
             className={`absolute ${
-              errors.password ? "bottom-14" : "bottom-3.5"
+              errors.password ? "top-[45px]" : "bottom-3.5"
             } right-3 cursor-pointer`}
             onClick={togglePassword}>
             {passwordShown ? <FiEyeOff /> : <FiEye />}
         </span>
         {errors.password && (
             <p
-                className='italic text-sm'
+                className='right-0 bottom-[-37px] italic text-sm italic text-sm'
                 style={{ color: "red" }}>
                 {errors.password?.message}
             </p>

@@ -29,7 +29,7 @@ export const ContactFormSuccessModal = ({modal, setModal}: PropValues)  => {
             setModal(false);
           }}
           data-close="close"
-          className=" text-xl font-bold py-2.5 px-8 mt-5 md:mt-10 mb-8 text-white bg-[#0056D6] rounded-lg"
+          className=" text-xl font-bold py-2.5 px-8 mt-5 md:mt-10 mb-8 text-white bg-[#0D142E] rounded-lg"
         >
           check mail
         </Button>
