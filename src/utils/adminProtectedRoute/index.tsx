@@ -20,7 +20,7 @@ export const AdminProtectedRoute = ({children}: {children: React.ReactNode}) => 
   const refreshToken = tokens?.refresh?.token
   const accessToken = tokens?.access?.token
 
-    const { mutate } = useMutation(userServices.refreshTokens, {
+    const { mutate, isLoading } = useMutation(userServices.refreshTokens, {
       onSuccess: (data) => {
         const responseData = data as TokenType
         if (responseData.code === 200) {
@@ -32,7 +32,7 @@ export const AdminProtectedRoute = ({children}: {children: React.ReactNode}) => 
         }
       }
     })
-
+    console.log(isLoading)
     useEffect(() => {
       if (!accessToken  || accessToken === undefined) {
         setIsLoggedIn(false)
