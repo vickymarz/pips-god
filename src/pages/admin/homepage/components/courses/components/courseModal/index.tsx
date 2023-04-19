@@ -287,7 +287,6 @@ const errorMsg = () => {
                   className={`border-0 outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full rounded-[8px] bg-[#fff] border border-[#B0B0B0] p-[7px]`}
                   type='text'
                   id='keywords'
-                  required
                   onKeyDown={handleKeyDown}
                   placeholder='Provide your keywords'
                 />
