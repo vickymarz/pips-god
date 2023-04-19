@@ -219,7 +219,7 @@ const errorMsg = () => {
     return (
       <div className={`${modal ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
         {errorMsg()}
-        <form className='w-[80%] ml-auto mr-auto relative my-44 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
+        <form className='w-[80%] ml-auto mr-auto relative my-12 rounded-[27px] flex justify-between items-start bg-white' onSubmit={onSubmit}>
           <div className="p-[32px]">
             <h2 className='mb-[16px] text-[#0D142E] font-semibold text-[1.37rem]'>Course thumbnail <span className='text-[#E8E8E8] font-normal'>(required)</span></h2>
 	          <div className="flex flex-col justify-center items-center gap-y-[32px]">
