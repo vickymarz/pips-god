@@ -288,9 +288,10 @@ const errorMsg = () => {
                   type='text'
                   id='keywords'
                   onKeyDown={handleKeyDown}
-                  placeholder='Provide your keywords and press enter after entering each keyword'
+                  placeholder='Provide your keywords'
                 />
               </div>
+              <span className="text-[12px]">Kindly press enter after typing a keyword </span>
             </div>
             <div className='flex flex-col justify-start items-start gap-y-[19px]'>
               <input type="file" id="videopicker" accept="video/*" onChange={onVideoChange} className='hidden'/>
@@ -307,9 +308,9 @@ const errorMsg = () => {
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
               <label htmlFor='docpicker' className='rounded-[10px] bg-[#E8E8E8] py-[5px] px-[3px] flex justify-start items-center gap-x-[11px]'>
-                <span className='text-[#0D142E] font-medium text-[1.25rem]'>Attach file</span>
+                <span className='text-[#0D142E] font-medium text-[1.25rem]'>Attach pdf</span>
                 <div className='w-[11px] h-[22px]'>
-                  <img src={pin} alt="attach file" />
+                  <img src={pin} alt="attach pdf" />
                 </div>
               </label>
               {isFilePicked && (
