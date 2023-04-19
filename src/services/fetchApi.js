@@ -13,8 +13,13 @@ const currentTime = new Date().toISOString()
 
 const authHeader = () => {
   const tokens = JSON.parse(localStorage.getItem('tokens'));
+  const adminTokens = JSON.parse(localStorage.getItem('admin-tokens'));
   if (tokens) {
     return { Authorization: `Bearer ${tokens.access.token}` };
+  }
+  
+  if (adminTokens) {
+    return { Authorization: `Bearer ${adminTokens.access.token}` };
   }
   return {};
 };
