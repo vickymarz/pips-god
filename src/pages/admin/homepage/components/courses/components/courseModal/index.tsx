@@ -38,7 +38,7 @@ export const CourseModal = () => {
     const file = (target.files as FileList)[0];
 	  setSelectedFile('Please wait...');
     const raw = await userServices.uploadFile(file)
-		setSelectedFile(raw);
+		raw && setSelectedFile("Uploaded!");
 		setIsFilePicked(true);
 	};
 
@@ -47,7 +47,7 @@ export const CourseModal = () => {
 	  setSelectedVideo('Please wait...')
     const file = (target.files as FileList)[0];
     const video = await userServices.uploadVideo(file)
-		setSelectedVideo(video);
+		video && setSelectedVideo("Uploaded");
 		setIsVideoPicked(true);
 	};
 
@@ -288,7 +288,7 @@ const errorMsg = () => {
                   type='text'
                   id='keywords'
                   onKeyDown={handleKeyDown}
-                  placeholder='Provide your video keywords'
+                  placeholder='Provide your keywords and press enter after entering each keyword'
                 />
               </div>
             </div>
