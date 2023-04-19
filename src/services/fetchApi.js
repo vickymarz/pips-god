@@ -1,8 +1,13 @@
 const tokens = JSON.parse(localStorage.getItem('tokens'));
+const adminTokens = JSON.parse(localStorage.getItem('admin-tokens'));
 const refreshToken = tokens?.refresh?.token
+const adiminRefreshToken = adminTokens?.refresh?.token
 const accessToken = tokens?.access?.token
+const adminAccessToken = adminTokens?.access?.token
 const accessTokenTime = tokens?.access?.expires;
+const adminAccessTokenTime = adminTokens?.access?.expires;
 const refreshTokenTime = tokens?.refresh?.expires;
+const adminRefreshTokenTime = adminTokens?.refresh?.expires;
 const currentTime = new Date().toISOString()
 
 
