@@ -46,13 +46,22 @@ const handleRefreshToken = async () => {
 
 if(accessToken) {
   if(accessTokenTime < currentTime) {
-    console.log(true)
+    handleRefreshToken()
+  }
+}
+
+if(adminAccessToken) {
+  if(adminAccessTokenTime < currentTime) {
     handleRefreshToken()
   }
 }
 
 if(refreshTokenTime < currentTime) {
   localStorage.removeItem('tokens')
+}
+
+if(adminRefreshTokenTime < currentTime) {
+  localStorage.removeItem('admin-tokens')
 }
 
 
