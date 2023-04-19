@@ -42,6 +42,24 @@ const handleRefreshToken = async () => {
     localStorage.setItem('tokens', JSON.stringify(data.tokens));
   }
 }
+  
+  if(adminRefreshToken) {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/refresh-tokens`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        adminRefreshToken
+      }),
+  });
+
+  const data = await response.json();
+  console.log(data, data.tokens)
+  if (data.tokens) {
+    localStorage.setItem('admin-tokens', JSON.stringify(data.tokens));
+  }
+}
 }
 
 if(accessToken) {
