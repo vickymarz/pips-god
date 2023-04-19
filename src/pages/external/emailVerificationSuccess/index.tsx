@@ -12,6 +12,7 @@ const [searchParams] = useSearchParams();
 
 const {mutate, data} = useMutation(userServices.verifyEmail, {
   onSuccess: (data) => {
+    console.log(data)
     if (data?.code === 200) {
        return localStorage.setItem("tokens", JSON.stringify(data.tokens));
     }
