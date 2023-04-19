@@ -47,7 +47,7 @@ export const CourseModal = () => {
 	  setSelectedVideo('Please wait...')
     const file = (target.files as FileList)[0];
     const video = await userServices.uploadVideo(file)
-		video && setSelectedVideo("Uploaded");
+		video && setSelectedVideo("Uploaded!");
 		setIsVideoPicked(true);
 	};
 
@@ -198,19 +198,19 @@ const errorMsg = () => {
     );
   } else if (addModuleError || updateModuleError) {
     element = (
-      <p className='mt-4 text-[24px] text-red-600 text-center'>
+      <p className='w-full mt-4 text-[24px] text-red-600 text-center'>
         Something went wrong. Please try again!
       </p>
     );
   } else if (responseData?.code === 208 || responseData2?.code === 208) {
     element = (
-      <p className='mt-4 text-[24px] text-red-600 text-center'>
+      <p className='w-full mt-4 text-[24px] text-red-600 text-center'>
         A course module with this title already exist. KIndly use another descriptive title
       </p>
     );
   } else if(responseData?.code === 400 || responseData2?.code === 400) {
     element = (
-      <p className='mt-4 text-[24px] text-red-600 text-center'>
+      <p className='w-full mt-4 text-[24px] text-red-600 text-center'>
         Kindly upload a thumbnail for your course and ensure that you fill all the fields
       </p>
     );
@@ -287,6 +287,7 @@ const errorMsg = () => {
                   className={`border-0 outline-none text-[#B0B0B0] text-[1.37rem] font-medium w-full rounded-[8px] bg-[#fff] border border-[#B0B0B0] p-[7px]`}
                   type='text'
                   id='keywords'
+                  required
                   onKeyDown={handleKeyDown}
                   placeholder='Provide your keywords'
                 />
