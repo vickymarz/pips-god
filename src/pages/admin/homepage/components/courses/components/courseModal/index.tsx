@@ -45,6 +45,7 @@ export const CourseModal = () => {
     const target= event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
     const video = await userServices.uploadVideo(file)
+                setSelectedVideo('Please wait...')
 		setSelectedVideo(video);
 		setIsVideoPicked(true);
 	};
