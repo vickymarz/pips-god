@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router'
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
-
+import loader from '../../assets/images/200w.gif'
 
 type TokenType = {
   code: number,
@@ -32,7 +32,6 @@ export const AdminProtectedRoute = ({children}: {children: React.ReactNode}) => 
         }
       }
     })
-    console.log(isLoading)
     useEffect(() => {
       if (!accessToken  || accessToken === undefined) {
         setIsLoggedIn(false)
@@ -40,14 +39,27 @@ export const AdminProtectedRoute = ({children}: {children: React.ReactNode}) => 
       } else if(refreshToken) {
         mutate({'refreshToken': refreshToken})
       }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    console.log(isLoading)
   return (
     <>
      {
-        isLoggedIn ? children : null
-     }
+      isLoggedIn ?
+        isLoading ?
+          <div className="bg-[#ffffffe6] h-screen flex justify-center items-center w-full">
+            <div className=''>
+              <img src={loader} alt='' />
+            </div>
+          </div> :
+            children :
+          <div className="bg-[#ffffffe6] h-screen flex justify-center items-center w-full">
+            <div className=''>
+                <img src={loader} alt='' />
+            </div>
+          </div>
+      }
     </>
   )
 }

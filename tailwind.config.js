@@ -20,6 +20,7 @@ module.exports = {
         'rightHill': "url('/src/assets/images/right-hill.png')",
         'authImg': "url('/src/assets/images/auth-image.png')",
         'authDesktop': "url('/src/assets/images/auth-desktop.png')",
+        'gifLoader': "url('/src/assets/images/200w.gif')",
       },
       dropShadow: {
         'mentorShadow': '5.30801px 2.654px 1.76934px rgba(29, 30, 44, 0.25)',
