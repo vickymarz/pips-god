@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router'
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
-
+import loader from '../../assets/images/200w.gif'
 
 type TokenType = {
   code: number,
@@ -20,7 +20,7 @@ export const PortalProtectedRoute = ({children}: {children: React.ReactNode}) =>
   const refreshToken = tokens?.refresh?.token
   const accessToken = tokens?.access?.token
 
-    const { mutate } = useMutation(userServices.refreshTokens, {
+    const { mutate, isLoading } = useMutation(userServices.refreshTokens, {
       onSuccess: (data) => {
         const responseData = data as TokenType
         if (responseData.code === 200) {
@@ -32,7 +32,7 @@ export const PortalProtectedRoute = ({children}: {children: React.ReactNode}) =>
         }
       }
     })
-    
+
     useEffect(() => {
       if (!accessToken  || accessToken === undefined) {
         setIsLoggedIn(false)
@@ -46,8 +46,20 @@ export const PortalProtectedRoute = ({children}: {children: React.ReactNode}) =>
   return (
     <>
      {
-        isLoggedIn ? children : null
-     }
+      isLoggedIn ?
+        isLoading ?
+          <div className="bg-[#ffffffe6] h-screen flex justify-center items-center w-full">
+            <div className=''>
+              <img src={loader} alt='' />
+            </div>
+          </div> :
+            children :
+          <div className="bg-[#ffffffe6] h-screen flex justify-center items-center w-full">
+            <div className=''>
+                <img src={loader} alt='' />
+            </div>
+          </div>
+      }
     </>
   )
 }
