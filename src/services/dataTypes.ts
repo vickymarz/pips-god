@@ -23,7 +23,7 @@ export type RegisterTypes = {
 export type LoginTypes = {
     email: string;
     password: string;
-    role?: "admin" | "user"
+    userRole?: "admin" | "user"
 }
 
 export type EmailVerifyTypes = {

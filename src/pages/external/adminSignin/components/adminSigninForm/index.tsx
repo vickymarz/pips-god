@@ -29,7 +29,7 @@ export const AdminSigninForm = () => {
 		setPasswordShown(!passwordShown);
 	};
 
-    const {mutate, data, isLoading, isError} = useMutation(userServices.login, {
+    const {mutate, data, isLoading, isError} = useMutation(userServices.adminLogin, {
       onSuccess: (data) => {
           if (data?.tokens ) {
             localStorage.setItem("admin-tokens", JSON.stringify(data.tokens));
@@ -42,7 +42,7 @@ export const AdminSigninForm = () => {
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-		mutate({'email': data.email, 'password': data.password, role: "admin" })
+		mutate({'email': data.email, 'password': data.password, userRole: "admin" })
 	};
 
 
@@ -58,6 +58,12 @@ export const AdminSigninForm = () => {
 			element = (
 				<p className='w-full mt-4 md:text-[20px] text-red-600 text-center'>
 					Incorrect Email or Password
+				</p>
+			);
+		} else if (data?.code === 403) {
+			element = (
+				<p className='w-full mt-4 md:text-[20px] text-red-600 text-center'>
+					You are not yet registered as an admin
 				</p>
 			);
 		}
