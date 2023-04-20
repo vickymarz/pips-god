@@ -42,7 +42,7 @@ export const AdminSigninForm = () => {
 
 	const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
 		reset();
-		mutate(data)
+		mutate({'email': data.email, 'password': data.password, role: "admin" })
 	};
 
 

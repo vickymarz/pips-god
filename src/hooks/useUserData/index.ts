@@ -30,14 +30,15 @@ export const useGetModules = () => {
  })
 }
 
+
 export const useGetModulesBrief = () => {
  return useQuery('get-all-modules-brief', userServices.getAllModulesBrief,
  {
    staleTime: 60000,
    select: (data) => {
       const modulesBriefResponse = data as ModulesType
-      const modulesBrief = modulesBriefResponse?.docs.map(({id, title}: {id: number, title: string}) => (
-         {id, title}
+      const modulesBrief = modulesBriefResponse?.docs.map(({id, title, users}) => (
+         {id, title, users}
       ))
       return modulesBrief
    }

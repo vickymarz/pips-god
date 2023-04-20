@@ -14,6 +14,11 @@ docs: {
     url: string
     thumbnail?: string
     }[]
+    users: {
+      user_course_module: {
+        isCompleted: boolean
+      }
+    }[]
 }[]
 pages?: number
 total?: number
