@@ -17,7 +17,7 @@ const authHeader = () => {
   if (tokens) {
     return { Authorization: `Bearer ${tokens.access.token}` };
   }
-  
+
   if (adminTokens) {
     return { Authorization: `Bearer ${adminTokens.access.token}` };
   }
@@ -42,7 +42,7 @@ const handleRefreshToken = async () => {
     localStorage.setItem('tokens', JSON.stringify(data.tokens));
   }
 }
-  
+
   if(adminRefreshToken) {
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/refresh-tokens`, {
       method: 'POST',
@@ -50,7 +50,7 @@ const handleRefreshToken = async () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        adminRefreshToken
+        'refreshToken': adminRefreshToken
       }),
   });
 

@@ -7,7 +7,7 @@ export const AnalyticsCard = ({data}: {data: any}) => {
       if(data?.activeUsers?.total === 0) {
         return percent = 0
       } else {
-      percent = Math.round(((members) / (data?.activeUsers?.total)) * 100)
+      percent = Math.round(((members === undefined ? 0 : members) / (data?.activeUsers?.total)) * 100)
       return percent
     }
    }
