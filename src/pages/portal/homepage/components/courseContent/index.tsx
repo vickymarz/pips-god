@@ -17,13 +17,20 @@ export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClos
 
   const {data: singleModule}  = useGetModuleDetails(selectedModuleId)
   const singleModuleResponse = singleModule as ModuleType
+
   const handleModuleClick = (id: null | number) => {
     setSelectedModuleId(id)
   }
 
   useEffect(() => {
-    if(singleModuleResponse)
+    if(singleModuleResponse && singleModuleResponse?.code === undefined) {
       setModule(singleModuleResponse)
+    }
+
+    if(singleModuleResponse?.code === 403) {
+      setModule(singleModuleResponse)
+      console.log(singleModuleResponse, 'error')
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedModuleId, singleModuleResponse])
 

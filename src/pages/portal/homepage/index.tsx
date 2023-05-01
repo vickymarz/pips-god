@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import { PortalHeader } from 'components'
 import { Lectures, CourseContent } from './components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

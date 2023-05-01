@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AdminHeader, Courses, Overview } from "./components"
 import { Button, Logo } from "components"
 import { CourseModal } from "./components/courses/components";
-import {CreateCourseContextUse} from 'context'
+import { CreateCourseContextUse } from 'context'
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom"
@@ -13,14 +13,14 @@ export const Admin = () => {
   const navigate = useNavigate()
   const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
   const refreshToken = tokens?.refresh?.token
-  
+
    const { mutate, isSuccess } = useMutation(userServices.logout)
-   
+
    if(isSuccess) {
       localStorage.removeItem('tokens')
       navigate('/admin-login')
    }
-    
+
    const handleLogout = () => {
     mutate({'refreshToken': refreshToken})
   }

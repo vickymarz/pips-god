@@ -12,7 +12,20 @@ export const Lectures = () => {
     <div className="w-full">
       <h2 className='md:hidden mb-[21px] text-[#0D142E] text-[20px] font-bold'>Get Started in Forex Trading.</h2>
         <div className="w-full">
-          <ReactPlayer url={module?.course_resources[0].url} controls width="100%" light={module?.course_resources[0].thumbnail}/>
+          {module?.code === 403 ?
+          <div className="w-full h-[300px] bg-[#F2F3F7] flex justify-center items-center">
+            <p className="text-[#0D142E] text-[20px] font-bold">
+              Sorry, this module is currently not available.
+              Kindly check back after 24 hrs of completing the previous module.
+            </p>
+            <p className="text-[#0D142E] text-[20px] font-bold">
+              Kindly check back after 24 hrs of completing the previous module.
+            </p>
+          </div>
+          :
+          <ReactPlayer url={module?.course_resources !== undefined ? module?.course_resources[0].url : ''} controls width="100%" light={ module?.course_resources !== undefined ? module?.course_resources[0].thumbnail : ''}/>
+          }
+
         </div>
        <ul className="flex justify-start items-center gap-x-[32px] md:gap-x-[45px] border-b border-[#D3D3D3] mt-[20px]">
         <li>

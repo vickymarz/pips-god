@@ -12,6 +12,7 @@ export const AnalyticsCard = ({data}: {data: any}) => {
     }
    }
 
+
   return (
     <div className="grid grid-cols-4 justify-between gap-x-[32px] w-full">
          <div className="text-[#0D142E] rounded-[8px] border border-[#D3D3D3] bg-[#fff] p-[20px] flex flex-col gap-y-[14px] relative">

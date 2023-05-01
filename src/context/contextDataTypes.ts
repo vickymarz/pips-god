@@ -17,15 +17,16 @@ export type AnalyticsContextType = {
 }
 
 export type ModuleType = {
-    id: number
-    title: string
-    tags: string,
-    course_resources: {
+    id?: number
+    title?: string
+    tags?: string,
+    course_resources?: {
       id?: number
-      type: string
-      url: string
+      type?: string
+      url?: string
       thumbnail?: string
     }[]
+    code?: number
 }
 
 export type ModuleComponentType = {

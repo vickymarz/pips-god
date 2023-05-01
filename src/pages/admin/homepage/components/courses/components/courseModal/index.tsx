@@ -21,7 +21,7 @@ export const CourseModal = () => {
   const queryClient = useQueryClient()
 
   useEffect(() => {
-    if(module) {
+    if(module && module?.course_resources !== undefined && module?.tags !== undefined && module?.title !== undefined) {
       setImage(module?.course_resources[0]?.thumbnail)
       setSelectedFile(module?.course_resources[1]?.url)
       setSelectedVideo(module?.course_resources[0]?.url)
@@ -140,7 +140,7 @@ const onSubmit = (e:React.FormEvent) => {
     })
   }
 
-  if (action === 'edit') {
+  if (action === 'edit' && module?.course_resources !== undefined) {
     updateModule({
       "courseResources": [
         {
