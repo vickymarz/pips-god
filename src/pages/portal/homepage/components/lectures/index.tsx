@@ -13,7 +13,7 @@ export const Lectures = () => {
       <h2 className='md:hidden mb-[21px] text-[#0D142E] text-[20px] font-bold'>Get Started in Forex Trading.</h2>
         <div className="w-full">
           {module?.code === 403 ?
-          <div className="w-full h-[300px] bg-[#F2F3F7] flex justify-center items-center">
+          <div className="w-full h-[300px] bg-[#F2F3F7] flex flex-col justify-center items-center">
             <p className="text-[#0D142E] text-[20px] font-bold">
               Sorry, this module is currently not available.
             </p>
