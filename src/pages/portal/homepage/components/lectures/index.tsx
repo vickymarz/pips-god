@@ -16,7 +16,6 @@ export const Lectures = () => {
           <div className="w-full h-[300px] bg-[#F2F3F7] flex justify-center items-center">
             <p className="text-[#0D142E] text-[20px] font-bold">
               Sorry, this module is currently not available.
-              Kindly check back after 24 hrs of completing the previous module.
             </p>
             <p className="text-[#0D142E] text-[20px] font-bold">
               Kindly check back after 24 hrs of completing the previous module.
