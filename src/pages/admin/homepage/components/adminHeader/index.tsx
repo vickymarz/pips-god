@@ -4,6 +4,7 @@ import { Button } from 'components'
 import admin from '../../../../../assets/images/admin.png'
 import moment from 'moment'
 import {CreateCourseContextUse, AdminAuthContextUse} from 'context'
+import { capitalizeFirstLetter } from 'helpers'
 
 export const AdminHeader = () => {
   const {setModal}  = CreateCourseContextUse()
@@ -28,7 +29,7 @@ export const AdminHeader = () => {
         </div>
         <div className='flex flex-col justify-start items-start gap-y-[5px] '>
           <h2 className='text-[#19275E] text-[1.37rem] font-semibold'>
-            {user?.firstName} - Admin Access
+            {capitalizeFirstLetter(user?.firstName)} - Admin Access
           </h2>
           <p className='text-[#19275E]'>
             {moment().toString()}
