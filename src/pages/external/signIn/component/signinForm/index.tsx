@@ -156,7 +156,7 @@ export const SigninForm = () => {
         )}
       </div>
 
-      <div className="flex justify-between mt-[0] md:mt-[20px]  w-full">
+      <div className="flex justify-between mt-[0] w-full">
         <div className='flex justify-start items-center gap-x-[9px]'>
           <input type="checkbox" className={`appearance-none w-[16px] md:w-[26px] h-[16px] md:h-[26px] relative outline-none bg-transparent border border-[#000] rounded-[3.7px] ${isChecked ? 'relative' : ''}`} checked={isChecked} onChange={handleCheckbox} id={`${isChecked ? 'checkbox' : ''}`} />
           <span className="text-[1rem] md:text-[16px] font-medium text-[#8B8B8B]">Remember me</span>
@@ -165,7 +165,7 @@ export const SigninForm = () => {
       </div>
       <Link to={'/forgot_password'} className="md:hidden mt-[15px] text-[#19275E] text-[1rem] md:text-[1.12rem] font-medium">Forget password?</Link>
       <button
-        className='mt-[150px] md:my-[85px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]'
+        className='mt-[150px] md:my-[60px] text-[1.06rem] font-bold text-white bg-[#0D142E] rounded-[4px] py-[0.75rem] px-[1.56rem] tracking-[0.02em]'
         type='submit'>
         {isLoading ? "Loading..." : "Sign In"}
       </button>
