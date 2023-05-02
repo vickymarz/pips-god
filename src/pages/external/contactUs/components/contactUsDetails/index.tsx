@@ -17,7 +17,7 @@ export const ContactUsDetails = () => {
         <div className="flex justify items-center text-[0.87rem] md:text-[1.37rem] font-bold text-[#0D142E] gap-x-[17px]">
           <FaRegEnvelope className="w-6 h-6 text-[#0D142E]" />
           <a href="mailto:hello@pipsgod@gmail.com" className="text-[#0D142E]">
-            hello@pipsgod@gmail.com
+            hello@pipsgod.com
           </a>
         </div>
       </div>

@@ -94,7 +94,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ) => {
             name="message"
             value={userData.message}
             onChange={onChange}
-            placeholder="Hello..."
+            placeholder="Write your message here"
             maxLength={100}
             className={` w-full border bg-transparent rounded-lg p-3 outline-none mt-2.5 placeholder:text-slate-400 placeholder:text-base placeholder:font-medium
                border-gray-400 focus:border-blue-500
