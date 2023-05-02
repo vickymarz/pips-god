@@ -106,7 +106,7 @@ export const AdminSignupForm = () => {
             );
         } else if(getRoleResponse?.data === true) {
             element = (
-                <p className='w-full mt-4 text-xl text-red-600 text-center'>
+                <p className='w-full mt-4 text-xl text-green-600 text-center'>
                     This email has already been registered for a different role. Kindly enter the password in your previous registration.
                 </p>
             );
