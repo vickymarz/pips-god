@@ -58,11 +58,11 @@ export const Readings = ({data}:{data:ModulesType}) => {
       <div className="flex justify-start items-start gap-x-[32px]">
         <Button type='button' onClick={() => mutate(id)} className="rounded-[3.5px] border border-[#D3DDE0] bg-white py-[11px] px-[13px] flex justify-start items-center gap-x-[11px] text-[#EA4545]">
           <FontAwesomeIcon icon={faTrashCan} className='text-[18px]'/>
-          <span className='text-[14px] text-productSans'>Delete file</span>
+          <span className='text-[14px] text-productSans'>Delete Module</span>
         </Button>
         <Button type='button' onClick={() => handleModuleClick(id)} className="rounded-[3.5px]  bg-[#19275E] py-[11px] px-[13px] flex justify-start items-center gap-x-[11px] text-[#fff]">
            <FontAwesomeIcon icon={faPen} className='text-[18px]'/>
-           <span className='text-[14px] text-productSans'>Edit file</span>
+           <span className='text-[14px] text-productSans'>Edit Module</span>
         </Button>
       </div>
     </div>
