@@ -42,19 +42,19 @@ export const ResetTokenForm = ({email}: {email: string}) => {
 		let element;
 		if (data?.code === 200) {
 			element = (
-				<p className='mt-4 md:text-[20px] text-green-600 text-center'>
+				<p className='w-full mt-4 md:text-[20px] text-green-600 text-center'>
 					Proceed to reset your password!
 				</p>
 			);
 		} else if (data?.code === 401) {
 			element = (
-				<p className='mt-4 md:text-[20px] text-red-600 text-center'>
+				<p className='w-full mt-4 md:text-[20px] text-red-600 text-center'>
 					Invalid token!
 				</p>
 			);
 		} else if (isLoading) {
           element = (
-            <p className='mt-4 md:text-[20px] text-[#74671D] text-center'>
+            <p className='w-full mt-4 md:text-[20px] text-[#74671D] text-center'>
                 Verification in progress...
             </p>
           );

@@ -12,17 +12,17 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
     const nav = [
         {
           id: 1,
-          path: 'about',
+          path: '/',
           children: 'About Us',
         },
         {
           id: 2,
-          path: 'academy',
+          path: '/',
           children: 'The Academy',
         },
         {
           id: 3,
-          path: 'faq',
+          path: '/',
           children: 'FAQs',
         },
         {
