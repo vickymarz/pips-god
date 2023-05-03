@@ -58,7 +58,7 @@ export const Admin = () => {
                 }'outline-0 border-0 focus:outline-0 text-[#53717A] text-[1.37rem] font-medium'`}
                 onClick={() => setStatus("courses")}
               >
-               Courses
+              Modules
               </Button>
             </li>
           </ul>

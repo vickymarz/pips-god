@@ -67,7 +67,7 @@ export const Readings = ({data}:{data:ModulesType}) => {
       {
         data === undefined || data?.docs.length === 0 ?
         <div className='flex justify-center items-center'>
-        <p className='text-[30px]'>Your data will appear here once you add a module.</p>
+        <p className='text-[30px]'>There are no course modules yet</p>
       </div> :
          documents
       }
