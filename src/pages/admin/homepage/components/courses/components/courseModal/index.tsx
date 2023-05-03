@@ -39,7 +39,6 @@ export const CourseModal = () => {
 	  setSelectedFile('false');
     const raw = await userServices.uploadFile(file)
 		raw && setSelectedFile(raw);
-    setSelectedFile('true');
 		setIsFilePicked(true);
 	};
 
@@ -49,7 +48,6 @@ export const CourseModal = () => {
     const file = (target.files as FileList)[0];
     const video = await userServices.uploadVideo(file)
 		video && setSelectedVideo(video);
-    setSelectedVideo('true')
 		setIsVideoPicked(true);
 	};
 
@@ -305,7 +303,7 @@ const errorMsg = () => {
               </label>
               {isVideoPicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedVideo === 'false' ? 'Please wait...' : selectedVideo === 'true' && 'Uploaded!' }</p>
+					        <p >{selectedVideo === '' ? 'Please wait...' : selectedVideo !== '' && 'Uploaded!' }</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -317,7 +315,7 @@ const errorMsg = () => {
               </label>
               {isFilePicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedFile === 'false' ? 'Please wait...' : selectedFile === 'true' && 'Uploaded!' }</p>
+					        <p >{selectedFile === '' ? 'Please wait...' : selectedFile !== '' && 'Uploaded!' }</p>
 				        </span>
 			        )}
             </div>
