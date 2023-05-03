@@ -15,12 +15,10 @@ export const VipPaymentForm = ({id}:{id:string}) => {
     const location = useLocation()
 
     const emailAssign = () => {
-        let userEmail: string
-        if(location?.state === null){
-            return userEmail = ''
-        }
-        return userEmail = location?.state.email
+        if(location?.state === null) return ''
+        return location?.state.email
     }
+    
     const {
 		register,
 		handleSubmit,
