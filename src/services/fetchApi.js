@@ -1,5 +1,5 @@
 const tokens = JSON.parse(localStorage.getItem('tokens'));
-const adminTokens = JSON.parse(localStorage.getItem('admin-tokens'));
+const adminTokens = JSON.parse(localStorage.getItem('ATS'));
 const refreshToken = tokens?.refresh?.token
 const adminRefreshToken = adminTokens?.refresh?.token
 const accessToken = tokens?.access?.token
@@ -13,7 +13,7 @@ const currentTime = new Date().toISOString()
 
 const authHeader = () => {
   const tokens = JSON.parse(localStorage.getItem('tokens'));
-  const adminTokens = JSON.parse(localStorage.getItem('admin-tokens'));
+  const adminTokens = JSON.parse(localStorage.getItem('ATS'));
   if (tokens) {
     return { Authorization: `Bearer ${tokens.access.token}` };
   }
@@ -57,7 +57,7 @@ const handleRefreshToken = async () => {
   const data = await response.json();
   console.log(data, data.tokens)
   if (data.tokens) {
-    localStorage.setItem('admin-tokens', JSON.stringify(data.tokens));
+    localStorage.setItem('ATS', JSON.stringify(data.tokens));
   }
 }
 }
@@ -79,7 +79,7 @@ if(refreshTokenTime < currentTime) {
 }
 
 if(adminRefreshTokenTime < currentTime) {
-  localStorage.removeItem('admin-tokens')
+  localStorage.removeItem('ATS')
 }
 
 

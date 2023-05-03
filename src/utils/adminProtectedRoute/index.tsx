@@ -16,7 +16,7 @@ export const AdminProtectedRoute = ({children}: {children: React.ReactNode}) => 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const navigate = useNavigate()
-  const tokens = JSON.parse(localStorage.getItem('admin-tokens') || '{}')
+  const tokens = JSON.parse(localStorage.getItem('ATS') || '{}')
   const refreshToken = tokens?.refresh?.token
   const accessToken = tokens?.access?.token
 
@@ -25,7 +25,7 @@ export const AdminProtectedRoute = ({children}: {children: React.ReactNode}) => 
         const responseData = data as TokenType
         if (responseData.code === 200) {
             setIsLoggedIn(true)
-            localStorage.setItem("admin-tokens", JSON.stringify(responseData?.data));
+            localStorage.setItem("ATS", JSON.stringify(responseData?.data));
         } else {
             setIsLoggedIn(false)
             return navigate('/admin-login')

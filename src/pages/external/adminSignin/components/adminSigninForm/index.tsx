@@ -32,7 +32,7 @@ export const AdminSigninForm = () => {
     const {mutate, data, isLoading, isError} = useMutation(userServices.adminLogin, {
       onSuccess: (data) => {
           if (data?.tokens ) {
-            localStorage.setItem("admin-tokens", JSON.stringify(data.tokens));
+            localStorage.setItem("ATS", JSON.stringify(data.tokens));
             setTimeout(() => {
               navigate("/admin", {state: data?.user});
             }, 1000);

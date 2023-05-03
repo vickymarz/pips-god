@@ -57,7 +57,7 @@ export const AdminSignupForm = () => {
     const { mutate:registerAdmin, isLoading, error, data } = useMutation(userServices.adminRegister, {
         onSuccess: (data) => {
           if (data?.code === 201) {
-            localStorage.setItem("admin-tokens", JSON.stringify(data?.data.tokens));
+            localStorage.setItem("ATS", JSON.stringify(data?.data.tokens));
 			setTimeout(() => {
 				navigate("/admin", {state: data?.data.user});
 			}, 1000);
