@@ -32,7 +32,7 @@ export const SigninForm = () => {
     const {mutate, data, isLoading, isError} = useMutation(userServices.login, {
         onSuccess: (data) => {
           if (data?.tokens) {
-            localStorage.setItem("tokens", JSON.stringify(data.tokens));
+            localStorage.setItem('UTS', JSON.stringify(data.tokens));
             setTimeout(() => {
               navigate("/portal");
             }, 1000);

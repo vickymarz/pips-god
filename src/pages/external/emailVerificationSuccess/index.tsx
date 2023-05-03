@@ -15,7 +15,7 @@ const {mutate, data} = useMutation(userServices.verifyEmail, {
     console.log(data)
     if (data?.code === 200) {
 
-       return localStorage.setItem("tokens", JSON.stringify(data.data.tokens))
+       return localStorage.setItem('UTS', JSON.stringify(data.data.tokens))
     }
   },
 })

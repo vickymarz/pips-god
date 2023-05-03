@@ -197,7 +197,7 @@ const errorMsg = () => {
   if (responseData?.status === 200 || responseData2?.status === 200) {
     element = (
       <p className='w-full mt-4 text-[24px] text-green-600 text-center'>
-        Course added successfully!
+        Course module added successfully!
       </p>
     );
   } else if (addModuleError || updateModuleError) {
