@@ -11,7 +11,7 @@ export const Admin = () => {
   const [status, setStatus] = useState("overview");
   const {modal }  = CreateCourseContextUse()
   const navigate = useNavigate()
-  const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
+  const tokens = JSON.parse(localStorage.getItem('admin-tokens') || '{}')
   const refreshToken = tokens?.refresh?.token
 
    const { mutate, isSuccess } = useMutation(userServices.logout)
