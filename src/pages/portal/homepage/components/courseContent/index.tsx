@@ -14,7 +14,6 @@ export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClos
   const { setModule } = PortalContextUse()
 
   const { data: allModulesBrief } = useGetModulesBrief()
-
   const {data: singleModule}  = useGetModuleDetails(selectedModuleId)
   const singleModuleResponse = singleModule as ModuleType
 
@@ -65,7 +64,7 @@ export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClos
 			  </Button>
       </h2>
       <ul className='flex flex-col justify-start gap-y-[12px] mt-[12px]'>
-        { allModulesBrief === undefined ?
+        { allModulesBrief === undefined || allModulesBrief.length === 0 ?
           <li className="text-[#0D142E] flex justify-center items-center">Not available</li>
             :
           modules

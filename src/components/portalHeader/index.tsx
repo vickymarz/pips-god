@@ -12,22 +12,33 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from "react-router-dom"
 import userServices from "services/userServices";
 import { useMutation } from "react-query";
+import { useGetModulesBrief } from 'hooks'
 
 export const PortalHeader = () => {
   const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
   const refreshToken = tokens?.refresh?.token
   const navigate = useNavigate()
-  const percentage = 0;
+
   const { ref, inView } = useInView({
     threshold: 0,
   });
 
-  //   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  //   const handleMenuOpen = () => {
-	// 	setIsMenuOpen(!isMenuOpen);
-	// };
+  const { data } = useGetModulesBrief()
+  const progress = () => {
+    let userProgress: number
+    const allModules = data?.length
+    const completedModules = data?.filter((module: any) => module?.users?.user_course_module?.isCompleted === true).length
+
+    if(allModules !== undefined && completedModules !== undefined) {
+      userProgress = Math.round(((completedModules) / (allModules || 1)) * 100)
+      return userProgress
+    } else {
+      return userProgress = 0
+    }
+  }
+
   const { mutate, isSuccess} = useMutation(userServices.logout)
-  
+
    if(isSuccess) {
       localStorage.removeItem('tokens')
       navigate('/login')
@@ -101,13 +112,13 @@ export const PortalHeader = () => {
                   <span className='text-[#0D142E] font-medium text-[18px]'>Rate this course</span>
                 </div> */}
                 <div className='flex justify-start items-center gap-x-[12px]'>
-                  <div className='flex justify-center flex-col items-center gap-y-[1rem]' style={{ width: '26px', height: '26px'}}>
-                    <CircularProgressbar value={percentage} text={`${percentage}%`}   styles={buildStyles({
+                  <div className='flex justify-center flex-col items-center gap-y-[1rem]' style={{ width: '35px', height: '35px'}}>
+                    <CircularProgressbar value={progress()} text={`${progress()}%`}   styles={buildStyles({
                       strokeLinecap: 'butt',
-                      textSize: '1.75rem',
+                      textSize: '2rem',
                       pathTransitionDuration: 0.5,
-                      pathColor: `B0B0B0`,
-                      textColor: '#fff',
+                      pathColor: `#19275E`,
+                      textColor: '#0D142E',
                       trailColor: '#cdcdcd',
                     })}/>
                   </div>
