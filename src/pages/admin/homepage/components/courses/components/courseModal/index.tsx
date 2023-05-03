@@ -14,6 +14,8 @@ export const CourseModal = () => {
   const [selectedFile, setSelectedFile] =  useState<string | React.ReactNode>('')
 	const [isFilePicked, setIsFilePicked] = useState(false);
   const [selectedVideo, setSelectedVideo] =  useState<string | React.ReactNode>('')
+  const [isSelectedVideo, setIsSelectedVideo] =  useState<string | React.ReactNode>('')
+  const [isSelectedFile, setIsSelectedFile] =  useState<string | React.ReactNode>('')
 	const [isVideoPicked, setIsVideoPicked] = useState(false);
   const [tags, setTags] = useState<Array<string>>([])
   const [title, setTitle] = useState('')
@@ -36,18 +38,20 @@ export const CourseModal = () => {
   const onFileChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];
-	  setSelectedFile('false');
+	  setIsSelectedFile('false');
     const raw = await userServices.uploadFile(file)
 		raw && setSelectedFile(raw);
+    setIsSelectedFile('true');
 		setIsFilePicked(true);
 	};
 
   const onVideoChange = async(event: React.ChangeEvent) => {
     const target= event.target as HTMLInputElement;
-	  setSelectedVideo('false')
+	  setIsSelectedVideo('false')
     const file = (target.files as FileList)[0];
     const video = await userServices.uploadVideo(file)
 		video && setSelectedVideo(video);
+    setIsSelectedVideo('true')
 		setIsVideoPicked(true);
 	};
 
@@ -303,7 +307,7 @@ const errorMsg = () => {
               </label>
               {isVideoPicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedVideo === '' ? 'Please wait...' : selectedVideo !== '' && 'Uploaded!' }</p>
+					        <p >{isSelectedVideo === 'false' ? 'Please wait...' : isSelectedVideo === 'true' && 'Uploaded!' }</p>
 				        </span>
 			        )}
               <input type="file" id="docpicker" onChange={onFileChange} accept=".pdf, .doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className='hidden'/>
@@ -315,7 +319,7 @@ const errorMsg = () => {
               </label>
               {isFilePicked && (
 				        <span className="w-[50%] text-[12px]">
-					        <p >{selectedFile === '' ? 'Please wait...' : selectedFile !== '' && 'Uploaded!' }</p>
+					        <p >{isSelectedFile === 'false' ? 'Please wait...' : isSelectedFile === 'true' && 'Uploaded!' }</p>
 				        </span>
 			        )}
             </div>
