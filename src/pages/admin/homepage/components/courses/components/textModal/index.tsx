@@ -21,7 +21,7 @@ export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
 
   return (
     <div className={`${isOpen ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
-    <div className='w-[80%] ml-auto mr-auto relative my-[50px] rounded-[27px] bg-white px-[40px] py-[20px]'>
+    <div className='w-[60%] ml-auto mr-auto relative my-[50px] rounded-[27px] bg-white px-[40px] py-[20px]'>
       <div className='w-full flex justify-end items-end mb-[10px] text-end'>
         <Button type="button" onClick={() => setIsOpen(false)} className="z-10 flex justify-end items-end mb-[50px] text-end w-full">
           <FontAwesomeIcon icon={faTimes} className={`text-[25px] text-[#232323]`}/>
