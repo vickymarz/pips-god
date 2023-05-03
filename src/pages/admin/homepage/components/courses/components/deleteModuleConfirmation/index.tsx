@@ -30,11 +30,11 @@ export const DeleteModuleConfirmation = ({popup, setPopup, id}: PropValues)  => 
             setPopup(false);
           }}
         />
-        <div className="my-5">
+        <div className="my-5 w-[150px]">
           <img src={deleteImg} alt={"delete-icon"} className="mix-blend-hard-light"/>
         </div>
         <p className="text-xl md:text-3xl mb-4">Are you sure you want to delete this module?</p>
-        <p className="text-[14px] md:text-[24px] text-[#8B8B8B]">Kindly note that deleting the module will delete both the video and the file. </p>
+        <p className="text-[14px] md:text-[22px] text-[#8B8B8B]">Kindly note that deleting the module will delete both the video and the file. </p>
         <p className="text-[14px] mt-4 md:text-[20px] text-[#8B8B8B]"> This operation is not reversible! </p>
         <div className="flex justify-center items-center gap-x-[20px]  mt-5 md:mt-10 mb-8 ">
          <Button
