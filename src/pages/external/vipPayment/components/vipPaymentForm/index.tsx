@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useMutation } from "react-query";
+import { useLocation } from "react-router-dom";
 import userServices from "services/userServices";
 import card from '../../../../../assets/images/card.png'
 
@@ -11,12 +12,25 @@ type FormValues = {
 };
 
 export const VipPaymentForm = ({id}:{id:string}) => {
+    const location = useLocation()
+
+    const emailAssign = () => {
+        let userEmail: string
+        if(location?.state === null){
+            return userEmail = ''
+        }
+        return userEmail = location?.state.email
+    }
     const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors },
-	} = useForm<FormValues>();
+	} = useForm<FormValues>({
+        defaultValues: {
+          email: emailAssign()
+        }
+      });
 
     const {mutate, isError, isLoading, data} = useMutation(userServices.initializeTransaction, {
         onSuccess: (data) => {
