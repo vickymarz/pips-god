@@ -9,7 +9,6 @@ import {
 } from "recharts";
 
 export const AnalyticsGraph = ({data}: {data: any}) => {
-
   const mentorship = data?.activeUsersAndPlans?.map((plans: any )=> {
     return plans.subscription_plans.filter(({name}: {name: string}) => name === "training_and_mentoring")
   })
@@ -34,7 +33,7 @@ export const AnalyticsGraph = ({data}: {data: any}) => {
         <div className='flex justify-between items-center p-[20px]'>
           <div className="font-medium text-[0.73rem] text-[#0D142E] flex flex-col gap-y-[8px] justify-start items-start">
             <p className="tracking-[0.01rem] text-[20px]">Total learners</p>
-            <p className="font-semibold">{`${'0' || data?.mentorship_members}`}</p>
+            <p className="font-semibold">{`${data?.activeUsers?.training_and_mentoring || '0'}`}</p>
           </div>
         </div>
         <div style={{ width: "100%", height: '300px'}}>

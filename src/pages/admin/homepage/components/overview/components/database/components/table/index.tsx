@@ -42,9 +42,9 @@ export const Table = ({data}: {data: any}) => {
   return (
     <>
       {
-      data === undefined  ?
+      data === undefined ||data?.completedTrainingAndMentoring?.total === 0  ?
         <div className='flex justify-center items-center'>
-          <p className='text-[30px]'>Your data will appear here</p>
+          <p className='text-[30px]'>Your data will appear here once a user completes training.</p>
         </div>
       :
         <table className="table-auto w-full border-0 outline-0 max-h-[30rem] overflow-y-scroll">

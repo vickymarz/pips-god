@@ -1,22 +1,20 @@
 import { useState, useEffect } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import file from '../../../../../../../assets/images/file.png'
 import { CreateCourseContextUse} from 'context'
-import userServices from 'services/userServices';
 import { useGetModule } from 'hooks';
 import { ModulesType, ModuleType, readingType } from '../../moduleTypes'
 import { TextModal } from '../textModal';
+import { DeleteModuleConfirmation } from '../deleteModuleConfirmation';
 
 
 export const Readings = ({data}:{data:ModulesType}) => {
   const [selectedModuleId, setSelectedModuleId] = useState<null | number>(null)
   const {setModal, setModule, setAction }  = CreateCourseContextUse()
   const [isOpen, setIsOpen] = useState(false)
-
-  const queryClient = useQueryClient()
+  const [popup, setPopup] = useState(false)
 
   const { data:moduleData, refetch } = useGetModule(selectedModuleId)
   const responseData = moduleData as ModuleType
@@ -37,13 +35,6 @@ export const Readings = ({data}:{data:ModulesType}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedModuleId, responseData, setModule])
 
-  const { mutate } = useMutation(userServices.deleteModule, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('get-all-modules')
-      queryClient.refetchQueries('get-all-modules');
-    },
-  })
-
   const documents = data?.docs?.map(({id, course_resources, title }: readingType) => (
   <div key={id}>
     <div className='rounded-[8px] bg-white py-[13px] py-[24px] flex justify-between items-center px-[24px] py-[13px]'>
@@ -56,7 +47,7 @@ export const Readings = ({data}:{data:ModulesType}) => {
         </div>
       </div>
       <div className="flex justify-start items-start gap-x-[32px]">
-        <Button type='button' onClick={() => mutate(id)} className="rounded-[3.5px] border border-[#D3DDE0] bg-white py-[11px] px-[13px] flex justify-start items-center gap-x-[11px] text-[#EA4545]">
+        <Button type='button' onClick={() => setPopup(true)} className="rounded-[3.5px] border border-[#D3DDE0] bg-white py-[11px] px-[13px] flex justify-start items-center gap-x-[11px] text-[#EA4545]">
           <FontAwesomeIcon icon={faTrashCan} className='text-[18px]'/>
           <span className='text-[14px] text-productSans'>Delete Module</span>
         </Button>
@@ -67,15 +58,16 @@ export const Readings = ({data}:{data:ModulesType}) => {
       </div>
     </div>
     <TextModal isOpen={isOpen} setIsOpen={setIsOpen} files={course_resources[1]?.url} title={title}/>
+    {popup && <DeleteModuleConfirmation popup={popup} setPopup={setPopup} id={id} />}
   </div>
 ))
 
   return (
     <div className='flex flex-col gap-y-[16px] p-[32px] bg-[#F8FAFC] rounded-[8px] w-full'>
       {
-        data === undefined ?
+        data === undefined || data?.docs.length === 0 ?
         <div className='flex justify-center items-center'>
-        <p className='text-[30px]'>Your data will appear here</p>
+        <p className='text-[30px]'>Your data will appear here once you add a module.</p>
       </div> :
          documents
       }
