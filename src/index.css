@@ -90,6 +90,13 @@ li {
   display: none;
 }
 
+.react-pdf__Page__canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 768px){
   #checkbox::before {
     content: "\2714";
