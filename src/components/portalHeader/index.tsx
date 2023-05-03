@@ -15,7 +15,7 @@ import { useMutation } from "react-query";
 import { useGetModulesBrief } from 'hooks'
 
 export const PortalHeader = () => {
-  const tokens = JSON.parse(localStorage.getItem('tokens') || '{}')
+  const tokens = JSON.parse(localStorage.getItem('UTS') || '{}')
   const refreshToken = tokens?.refresh?.token
   const navigate = useNavigate()
 
@@ -40,7 +40,7 @@ export const PortalHeader = () => {
   const { mutate, isSuccess} = useMutation(userServices.logout)
 
    if(isSuccess) {
-      localStorage.removeItem('tokens')
+      localStorage.removeItem('UTS')
       navigate('/login')
    }
 
