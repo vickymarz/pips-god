@@ -17,7 +17,7 @@ export const Admin = () => {
    const { mutate, isSuccess } = useMutation(userServices.logout)
 
    if(isSuccess) {
-      localStorage.removeItem('UTS')
+      localStorage.removeItem('ATS')
       navigate('/admin-login')
    }
 
