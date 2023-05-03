@@ -24,7 +24,7 @@ export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
     <div className='w-[80%] ml-auto mr-auto relative my-[50px] rounded-[27px] bg-white px-[40px] py-[20px]'>
       <div className='w-full flex justify-end items-end mb-[10px] text-end'>
         <Button type="button" onClick={() => setIsOpen(false)} className="z-10 flex justify-end items-end mb-[50px] text-end w-full">
-          <FontAwesomeIcon icon={faTimes} className={`text-white text-[25px] text-[#232323]`}/>
+          <FontAwesomeIcon icon={faTimes} className={`text-[25px] text-[#232323]`}/>
         </Button>
       </div>
       <div className='flex justify-start items-start gap-x-[36px]'>
