@@ -25,7 +25,7 @@ export const PortalProtectedRoute = ({children}: {children: React.ReactNode}) =>
         const responseData = data as TokenType
         if (responseData.code === 200) {
             setIsLoggedIn(true)
-            localStorage.setItem("", JSON.stringify(responseData?.data));
+            localStorage.setItem("UTS", JSON.stringify(responseData?.data));
         } else {
             setIsLoggedIn(false)
             return navigate('/login')
