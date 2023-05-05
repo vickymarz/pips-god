@@ -7,7 +7,7 @@ export const Faq = () => {
   return (
     <>
       <Header />
-      <section className="pt-[90px] pb-[20px] md:pt-[150px] md:px-[80px]  bg-[#0D142E]">
+      <section className="pt-[90px] pb-[20px] md:pt-[150px] md:px-[80px]  bg-[#281B5B]">
         <div className="flex flex-col justify-center items-center gap-y-3 md:gap-y-[24px] mb-16 md:mb-18">
           <div className='flex flex-col justify-center items-center gap-y-[8px] md:gap-y-[12px]'>
             <h2 className="text-[#fff] font-medium text-[1.25rem] md:text-[2.5rem]">
