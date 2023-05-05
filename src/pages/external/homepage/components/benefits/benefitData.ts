@@ -1,11 +1,11 @@
 export const premiumData = [
     {
       'id': '1',
-      'title': 'Professional guidance'
+      'title': 'Full video course'
     },
     {
       'id': '2',
-      'title': 'Highly regarded trader education'
+      'title': 'Live google video lessons'
     },
     {
       'id': '3',
@@ -52,11 +52,11 @@ export const premiumData = [
 export const vipData = [
     {
       'id': '1',
-      'title': 'Full video course'
+      'title': 'Professional guidance'
     },
     {
       'id': '2',
-      'title': 'Live google video lessons'
+      'title': 'High regarded trader education'
     },
     {
       'id': '3',
