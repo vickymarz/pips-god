@@ -220,7 +220,7 @@ const errorMsg = () => {
     );
   } else if(responseData2?.status === 200) {
     element = (
-      <p className='w-full mt-4 text-[24px] text-red-600 text-center'>
+      <p className='w-full mt-4 text-[24px] text-green-600 text-center'>
         Course module updated successfully!
       </p>
     );
