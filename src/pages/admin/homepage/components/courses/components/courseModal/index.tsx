@@ -79,7 +79,7 @@ const removeTag = (index:number) => {
 const {mutate:addModule, data:addModuleData, isError:addModuleError, isLoading:addModuleLoader} = useMutation(userServices.createModule, {
   onSuccess: (data) => {
     const responseData = data as {status: number, data: object}
-    if (responseData?.status === 200) {
+    if (responseData?.status === 201) {
       queryClient.invalidateQueries('get-all-modules')
       setTimeout(() => {
         setModal(false)
@@ -194,7 +194,7 @@ const errorMsg = () => {
   let element;
   const responseData = addModuleData as {code: number, status: number, data: object}
   const responseData2 = updateModuleData as {code: number, status: number, data: object}
-  if (responseData?.status === 200 || responseData2?.status === 200) {
+  if (responseData?.status === 201) {
     element = (
       <p className='w-full mt-4 text-[24px] text-green-600 text-center'>
         Course module added successfully!
@@ -216,6 +216,12 @@ const errorMsg = () => {
     element = (
       <p className='w-full mt-4 text-[24px] text-red-600 text-center'>
         Kindly upload a thumbnail for your course and ensure that you fill all the fields
+      </p>
+    );
+  } else if(responseData2?.status === 200) {
+    element = (
+      <p className='w-full mt-4 text-[24px] text-red-600 text-center'>
+        Course module updated successfully!
       </p>
     );
   }
