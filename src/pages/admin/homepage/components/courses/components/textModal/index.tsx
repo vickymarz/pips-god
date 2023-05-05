@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import { TextModalType } from '../../moduleTypes'
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css'
 
 export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
   const [numPages, setNumPages] = useState(null);
@@ -14,8 +16,9 @@ export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
   }, [])
 
-  const onDocumentLoadSuccess = () => ({ numPages: nextNumPages} : {numPages: any}) => {
-    setNumPages(nextNumPages);
+  const onDocumentLoadSuccess = () => ({ numPages } : {numPages: any}) => {
+    console.log(`Number of pages: ${numPages}`);
+    setNumPages(numPages);
   }
 
 
