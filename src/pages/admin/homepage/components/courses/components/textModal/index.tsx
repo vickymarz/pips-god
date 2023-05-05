@@ -6,18 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import { TextModalType } from '../../moduleTypes'
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css'
 
 export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
-  const [numPages, setNumPages] = useState(null);
-
+  const [numPages, setNumPages] = useState<number | null>();
   useEffect(() => {
-    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+    pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
   }, [])
 
-  const onDocumentLoadSuccess = () => ({ numPages } : {numPages: any}) => {
-    console.log(`Number of pages: ${numPages}`);
+
+  function onDocumentLoadSuccess({ numPages }: {numPages: number}) {
     setNumPages(numPages);
   }
 
@@ -33,7 +30,7 @@ export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
       <div className='flex justify-start items-start gap-x-[36px]'>
         <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{title}</h4>
       </div>
-      <div>
+      <div style={{ minHeight: "100%" }}>
         <Document file={files} onLoadSuccess={onDocumentLoadSuccess}>
           {Array.from(new Array(numPages), (el, index) => (
             <Page key={`page_${index + 1}`} pageNumber={index + 1} />
