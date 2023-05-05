@@ -62,13 +62,13 @@ const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     let element;
     if (data?.code === 200) {
       element = (
-        <p className="mt-4 md:text-[20px] text-green-600 text-center">
+        <p className="w-full mt-4 md:text-[20px] text-green-600 text-center">
           Password Reset Successful!
         </p>
       );
     } else if (isError || data?.code === 400) {
       element = (
-        <p className="mt-4 md:text-[20px] text-red-600 text-center">
+        <p className="w-full mt-4 md:text-[20px] text-red-600 text-center">
            Invalid code or incorrect email address
         </p>
       );

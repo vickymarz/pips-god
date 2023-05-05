@@ -328,7 +328,7 @@ const errorMsg = () => {
                 Cancel
               </Button>
               <Button type='submit' className="text-white bg-[#0D142E] rounded-[8px] py-[17px] px-[34px]">
-                {addModuleLoader || updateModuleLoader  ? 'Please wait...' : 'Create'}
+                {addModuleLoader || updateModuleLoader  ? 'Please wait...' : (module.title === '' ? 'Create' : 'Update')}
               </Button>
             </div>
           </div>
