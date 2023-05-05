@@ -10,7 +10,7 @@ export const MentorshipPaymentInfo = () => {
        <span className='text-[#8B8B8B] font medium text-[0.62rem] md:text-[1.2rem]'>USD</span>
        <h3 className='text-[#000000] font-medium text-[1.31rem] lg:text-[2rem]'>
        <FontAwesomeIcon icon={faDollarSign} className='text-[1.2rem]'/>
-       400 (<FontAwesomeIcon icon={faNairaSign} className='text-[1.2rem]'/>50,000)</h3>
+       500 (<FontAwesomeIcon icon={faNairaSign} className='text-[1.2rem]'/>350,000)</h3>
     </div>
     <div className='font-medium text-[0.67rem] lg:text-[1.2rem] text-[#000000] flex flex-col justify-start items-start gap-y-[20px] md:gap-y-[40px] mb-[24px]'>
        <h4 className='text-[#19275E]'>Mentorship Details</h4>
