@@ -7,12 +7,12 @@ export const MentorshipPaymentSummary = ({id}:{id:string}) => {
          <h3 className="text-[#19275E] font-semibold text-[1.18rem] md:text-[2rem]">Summary</h3>
          <div className='flex justify-between items-center w-full py-[10px] md:py-[26px] text-[#2D2D2D] md:text-[1.3rem] font-medium'>
            <span>Original price</span>
-           <span><FontAwesomeIcon icon={faDollarSign} />400</span>
+           <span><FontAwesomeIcon icon={faDollarSign} />500</span>
          </div>
          <div className="text-[#2D2D2D] flex justify-center items-center w-full"><span>____________________________________________</span><span className="hidden md:block">________________</span></div>
          <div className='flex w-full justify-between items-center py-[10px] md:py-[26px] text-[#19275E] font-semibold pb-[30px] md:pb-[85px] md:text-[1.3rem]'>
            <span>Total</span>
-           <span><FontAwesomeIcon icon={faDollarSign} />400</span>
+           <span><FontAwesomeIcon icon={faDollarSign} />500</span>
          </div>
          <p>By completing your purchase you agree to our <span>No refund Policy</span></p>
          <div className="w-full flex justify-center items-center">
