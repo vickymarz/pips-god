@@ -54,7 +54,7 @@ export const Footer = () => {
               <a href="https://twitter.com/pips_god?s=21&t=ede6UbLhy1c7vqnx3jxEDw" target="_blank" rel="noreferrer" >
                 <BsTwitter />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" >
+              <a href="https://youtube.com/@pipsgodempire7043" target="_blank" rel="noreferrer" >
                 <BsYoutube />
               </a>
           </li>
