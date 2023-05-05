@@ -45,7 +45,7 @@ export const Header = () => {
             <>
              <Navbar menuOpen={isMenuOpen} handleMenuOpen={handleMenuOpen} view={inView}/>
              <div className='flex justify-start items-center gap-x-[25px]'>
-              <Link to={'./login'} className={`font-productSans rounded-lg py-[0.5rem] px-[0.9rem] text-[0.9rem] ${inView ? 'text-white border border-white' : 'text-[#0D142E] border border-[#0D142E]'}`}>
+              <Link to={'/login'} className={`font-productSans rounded-lg py-[0.5rem] px-[0.9rem] text-[0.9rem] ${inView ? 'text-white border border-white' : 'text-[#0D142E] border border-[#0D142E]'}`}>
                 Log in
               </Link>
               <Link to={'/mentorship_payment'} className={`font-productSans rounded-lg  py-[0.5rem] px-[0.9rem] text-[0.9rem] font-bold ${inView ? 'bg-white text-[#0D142E]' : 'text-[#fff] bg-[#0D142E]'}`}>
