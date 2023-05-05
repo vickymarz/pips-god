@@ -22,7 +22,7 @@ export const Navbar = ({menuOpen, handleMenuOpen, view}: navbarProps) => {
         },
         {
           id: 3,
-          path: '',
+          path: 'faq',
           children: 'FAQs',
         },
         {
