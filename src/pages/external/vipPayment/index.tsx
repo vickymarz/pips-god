@@ -22,7 +22,7 @@ export const VipPayment = () => {
         <VipPaymentSummary id="form" />
     </section>
     <div className="md:hidden flex justify-center items-center w-full mt-[50px]">
-      <img src={cardMobile} alt="" className='w-max md:w-full'/>
+      <img src={cardMobile} alt="" className='w-min md:w-full'/>
     </div>
     </>
   )
