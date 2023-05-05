@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ContactUsDetails, ContactUsForm  } from "./components";
+import {  ContactUsForm  } from "./components";
 import { Footer, Header } from "components";
 
 export const ContactUs = () => {
@@ -10,13 +10,13 @@ export const ContactUs = () => {
   return (
     <>
     <Header />
-    <section className="bg-authImg bg-cover bg-no-repeat">
-    <div className="w-full h-full bg-[#e5e5e5] py-[70px] md:py-[90px]">
-        <div className="w-[90%] md:w-[80%] mx-[auto]">
-           <h2 className="w-full text-center text-[1.37rem] text-[3.12rem] font-bold font-productSans text-[#0D142E]">Contact Us</h2>
-           <div className="w-full flex flex-col md:flex-row md:justify-between items-start mt-[10px] md:mt-[40px]">
+    <section className="bg-[#281B5B]">
+    <div className="w-full h-full py-[80px] md:py-[100px]">
+        <div className="w-[90%] mx-[auto]">
+           <h2 className="w-full text-center text-[2rem] md:text-[3.12rem] font-bold font-productSans text-[#fff]">Contact Us</h2>
+           <div className="w-full flex flex-col justify-center items-start md:block md:w-[80%] mx-auto mt-[10px] md:mt-[40px]">
                 <ContactUsForm />
-                <ContactUsDetails />
+                {/* <ContactUsDetails /> */}
             </div>
         </div>
     </div>

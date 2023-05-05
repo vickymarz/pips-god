@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { companyData, resourceData } from "./footerData";
-import { BsFacebook, BsTwitter, BsInstagram, BsYoutube } from "react-icons/bs";
+import { BsTelegram, BsTwitter, BsInstagram, BsYoutube } from "react-icons/bs";
 import { Input } from "components/input";
 import { Button } from "components/button";
 import ellipse from '../../assets/images/ellipse.png'
@@ -42,16 +42,16 @@ export const Footer = () => {
             Contact Us
           </h2>
           <ul className="flex flex-col justify-start items-start gap-y-[1.37rem]">
-            <li className="text-[#19275E] text-[0.87rem] lg:text-[1.12rem]">+2347012345678</li>
+            <li className="text-[#19275E] text-[0.87rem] lg:text-[1.12rem]">+2348143987059</li>
             <li className="text-[#19275E] text-[0.87rem] lg:text-[1.12rem]">We are on social media</li>
             <li className="flex text-[0.87rem] lg:text-[1.12rem] text-[#0D142E] gap-x-[1.75rem] justify-between">
-              <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" >
-                <BsFacebook />
+              <a href="https://t.me/+fgEYuLbxiWYyMmVk" target="_blank" rel="noreferrer" >
+                <BsTelegram />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" >
+              <a href="https://instagram.com/pips.god?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer" >
                 <BsInstagram />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" >
+              <a href="https://twitter.com/pips_god?s=21&t=ede6UbLhy1c7vqnx3jxEDw" target="_blank" rel="noreferrer" >
                 <BsTwitter />
               </a>
               <a href="https://youtube.com" target="_blank" rel="noreferrer" >
@@ -77,7 +77,7 @@ export const Footer = () => {
       </div>
       <div className="flex justify-center items-center">
         <span className="font-medium text-[0.75rem] lg:text-[1.25rem] text-[#19275E] mt-[100px]">
-          © 2022 <span>Pips god Academy - All Rights Reserved</span>
+          © 2023 <span>Pips god Academy - All Rights Reserved</span>
         </span>
       </div>
     </footer>

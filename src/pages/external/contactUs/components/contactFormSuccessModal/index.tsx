@@ -9,8 +9,8 @@ type PropValues = {
 
 export const ContactFormSuccessModal = ({modal, setModal}: PropValues)  => {
   return (
-    <div className={`${modal ?'fixed top-0 right-0 left-0 bottom-0 w-screen z-20  bg-black bg-opacity-50': 'hidden'}`}>
-      <div className="bg-white mx-auto w-5/6 sm:w-2/3 px-2 flex flex-col justify-center items-center font-bold  text-center text-xl my-[40px]">
+    <div className={`${modal ?'fixed top-0 right-0 left-0 bottom-0 w-screen z-20  bg-black bg-opacity-50 ': 'hidden'}`}>
+      <div className="bg-white mx-auto w-5/6 sm:w-2/3 px-2 flex flex-col justify-center items-center font-bold  text-center text-xl my-[40px] rounded-[20px]">
         <IoIosClose
           className="w-10 h-10 self-end cursor-pointer my-2"
           data-close="close"

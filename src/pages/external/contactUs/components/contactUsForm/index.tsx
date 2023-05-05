@@ -54,10 +54,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ) => {
 }
 
   return (
-    <div className="basis-6/2 ">
+    <div className="">
       <div className="mb-[10px] md:mb-[32px]">
-        <h3 className="hidden md:flex text-[2.37rem] font-bold text-[#424245] font-productSans #19275E mb-[16px]"> Drop a message</h3>
-        <p className="text-[#19275E] text-[1.12rem]">We are always glad to hear from you.</p>
+        <h3 className="hidden md:flex text-[2.37rem] font-bold text-[#fff] font-productSans mb-[16px]"> Drop a message</h3>
+        <p className="text-[#fff] text-[1.12rem]">We are always glad to hear from you.</p>
       </div>
       <form className="w-full" onSubmit={handleSubmit}>
         <ContactInputComponent
@@ -84,7 +84,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ) => {
         <div>
           <label
             htmlFor="message"
-            className="mb-2 p-0 text-lg font-medium text-[#424245]"
+            className="mb-2 p-0 text-lg font-medium text-[#fff]"
           >
             Drop a message
           </label>
@@ -96,17 +96,17 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ) => {
             onChange={onChange}
             placeholder="Write your message here"
             maxLength={100}
-            className={` w-full border bg-transparent rounded-lg p-3 outline-none mt-2.5 placeholder:text-slate-400 placeholder:text-base placeholder:font-medium
+            className={` w-full border bg-transparent rounded-lg p-3 outline-none mt-2.5 text-[#fff] placeholder:text-white placeholder:font-medium
                border-gray-400 focus:border-blue-500
             `}
           />
-          <p className="text-[#B1B1B1] font-bold text-gray-800">
+          <p className="text-[#fff] font-bold">
             Maximum of 100 words
           </p>
         </div>
         <Button
           type="submit"
-          className="w-full text-xl font-bold py-3.5 mt-[1.5rem] mb-9 text-white bg-[#0D142E] rounded-lg"
+          className="w-full text-xl font-bold py-3.5 mt-[1.5rem] mb-9 text-[#281B5B] bg-[#fff] rounded-lg"
         >
           {isLoading ? 'Loading...' : 'Send message'}
         </Button>
