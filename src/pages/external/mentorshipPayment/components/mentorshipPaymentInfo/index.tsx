@@ -1,6 +1,6 @@
 import paystackDesktop from '../../../../../assets/images/paystack-desktop.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { faDollarSign, faNairaSign } from '@fortawesome/free-solid-svg-icons';
 
 export const MentorshipPaymentInfo = () => {
   return (
@@ -9,8 +9,8 @@ export const MentorshipPaymentInfo = () => {
     <div className='flex flex-col justify-start items-start gap-y-[3px] md:gap-y-[6px]'>
        <span className='text-[#8B8B8B] font medium text-[0.62rem] md:text-[1.2rem]'>USD</span>
        <h3 className='text-[#000000] font-medium text-[1.31rem] lg:text-[2rem]'>
-       <FontAwesomeIcon icon={faDollarSign} />
-       400</h3>
+       <FontAwesomeIcon icon={faDollarSign} className='text-[1.2rem]'/>
+       400 (<FontAwesomeIcon icon={faNairaSign} className='text-[1.2rem]'/>50,000)</h3>
     </div>
     <div className='font-medium text-[0.67rem] lg:text-[1.2rem] text-[#000000] flex flex-col justify-start items-start gap-y-[20px] md:gap-y-[40px] mb-[24px]'>
        <h4 className='text-[#19275E]'>Mentorship Details</h4>

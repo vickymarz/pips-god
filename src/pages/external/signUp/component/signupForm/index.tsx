@@ -36,7 +36,7 @@ export const SignupForm = () => {
 
     const { data: getRoleData, mutate:getRole} = useMutation(userServices.getRoles)
     const getRoleResponse = getRoleData as {data: boolean}
-    
+
     const {
         register,
 		handleSubmit,
@@ -353,14 +353,14 @@ export const SignupForm = () => {
                 />
                 <span
                     className={`absolute ${
-                        errors.passwordConfirm ? "bottom-12" : "bottom-3.5"
+                        errors.passwordConfirm ? "top-[45px]" : "bottom-3.5"
                     } right-3 cursor-pointer`}
                     onClick={togglePassword}>
                     {passwordShown ? <FiEyeOff /> : <FiEye />}
                 </span>
                 {errors.passwordConfirm && (
                     <p
-                        className=' italic text-sm '
+                        className='right-0 bottom-[-37px] italic text-sm '
                         style={{ color: "red" }}>
                         {errors.passwordConfirm?.message || (errors?.passwordConfirm.type === "validate" && "Passwords do not match")}
                     </p>
