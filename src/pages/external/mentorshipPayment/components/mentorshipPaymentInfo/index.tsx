@@ -1,4 +1,3 @@
-import paystack from '../../../../../assets/images/paystack.png'
 import paystackDesktop from '../../../../../assets/images/paystack-desktop.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
@@ -21,8 +20,7 @@ export const MentorshipPaymentInfo = () => {
     <div>
        <h3 className='text-[#19275E] font-medium text-[0.93rem] md:text-[1.4rem]'>Payment Method</h3>
        <div className='w-full'>
-         <img src={paystack} alt="payment method" className='md:hidden'/>
-         <img src={paystackDesktop} alt="payment method" className='hidden md:block'/>
+         <img src={paystackDesktop} alt="payment method" className='w-min md:w-full'/>
        </div>
     </div>
 </div>
