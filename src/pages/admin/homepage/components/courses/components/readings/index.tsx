@@ -5,7 +5,7 @@ import { Button } from 'components';
 import file from '../../../../../../../assets/images/file.png'
 import { CreateCourseContextUse} from 'context'
 import { useGetModule } from 'hooks';
-import { ModulesType, ModuleType, readingType } from '../../moduleTypes'
+import { ModulesType, ModuleType, readingType, ItemType } from '../../moduleTypes'
 import { TextModal } from '../textModal';
 import { DeleteModuleConfirmation } from '../deleteModuleConfirmation';
 
@@ -15,6 +15,7 @@ export const Readings = ({data}:{data:ModulesType}) => {
   const {setModal, setModule, setAction }  = CreateCourseContextUse()
   const [isOpen, setIsOpen] = useState(false)
   const [popup, setPopup] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<ItemType>({course_resources: [], title: ''})
 
   const { data:moduleData, refetch } = useGetModule(selectedModuleId)
   const responseData = moduleData as ModuleType
@@ -35,11 +36,16 @@ export const Readings = ({data}:{data:ModulesType}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedModuleId, responseData, setModule])
 
+  const handleItemClick = (course_resources: any[], title: string) => {
+    setIsOpen(true)
+    setSelectedItem({course_resources, title})
+  }
+
   const documents = data?.docs?.map(({id, course_resources, title }: readingType) => (
   <div key={id}>
     <div className='rounded-[8px] bg-white py-[13px] py-[24px] flex justify-between items-center px-[24px] py-[13px]'>
       <div className='flex justify-start items-start gap-x-[36px]'>
-        <Button type='button' onClick={() =>setIsOpen(true)}>
+        <Button type='button'  onClick={() => handleItemClick(course_resources, title) }>
           <img src={file} alt="file player" />
         </Button>
         <div className='flex flex-col justify-start items-start gap-y-[3px]'>
@@ -57,7 +63,7 @@ export const Readings = ({data}:{data:ModulesType}) => {
         </Button>
       </div>
     </div>
-    <TextModal isOpen={isOpen} setIsOpen={setIsOpen} files={course_resources[1]?.url} title={title}/>
+    {isOpen && <TextModal isOpen={isOpen} setIsOpen={setIsOpen} item={selectedItem} />}
     {popup && <DeleteModuleConfirmation popup={popup} setPopup={setPopup} id={id} />}
   </div>
 ))

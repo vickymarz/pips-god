@@ -3,7 +3,7 @@ import { faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import { VideoModalType } from '../../moduleTypes'
 
-export const VideoModal = ({isOpen, setIsOpen, videoUrl, title, thumbnail}: VideoModalType) => {
+export const VideoModal = ({isOpen, setIsOpen, item}: VideoModalType) => {
 
   return (
     <div className={`${isOpen ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
@@ -14,11 +14,11 @@ export const VideoModal = ({isOpen, setIsOpen, videoUrl, title, thumbnail}: Vide
          </Button>
         </div>
         <div className='flex justify-start items-start gap-x-[36px]'>
-          <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{title}</h4>
+          <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{item?.title}</h4>
         </div>
-        <video controls width="100%" height="100%" poster={thumbnail}>
-          <source src={videoUrl} type="video/webm" />
-          <source src={videoUrl} type="video/mp4" />
+        <video controls width="100%" height="100%" poster={item?.course_resources[0].thumbnail}>
+          <source src={item?.course_resources[0].url} type="video/webm" />
+          <source src={item?.course_resources[0].url} type="video/mp4" />
            Sorry, your browser doesn't support videos.
         </video>
       </div>

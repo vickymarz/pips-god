@@ -7,17 +7,16 @@ import { faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components';
 import { TextModalType } from '../../moduleTypes'
 
-export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
+export const TextModal = ({isOpen, setIsOpen, item}: TextModalType) => {
   const [numPages, setNumPages] = useState<number | null>();
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
-  }, [])
+  }, [item])
 
-
+ 
   function onDocumentLoadSuccess({ numPages }: {numPages: number}) {
     setNumPages(numPages);
   }
-
 
   return (
     <div className={`${isOpen ? 'fixed top-0 right-0 left-0 bottom-0 min-h-screen w-screen z-20 bg-[#69686844] overflow-y-scroll' : 'hidden'}`}>
@@ -28,10 +27,10 @@ export const TextModal = ({isOpen, setIsOpen, files, title}: TextModalType) => {
         </Button>
       </div>
       <div className='flex justify-start items-start gap-x-[36px]'>
-        <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{title}</h4>
+        <h4 className="text-[2.5rem] font-bold font-productSans text-[#19275E]">{item?.title}</h4>
       </div>
       <div style={{ minHeight: "100%" }}>
-        <Document file={files} onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file={item.course_resources[1]?.url} onLoadSuccess={onDocumentLoadSuccess}>
           {Array.from(new Array(numPages), (el, index) => (
             <Page key={`page_${index + 1}`} pageNumber={index + 1} />
           ))}

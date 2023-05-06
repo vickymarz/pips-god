@@ -51,14 +51,29 @@ export type ModuleType = {
   export type TextModalType = {
     isOpen: boolean
     setIsOpen: (value: boolean) => void
-    files: string
-    title: string
+    item: {
+      title: string,
+      course_resources: {
+        url: string,
+    }[]
   }
-
+}
   export type VideoModalType = {
     isOpen: boolean
     setIsOpen: (value: boolean) => void
-    videoUrl: string
-    title: string
-    thumbnail?: string
+    item: {
+      title: string,
+      course_resources: {
+        url: string,
+        thumbnail: string
+    }[]
   }
+}
+
+  export type ItemType = {
+      title: string,
+      course_resources: {
+        url: string,
+        thumbnail: string
+    }[]
+}
