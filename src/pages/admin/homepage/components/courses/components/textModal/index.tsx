@@ -13,7 +13,7 @@ export const TextModal = ({isOpen, setIsOpen, item}: TextModalType) => {
     pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
   }, [item])
 
- 
+
   function onDocumentLoadSuccess({ numPages }: {numPages: number}) {
     setNumPages(numPages);
   }
@@ -32,7 +32,7 @@ export const TextModal = ({isOpen, setIsOpen, item}: TextModalType) => {
       <div style={{ minHeight: "100%" }}>
         <Document file={item.course_resources[1]?.url} onLoadSuccess={onDocumentLoadSuccess}>
           {Array.from(new Array(numPages), (el, index) => (
-            <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+            <Page scale={1.5} key={`page_${index + 1}`} pageNumber={index + 1} />
           ))}
         </Document>
       </div>
