@@ -27,8 +27,9 @@ export const PortalHeader = () => {
   const progress = () => {
     let userProgress: number
     const allModules = data?.length
-    const completedModules = data?.filter((module: any) => module?.users?.user_course_module?.isCompleted === true).length
-
+    console.log(allModules, 'all modules')
+    const completedModules = data?.filter((docs: any) => docs?.users[0]?.user_course_module?.isCompleted === true).length
+    console.log(completedModules, 'completed modules')
     if(allModules !== undefined && completedModules !== undefined) {
       userProgress = Math.round(((completedModules) / (allModules || 1)) * 100)
       return userProgress

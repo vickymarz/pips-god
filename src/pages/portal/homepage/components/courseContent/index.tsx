@@ -41,7 +41,7 @@ export const CourseContent = ({isClose, setIsClose}:{isClose: boolean, setIsClos
   const modules = allModulesBrief?.map(({title,id, users}, index) => (
     <li key={index} onClick={() => handleModuleClick(id)} role='button' tabIndex={0} className='border border-[#D3D3D3] bg-white px-[23px] py-[7px] flex flex-col justify-start gap-y-[16px] visited:bg-[#EFEFEF]'>
       <div className='flex justify-start items-center gap-x-[5px]'>
-        <div className={`${users[0]?.user_course_module.isCompleted ? 'hidden' : 'hidden'} justify-start items-center w-[16px] h-[16px]`}>
+        <div className={`${users[0]?.user_course_module.isCompleted ? 'block' : 'hidden'} justify-start items-center w-[16px] h-[16px]`}>
           <img src={checked} alt='checked' className='object-cover'/>
         </div>
         <h3 className='text-[#19275E] font-medium text-[20px]'>{`${updateIndex(index)}. ${title}`}</h3>
