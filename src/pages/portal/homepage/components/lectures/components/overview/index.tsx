@@ -32,7 +32,7 @@ export const LessonOverview = () => {
         )
       } else if (module?.course_resources) {
         return (
-          <div className='w-[80%]'>
+          <div className='w-[100%]'>
           <Document file={module?.course_resources !== undefined ? module?.course_resources[1].url : ''} onLoadSuccess={onDocumentLoadSuccess}>
             {Array.from(new Array(numPages), (el, index) => (
               <Page key={`page_${index + 1}`} pageNumber={index + 1} />
