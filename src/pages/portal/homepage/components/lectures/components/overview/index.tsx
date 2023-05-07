@@ -35,7 +35,7 @@ export const LessonOverview = () => {
           <div className='w-[100%]'>
           <Document file={module?.course_resources !== undefined ? module?.course_resources[1].url : ''} onLoadSuccess={onDocumentLoadSuccess}>
             {Array.from(new Array(numPages), (el, index) => (
-              <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+              <Page scale={1.5} key={`page_${index + 1}`} pageNumber={index + 1} />
             ))}
           </Document>
       </div>
