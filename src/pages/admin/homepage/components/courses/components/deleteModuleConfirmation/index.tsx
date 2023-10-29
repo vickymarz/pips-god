@@ -34,16 +34,16 @@ export const DeleteModuleConfirmation = ({popup, setPopup, id}: PropValues)  => 
           <img src={deleteImg} alt={"delete-icon"} className="mix-blend-hard-light"/>
         </div>
         <p className="text-xl md:text-3xl mb-4">Are you sure you want to delete this module?</p>
-        <p className="text-[14px] md:text-[22px] text-[#8B8B8B]">Kindly note that deleting the module will delete both the video and the file. </p>
+        <p className="text-[14px] md:text-[22px] text-[#27272a]">please note that deleting the module will delete both the video and the file permanently. </p>
         <p className="text-[14px] mt-4 md:text-[20px] text-[#8B8B8B]"> This operation is not reversible! </p>
         <div className="flex justify-center items-center gap-x-[20px]  mt-5 md:mt-10 mb-8 ">
          <Button
           type="button"
           onClick={() => mutate(id)}
           data-close="close"
-          className=" text-xl font-bold py-2.5 px-8 text-white bg-[#0D142E] rounded-lg"
+          className=" text-xl font-bold py-2.5 px-8 text-white bg-[#0D142E] hover:bg-sky-700 rounded-lg "
         >
-          YES
+          DELETE
         </Button>
         <Button
           type="button"
@@ -51,9 +51,9 @@ export const DeleteModuleConfirmation = ({popup, setPopup, id}: PropValues)  => 
             setPopup(false);
           }}
           data-close="close"
-          className=" text-xl font-bold py-2.5 px-8 text-white bg-[#0D142E] rounded-lg"
+          className=" text-xl font-bold py-2.5 px-8 text-white bg-[#0D142E] hover:bg-sky-700 rounded-lg"
         >
-          NO
+          CANCEL
         </Button>
          </div>
       </div>
